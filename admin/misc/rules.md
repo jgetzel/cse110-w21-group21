@@ -18,3 +18,32 @@ TA - Jordan Gassaway
 | Jaehee Yoo  |       |       |      |
 | Stone Tao       |       |       |      |
 | Xiaolong Huang  |       |       |      |
+
+# 2. Primary Means of Communication and Expectations
+*All members will be expected to check the Slack group regularly on a daily basis and respond in no more than 50 minutes.*
+
+# 3. Scheduling Meetings
+*Team will agree, at the end of each meeting, when to meet next, and what will be discussed in the next meeting. Individuals will be resposible to remind their team members about future meetings, and requirements. Absence from a meeting should be announced at least 2 hours prior to the meeting.*
+
+# 4. General Responsibilities of Team Members
+ - Respect deadlines as setup during meetings, and as communicated through slack.
+ - Repsonsible to respond to Slack messages within 50 minutes.
+ - Attend meetings regularly, and announce absense at least 2 hours prior to the meeting.
+ - Adhere to Academic Integrity Rules
+ - Responsible to help or take over other team members' tasks if needed.
+ - Maintain all informal communication via Slack, and follow instructions as provided on the GitHub repository
+ - Adhere to the group's working agreement.
+ 
+# 5. General responsibilities of Leaders
+  - Enforce the working agreement on team members
+  - Provide a communication path between the team and the faculty
+  - Guide Meetings and approve Meeting Minutes
+
+# 6. Conflict Resolution
+## 6A. Individual Conflict Resolution
+*If the issue isn't regular then be more flexible and help the individual. If the issue persists then confront the individual, and later contact the TA.*
+## 6B. Conflcits between Team Members
+*Work to calm down the situation. If the issues persist, first contact the other team members and then the TA.*
+
+# 7. Signature
+**I, ______________, adhere to the guidelines as stated in this agreement, and will strive to make SCRIBBLERS succesful.**
