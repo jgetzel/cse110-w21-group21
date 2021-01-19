@@ -11,7 +11,7 @@ TA - Jordan Gassaway
 | --------------- | ----- | ----- | ---- |
 | Jakob Getzel (leader)    |     |       |      |
 | Shwet Chitnis (leader)     |      |       |      |
-| Ethan Huynh   |       |       |      |
+| Ethan Huynh   | e2huynh@ucsd.edu | 858-449-9435 | e2huynh |
 | Jarrett Ratelle |       |       |      |
 | Kevin Klmek     |       |       |      |
 | Manav Ram       |       |       |      |
