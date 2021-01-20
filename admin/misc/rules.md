@@ -9,12 +9,12 @@ TA - Jordan Gassaway
 
 | Name            | Email | Phone | Github |
 | --------------- | ----- | ----- | ---- |
-| Jakob Getzel (leader)    |     |       |      |
-| Shwet Chitnis (leader)     |      |       |      |
+| Jakob Getzel (leader)    | jgetzel@ucsd.edu     |       |  jgetzel    |
+| Shwet Chitnis (leader)     | s2chitni@ucsd.edu     |       | s2chitni     |
 | Ethan Huynh   | e2huynh@ucsd.edu | 858-449-9435 | e2huynh |
-| Jarrett Ratelle |       |       |      |
-| Kevin Klmek     |       |       |      |
-| Manav Ram       |       |       |      |
+| Jarrett Ratelle | jratelle@ucsd.edu      |       | ruhtel     |
+| Kevin Klmek     | kklimek@ucsd.edu      |       |      |
+| Manav Ram       | mram@ucsd.edu  | 323-680-1476      | Manav-Ram19     |
 | Jaehee Yoo      |  j3yoo@ucsd.edu     | 626-893-0869      | jaeyoo0609     |
 | Stone Tao       |  stao@ucsd.edu     | 858-500-2342       |  StoneT2000    |
 | Xiaolong Huang  | xih002@ucsd.edu | 858-999-6448 | xilohuang |
