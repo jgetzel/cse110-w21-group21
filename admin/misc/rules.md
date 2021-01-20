@@ -16,7 +16,7 @@ TA - Jordan Gassaway
 | Kevin Klmek     |       |       |      |
 | Manav Ram       |       |       |      |
 | Jaehee Yoo  |       |       |      |
-| Stone Tao       |       |       |      |
+| Stone Tao       |  stao@ucsd.edu     | 858-500-2342       |  StoneT2000    |
 | Xiaolong Huang  | xih002@ucsd.edu | 858-999-6448 | xilohuang |
 
 # 2. Primary Means of Communication and Expectations
