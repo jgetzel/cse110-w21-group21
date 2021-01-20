@@ -9,7 +9,7 @@ TA - Jordan Gassaway
 
 | Name            | Email | Phone | Github |
 | --------------- | ----- | ----- | ---- |
-| Jakob Getzel (leader)    | jgetzel@ucsd.edu     |       |  jgetzel    |
+| Jakob Getzel (leader)    | jgetzel@ucsd.edu     | 619-832-8200      |  jgetzel    |
 | Shwet Chitnis (leader)     | s2chitni@ucsd.edu     | 408-805-0358      | s2chitni     |
 | Ethan Huynh   | e2huynh@ucsd.edu | 858-449-9435 | e2huynh |
 | Jarrett Ratelle | jratelle@ucsd.edu      | 707-718-6093 | ruhtel     |
