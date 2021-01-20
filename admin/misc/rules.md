@@ -46,4 +46,9 @@ TA - Jordan Gassaway
 *Work to calm down the situation, and attempt to resolve the situation among themselves. If the issues persist, first contact the other team members and then the TA.*
 
 # 7. Signature
-**I, ______________, adhere to the guidelines as stated in this agreement, and will strive to make SCRIBBLERS succesful.**
+**I promise to adhere to the guidelines as stated in this agreement, and will strive to make SCRIBBLERS succesful.**
+  
+  ## Member Signature:
+  
+  X___________________
+  
