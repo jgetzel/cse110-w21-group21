@@ -17,7 +17,7 @@ TA - Jordan Gassaway
 | Manav Ram       |       |       |      |
 | Jaehee Yoo  |       |       |      |
 | Stone Tao       |       |       |      |
-| Xiaolong Huang  |       |       |      |
+| Xiaolong Huang  | xih002@ucsd.edu | 858-999-6448 | xilohuang |
 
 # 2. Primary Means of Communication and Expectations
 *All members will be expected to check the Slack group regularly on a daily basis and respond in no more than 50 minutes.*
