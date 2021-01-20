@@ -27,7 +27,7 @@ TA - Jordan Gassaway
 
 # 4. General Responsibilities of Team Members
  - Respect deadlines as setup during meetings, and as communicated through slack or as mentioned on GitHub.
- - Repsonsible to respond to Slack messages within 50 minutes.
+ - Responsible to respond to Slack messages within 50 minutes.
  - Attend meetings regularly, and announce absense at least 2 hours prior to the meeting.
  - Adhere to Academic Integrity Rules
  - Responsible to help or take over other team members' tasks if needed.
