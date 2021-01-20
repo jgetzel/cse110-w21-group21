@@ -26,7 +26,7 @@ TA - Jordan Gassaway
 *Team will agree, at the end of each meeting, when to meet next, and what will be discussed in the next meeting. Individuals will be resposible to remind their team members about future meetings, and requirements. Absence from a meeting should be announced at least 2 hours prior to the meeting.*
 
 # 4. General Responsibilities of Team Members
- - Respect deadlines as setup during meetings, and as communicated through slack.
+ - Respect deadlines as setup during meetings, and as communicated through slack or as mentioned on GitHub.
  - Repsonsible to respond to Slack messages within 50 minutes.
  - Attend meetings regularly, and announce absense at least 2 hours prior to the meeting.
  - Adhere to Academic Integrity Rules
