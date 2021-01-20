@@ -8,18 +8,18 @@ This is a regualar **Decision making** meeting for Scribblers for CSE 110 WI21 s
 
 #### Present
 
-Shwet Chitnis (Leader)
-Ethan Huynh
-Stone Tao
-Manav Ram
-Xiaolong Huang
+ - Shwet Chitnis (Leader)
+ - Ethan Huynh
+ - Stone Tao
+ - Manav Ram
+ - Xiaolong Huang
 
 #### Absent
 
-Jarrett Ratelle
-Kevin Klimek
-Jakob Getzel (Leader)
-Jaehee Yoo
+ - Jarrett Ratelle
+ - Kevin Klimek
+ - Jakob Getzel (Leader)
+ - Jaehee Yoo
 
 #### Agenda
 
