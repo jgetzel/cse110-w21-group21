@@ -43,7 +43,7 @@ TA - Jordan Gassaway
 ## 6A. Individual Conflict Resolution
 *If the issue isn't regular then be more flexible and help the individual. If the issue persists then confront the individual, and later contact the TA.*
 ## 6B. Conflcits between Team Members
-*Work to calm down the situation, and attempt to resolved the situation among themselves. If the issues persist, first contact the other team members and then the TA.*
+*Work to calm down the situation, and attempt to resolve the situation among themselves. If the issues persist, first contact the other team members and then the TA.*
 
 # 7. Signature
 **I, ______________, adhere to the guidelines as stated in this agreement, and will strive to make SCRIBBLERS succesful.**
