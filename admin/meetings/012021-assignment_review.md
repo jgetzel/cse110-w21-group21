@@ -40,11 +40,6 @@ This is a regualar **Status update** meeting for Scribblers for CSE 110 WI21 sch
 
 #### Future Plans
 
-- Discuss roles
-- Finalize group contract
-- Finalize group page
-- Plan regular hours for weekly meetings using https://lettucemeet.com/l/agRxJ
 
 #### Conclusion
 
-Met up during lab hours to work on upcoming assignments!
