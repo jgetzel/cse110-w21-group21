@@ -34,7 +34,7 @@ This is a regualar **Planning** meeting for Scribblers for CSE 110 WI21 schedule
 
 #### Decisions Made
 
- - Fill in (Weekly Planner)[https://lettucemeet.com/l/agRxJ
+ - Fill in [Weekly Planner](https://lettucemeet.com/l/agRxJ)
 
 #### Future Plans
 
