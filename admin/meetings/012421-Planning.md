@@ -41,8 +41,12 @@ This is a regualar **Planning** meeting for Scribblers for CSE 110 WI21 schedule
 
 #### Future Plans
 
- - 
+ - Brainstorming Assignment
+   - Read up about Pomodoro technique
+   - Familiarize ourselves with skills for specific roles
+   - Announce final meeting times on Slack.
 
 #### Conclusion
+
 
 
