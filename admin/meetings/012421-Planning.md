@@ -46,7 +46,4 @@ This is a regualar **Planning** meeting for Scribblers for CSE 110 WI21 schedule
    - Familiarize ourselves with skills for specific roles
    - Announce final meeting times on Slack.
 
-#### Conclusion
-
-
 
