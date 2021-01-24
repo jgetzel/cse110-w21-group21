@@ -30,11 +30,11 @@ This is a regualar **Planning** meeting for Scribblers for CSE 110 WI21 schedule
     - Design Ideas
  - Designate Roles
  - Find best meeting times
- - Discuss weekly check-ins timings
+ - Discuss weekly check-in timings
 
 #### Decisions Made
 
- - 
+ - Fill in {When2Meet}[https://lettucemeet.com/l/agRxJ
 
 #### Future Plans
 
