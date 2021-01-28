@@ -12,5 +12,7 @@
 - Decide how we might implement these principles in our own timer
 
 ### Decisions Made:
+- General Design Decisions for the Pomo Timer
+  - 
 
 ### Future Plans:
