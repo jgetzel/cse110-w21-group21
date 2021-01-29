@@ -13,7 +13,7 @@ TA - Jordan Gassaway
 | Shwet Chitnis (leader)     | s2chitni@ucsd.edu     | 408-805-0358      | s2chitni     |
 | Ethan Huynh   | e2huynh@ucsd.edu | 858-449-9435 | e2huynh |
 | Jarrett Ratelle | jratelle@ucsd.edu      | 707-718-6093 | ruhtel     |
-| Kevin Klmek     | kklimek@ucsd.edu      |       |      |
+| Kevin Klmek     | kklimek@ucsd.edu      |  408-529-4996     | Kevin-Klimek     |
 | Manav Ram       | mram@ucsd.edu  | 323-680-1476      | Manav-Ram19     |
 | Jaehee Yoo      |  j3yoo@ucsd.edu     | 626-893-0869      | jaeyoo0609     |
 | Stone Tao       |  stao@ucsd.edu     | 858-500-2342       |  StoneT2000    |
