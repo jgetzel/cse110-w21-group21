@@ -36,7 +36,7 @@ This is a regualar **Planning** meeting for Scribblers for CSE 110 WI21 schedule
 
  - Fill in [Weekly Planner](https://lettucemeet.com/l/agRxJ)
  - Designated Roles:
- ![image](https://user-images.githubusercontent.com/60715649/105647526-3a6a1e00-5e5b-11eb-9f1d-4ab2f65ed0e7.png)
+ ![CSE110_wi21_roles](https://user-images.githubusercontent.com/60715649/106401152-6b0c0380-63d7-11eb-9762-543ad39720aa.png)
 
 
 #### Future Plans
