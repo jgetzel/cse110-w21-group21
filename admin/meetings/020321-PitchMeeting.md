@@ -17,3 +17,4 @@ Once the button is pressed, they move to the task next in the order that they al
 - Have break window that actually has a large timer in a middle, that allows much more interaction that we would have in the main window.
 Some things you could do would be to allow the user to change the order of the tasks, as well as mark tasks as completed if you didn't hit the button during the session.
 - Created user personas. can be found [here](https://github.com/jgetzel/cse110-w21-group21/tree/main/specs/userstories)
+- Perhaps have just a very clean looking background then changes color smoothly from top to bottom until the timer is done.
