@@ -1,0 +1,22 @@
+name: Code Documentation Generation
+on:
+  push:
+    branches:
+      - main
+    
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: npm i
+      - name: Create documentation
+        run: npm run docs
+      - name: Commit documentation generated
+        run: |
+          git config --global user.name 'Scribbler'
+          git config --global user.email 'scribbler@ucsd.edu'
+          git add .
+          git commit -am "Generated Documentation"
+          git push
