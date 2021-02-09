@@ -1,7 +1,5 @@
 name: Code Jest Testing
-on:
-  pull_request:
-    types: [opened]
+on: [pull_request]
     
 jobs:
   build:
