@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install modules
+        run: npm i
       - name: Create documentation
         run: npm run docs
       - name: Commit documentation generated
