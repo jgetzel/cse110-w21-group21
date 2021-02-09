@@ -11,8 +11,11 @@ const HTMLElements = {
   honkButton: document.getElementById("honk-btn")
 }
 
-
-// sets the values of relevant html elements to the correct values and updates the volume image
+/**
+ * Sets the volume on the webpage and displays the correct volume image
+ * @param {number} volume - the volume to set
+ * @returns nothing
+ */
 function setAndDisplayVolume(volume) {
   HTMLElements.volumeNumber.value = volume;
   HTMLElements.volumeSlider.value = volume;
