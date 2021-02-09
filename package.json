@@ -1,0 +1,23 @@
+{
+  "name": "cse110-w21-group21",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./source/pipelineTestCode --ext .js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgetzel/cse110-w21-group21.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jgetzel/cse110-w21-group21/issues"
+  },
+  "homepage": "https://github.com/jgetzel/cse110-w21-group21#readme",
+  "dependencies": {
+    "eslint": "^7.19.0"
+  }
+}
