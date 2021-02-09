@@ -1,7 +1,7 @@
 // main.js
 
 // keep track of all html elements we are using
-const HTMLElements = {
+var HTMLElements = {
   volumeNumber: document.getElementById("volume-number"),
   volumeSlider: document.getElementById("volume-slider"),
   hornSound: document.getElementById("horn-sound"),
@@ -9,7 +9,7 @@ const HTMLElements = {
   audioSelection: document.getElementById("audio-selection"),
   soundImage: document.getElementById("sound-image"),
   honkButton: document.getElementById("honk-btn")
-}
+};
 
 /**
  * Sets the volume on the webpage and displays the correct volume image
@@ -22,7 +22,7 @@ function setAndDisplayVolume(volume) {
   HTMLElements.hornSound.volume = volume / 100;
 
   // get volume level and set volume image
-  let volumeLevel = 0;
+  var volumeLevel = 0;
   if (volume === 0) {
     volumeLevel = 0;
   } else if (volume <= 33) {
@@ -32,7 +32,7 @@ function setAndDisplayVolume(volume) {
   } else if (volume <= 100) {
     volumeLevel = 3;
   }
-  HTMLElements.volumeImage.setAttribute("src", `./assets/media/icons/volume-level-${volumeLevel}.svg`);
+  HTMLElements.volumeImage.setAttribute("src", "./assets/media/icons/volume-level-" + volumeLevel + ".svg");
 
   if (volumeLevel === 0) {
     HTMLElements.honkButton.disabled = true;
@@ -41,16 +41,16 @@ function setAndDisplayVolume(volume) {
   }
 }
 
-HTMLElements.volumeSlider.addEventListener("input", (e) => {
+HTMLElements.volumeSlider.addEventListener("input", function (e) {
   setAndDisplayVolume(parseInt(e.target.value));
 });
-HTMLElements.volumeNumber.addEventListener("input", (e) => {
+HTMLElements.volumeNumber.addEventListener("input", function (e) {
   setAndDisplayVolume(parseInt(e.target.value));
 });
 
-HTMLElements.audioSelection.addEventListener("input", (e) => {
-  let audioFile = "";
-  let soundImageFile = "";
+HTMLElements.audioSelection.addEventListener("input", function (e) {
+  var soundImageFile = "";
+  var audioFile = "";
   switch(e.target.id) {
     case "radio-air-horn":
       audioFile = "air-horn";
@@ -65,12 +65,12 @@ HTMLElements.audioSelection.addEventListener("input", (e) => {
       soundImageFile = "party-horn";
       break;
   }
-  HTMLElements.hornSound.setAttribute("src", `./assets/media/audio/${audioFile}.mp3`);
-  HTMLElements.soundImage.setAttribute("src", `./assets/media/images/${soundImageFile}.svg`)
+  HTMLElements.hornSound.setAttribute("src", "./assets/media/audio/" + audioFile + ".mp3");
+  HTMLElements.soundImage.setAttribute("src", "./assets/media/images/" + soundImageFile + ".svg");
 });
 
 
-HTMLElements.honkButton.addEventListener("click", (e) => {
+HTMLElements.honkButton.addEventListener("click", function (e) {
   e.preventDefault();
   HTMLElements.hornSound.play();
 });

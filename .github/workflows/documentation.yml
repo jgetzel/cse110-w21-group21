@@ -2,10 +2,10 @@ name: Code Documentation Generation
 on:
   push:
     branches:
-      - testbranch
+      - main
     
 jobs:
-  report:
+  documentation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
