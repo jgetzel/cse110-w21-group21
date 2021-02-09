@@ -17,5 +17,6 @@ jobs:
         run: |
           git config --global user.name 'Scribbler'
           git config --global user.email 'scribbler@ucsd.edu'
+          git add .
           git commit -am "Generated Documentation"
           git push
