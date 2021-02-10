@@ -13,6 +13,7 @@ var HTMLElements = {
 
 /**
  * Sets the volume on the webpage and displays the correct volume image
+ * @author Manav Ram
  * @param {number} volume - the volume to set
  * @returns nothing
  */
