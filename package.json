@@ -7,11 +7,9 @@
     "test": "jest",
     "lint": "eslint ./source/pipelineTestCode --ext .js",
     "docs": "jsdoc ./source/pipelineTestCode/assets/scripts/main.js"
-
   },
   "repository": {
     "type": "git",
-        
     "url": "git+https://github.com/jgetzel/cse110-w21-group21.git"
   },
   "author": "",
