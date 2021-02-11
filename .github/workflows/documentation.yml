@@ -2,7 +2,7 @@ name: Code Documentation Generation
 on:
   push:
     branches:
-      - dev
+      - dev-branch
     
 jobs:
   documentation:
