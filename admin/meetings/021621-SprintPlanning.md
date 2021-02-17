@@ -1,5 +1,7 @@
 # Sprint Planning Meeting
 
+### Meeting Length: 2 Hours
+
 ### Attendance:
 - Stone
 - Jakob
@@ -28,4 +30,3 @@
 - Everything else on the To-Do section of the project boards
   - Work from top to bottom
 
-### Meeting Length: 2 Hours
