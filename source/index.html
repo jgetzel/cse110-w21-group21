@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/styles/home.css">
+        <link rel="stylesheet" href="assets/styles/home_style.css">
         <script src="assets/scripts/main.js"></script>
     </head>
 
@@ -11,11 +11,15 @@
         <nav>
             <img src="logo.png">
             <button>History</button>
-            <button>?</button>
+            <button id="about-pomo" style="position: absolute; right:0px; padding: 10px;">?</button>
         </nav>
-        
-        <button id="btn-create">Create New Timer</button>
-        <button id="btn-check-leftover">Use leftover tasks from last time</button>
+        <div class="flex-container" style="vertical-align: middle;">
+            <button id="btn-create">Create New Timer</button>
+            <button id="btn-check-leftover">Use leftover tasks from last time</button>
+        </div>
+
+        <div id = "Task-Table">
+            <h2>My Task Table</h2>
     </body>
 </html>
 
