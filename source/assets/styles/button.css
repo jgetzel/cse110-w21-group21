@@ -1,0 +1,32 @@
+.pomo-button {
+    background-color: #333844;
+    border: none;
+    border-radius: 0.25rem;
+    color: white;
+    font-size: 1.5rem;
+    
+    min-width: 12rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    padding: 2rem 2rem
+}
+.pomo-button:hover {
+    transform: translateY(-3px);
+}
+.pomo-button:active {
+    transform: translateY(-2px);
+}
+
+.pomo-button.outline {
+    background-color: white;
+    border: 1px #333844 solid;
+    color: #333844;
+}
+
+.pomo-button.nav {
+    background-color: #FA7F7F;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    min-width: 6rem;
+}
