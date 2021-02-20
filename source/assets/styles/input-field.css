@@ -1,15 +1,26 @@
 .pomo-input {
+    cursor: text;
+    /*Styling the input box*/
     border: none;
-    text-align: left;
-    padding: 0rem 0rem 0.3rem 0rem;
-    border-bottom: 0.2rem solid #C4C4C4;
     outline: none;
     min-width: 20rem;
-    color: rgba(0, 0, 0, 1);
+    max-width: 20rem;
+    border-bottom: 0.2rem solid #C4C4C4;
+    transition: border-bottom 0.2s;
+    
+    /*Styling the font of the input box*/
+    font-family: 'Roboto', sans-serif; /*BUG: For some reason the Roboto font is not loading by default so I put it in the style*/
+    padding: 0rem 0rem 0.3rem 0rem;
+    color: rgba(51, 56, 68, 0.75);
     font-size: 1rem;
-    font-weight: bolder;
+    font-weight: bold;
+    word-wrap: break-word;
 }
 
-.pomo-input::placeholder {
-    color: rgba(0, 0, 0, 0.5);
+.pomo-input.max {
+    border-bottom: 0.2rem solid #FA7F7F;
+}
+
+.pomo-input.placeholder {
+    color: rgba(51, 56, 68, 0.5);
 }
