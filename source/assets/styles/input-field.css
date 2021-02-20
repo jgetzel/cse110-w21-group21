@@ -5,7 +5,11 @@
     border-bottom: 0.2rem solid #C4C4C4;
     outline: none;
     min-width: 20rem;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 1);
     font-size: 1rem;
     font-weight: bolder;
+}
+
+.pomo-input::placeholder {
+    color: rgba(0, 0, 0, 0.5);
 }

@@ -36,13 +36,9 @@ class InputField extends HTMLElement {
     }
 
     connectedCallback() {
-        // add attribute content
-        this.type = this.getAttribute("type");
-        if (this.type == "required") {
-            this.elements.wrapper.required = true;
-            this.elements.wrapper.setAttribute("class", this.elements.wrapper.getAttribute("class") + " outline");
+        if(this.getAttribute("required")) {
+            this.required = true;
         }
-            
     }
 }
 
