@@ -1,14 +1,13 @@
 // product-item.js
+
 /**
- * STEPS:
- * CHANGE NAME FROM TEMPLATE TO XYZ
+ * @class Button
  * 
- * CHANGE DEFINITION AT BOTTOM FROM TEMPLATE TO XYZ (x-y-z or smth)
+ * A button component with 3 types, normal, outline, and nav
  */
 class Button extends HTMLElement {
     constructor() {
         super();
-        console.log(this.textContent)
         // use an object to store all relevant elements to the components for convenience
         this.elements = {};
 
@@ -17,13 +16,13 @@ class Button extends HTMLElement {
         this.attachShadow({ mode: "open" }); // sets and returns 'this.shadowRoot'
 
         // Create an example element that will serve as our "root" element here
-        const wrapper = document.createElement("button");
+        const button = document.createElement("button");
         // set class as an example, this can be later used for css!
-        wrapper.setAttribute("class", "pomo-button");
-        wrapper.innerText = "ABCDEFG"
+        button.setAttribute("class", "pomo-button");
+        button.innerText = this.textContent || ""
 
         // store it for future reference
-        this.elements.wrapper = wrapper;
+        this.elements.button = button;
 
         // Add Styles
         const linkElem = document.createElement("link");
@@ -33,17 +32,16 @@ class Button extends HTMLElement {
         this.elements.linkElem = linkElem;
 
         // attach the created elements to the shadow DOM
-        this.shadowRoot.append(linkElem, wrapper);
+        this.shadowRoot.append(linkElem, button);
 
-    }
-
-    connectedCallback() {
         this.type = this.getAttribute("type");
         if (this.type == "outline") {
-            this.elements.wrapper.setAttribute("class", this.elements.wrapper.getAttribute("class") + " outline");
+            this.elements.button.setAttribute("class", this.elements.button.getAttribute("class") + " outline");
         } else if (this.type == "nav") {
-            this.elements.wrapper.setAttribute("class", this.elements.wrapper.getAttribute("class") + " nav");
+            this.elements.button.setAttribute("class", this.elements.button.getAttribute("class") + " nav");
         }
+
+
     }
 }
 
