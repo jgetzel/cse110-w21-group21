@@ -1,6 +1,6 @@
 .pomo-input {
-    cursor: text;
     /*Styling the input box*/
+    cursor: text;
     border: none;
     outline: none;
     min-width: 20rem;
@@ -14,7 +14,6 @@
     color: rgba(51, 56, 68, 0.75);
     font-size: 1rem;
     font-weight: bold;
-    word-wrap: break-word;
 }
 
 .pomo-input.max {

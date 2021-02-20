@@ -1,10 +1,13 @@
 /**
- * STEPS:
- * CHANGE NAME FROM TEMPLATE TO XYZ
- * 
- * CHANGE DEFINITION AT BOTTOM FROM TEMPLATE TO XYZ (x-y-z or smth)
+ * InputField class to make a web component that can handle user input
+ * @class
+ * @author Ethan Huynh
  */
 class InputField extends HTMLElement {
+    /** Constructor for pomo-input component creates a contentEditable div with
+     * a default max character limit of 50
+     * @constructor
+     */
     constructor() {
         super();
 
@@ -40,8 +43,10 @@ class InputField extends HTMLElement {
         this.elements.wrapper.setAttribute("class", this.elements.wrapper.getAttribute("class") + " placeholder");
 
         /** 
-         * This doesn't take into account copy + paste so if user pastes something >= max it will paste
-         * and then restrict key inputs after
+         * Checks input field if it's exceeded the maximum character limit on an event
+         * @function
+         * @param {Event} e Checks on keydown,paste, and input events
+         * @returns {Boolean} false If the max character limit has been reached
         */
         function limitCharCount(e) {
             if(wrapper.textContent.length >= wrapper.max) {
@@ -58,6 +63,10 @@ class InputField extends HTMLElement {
         wrapper.addEventListener('paste', limitCharCount, false);
         wrapper.addEventListener('input', limitCharCount, false); //this is mainly for changing the backspace/del key
 
+        /**
+         * Anonymous function to replace placeholder text with empty string when user clicks on component
+         * @function
+         */
         wrapper.addEventListener('focus', function() {
             //if focused and current text is the placeholder text replace it with empty string
             if(wrapper.textContent == wrapper.placeholder) {
@@ -66,6 +75,10 @@ class InputField extends HTMLElement {
             }
         });
 
+        /**
+         * Anonymous function to replace empty string with placeholder text when user clicks away
+         * @function
+         */
         wrapper.addEventListener('blur', function() {
             //if not focused and there is no input, return back to placeholder string
             if(wrapper.textContent == '') {
