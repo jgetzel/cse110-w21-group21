@@ -1,0 +1,11 @@
+.pomo-input {
+    border: none;
+    text-align: left;
+    padding: 0rem 0rem 0.3rem 0rem;
+    border-bottom: 0.2rem solid #C4C4C4;
+    outline: none;
+    min-width: 20rem;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 1rem;
+    font-weight: bolder;
+}
