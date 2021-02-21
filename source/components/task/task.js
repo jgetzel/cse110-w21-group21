@@ -13,16 +13,23 @@
 
          const wrapper = document.createElement("li");
          wrapper.setAttribute("class", "task");
+         // A div wrapper for the title and description
+         const wrapperText = document.createElement("div");
+         wrapperText.setAttribute("class", "textwrapper");
+         wrapper.appendChild(wrapperText);
 
          const title = document.createElement("p");
          title.setAttribute("class", "title");
          title.innerText = this.textContent || "";
-         wrapper.appendChild(title);
+         wrapperText.appendChild(title);
 
          const description = document.createElement("p");
          description.setAttribute("class", "description");
          description.innerText = this.getAttribute("description") || "";
-         wrapper.appendChild(description);
+         wrapperText.appendChild(description);
+         
+
+        
 
         //  // The Green, Red or Yellow circle that describes the ratio of Pomos expected vs Pomos Used
         //  const wrapperCompletionCircle = document.createElement("svg");
@@ -34,21 +41,36 @@
         //  wrapperCompletionCircle.appendChild(completionCircle);
         //  wrapper.appendChild(wrapperCompletionCircle);
 
-        //  // The Check mark that defines if a task is complete or not
-        //  const wrapperCheckMark = document.createElement("svg");
-        //  if(this.completed === true) {
-        //     wrapperCheckMark.setAttribute("class", "completeCheckMark");
-        //  }
-        //  else {
-        //     wrapperCheckMark.setAttribute("class", "incompleteCheckMark");
-        //  }
-        //  wrapper.appendChild(wrapperCheckMark);
+         // A div wrapper for the check mark
+         const wrapperCheckMark = document.createElement("div");
+         wrapperCheckMark.setAttribute("class", "wrapperCheckMark");
+         wrapper.appendChild(wrapperCheckMark);
+         // The Check mark that defines if a task is complete or not
+         const checkMark = document.createElement("img");
+         if(this.completed == true) {
+            checkMark.setAttribute("class", "completeCheckMark");
+            checkMark.setAttribute("src", "./assets/svgImages/check_Complete.svg");
+         }
+         else {
+            checkMark.setAttribute("class", "incompleteCheckMark");
+            checkMark.setAttribute("src", "./assets/svgImages/check_Incomplete.svg");
+         }
+         checkMark.onclick = function() {
+            checkMark.setAttribute("class", "completeCheckMark");
+            checkMark.setAttribute("src", "./assets/svgImages/check_Complete.svg");
+            this.completed = true;
+         }
+         wrapperCheckMark.appendChild(checkMark);
 
+         // A div wrapper for the check mark
+         const wrapperDragAndDrop = document.createElement("div");
+         wrapperDragAndDrop.setAttribute("class", "wrapperDragAndDrop");
+         wrapper.appendChild(wrapperDragAndDrop);
          // The Drag and Drop SVG
          const imgDragAndDrop = document.createElement("img");
          imgDragAndDrop.setAttribute("class", "dragAndDrop");
          imgDragAndDrop.setAttribute("src", "./assets/svgImages/drag-dots.svg");
-         wrapper.appendChild(imgDragAndDrop);
+         wrapperDragAndDrop.appendChild(imgDragAndDrop);
          
          this.elements.wrapper = wrapper;
          
@@ -82,7 +104,8 @@
     //  }
     //  completeTask() {
     //      this.completed = true;
-    //      this.colorDecider();
+    //      this.wrapper.wrapperImage.checkMark.setAttribute("src", "./assets/svgImages/check_Complete.svg");
+    //     //  this.colorDecider();
     //  }
  }
 

@@ -1,4 +1,6 @@
 .task {
+    display: flex;
+    justify-content: space-between;
     background-color: white;
     border: 1px #333844 solid;
     font-family: 'Roboto';
@@ -7,8 +9,12 @@
     height: 7rem;
     margin-bottom: 1rem;
 }
+.task > div {
+    /*border: 3px green solid;*/
+    margin-right: 1rem;
+}
 
-.task > .title {
+.textwrapper > .title {
     top: 0.01rem;
     color: #333844;
     font-size: 1.3rem;
@@ -20,16 +26,21 @@
     word-wrap: break-word;
     padding-bottom: 0rem;
 }
-.task > .description {
+.textwrapper > .description {
     color: rgba(51, 56, 68, 0.5); 
     font-size: 0.5rem;
     padding-left: 1rem;
     max-width: 13.5rem;
 }
-.task > .dragAndDrop {
+.wrapperDragAndDrop > .dragAndDrop {
     position: relative;
-    top: -2.5rem;
-    left: 23rem;
-    height: 1.5rem;
-    vertical-align: middle;
+    top: 2rem;
+}
+.wrapperCheckMark > .completeCheckMark {
+    position: relative;
+    top: 1rem;
+}
+.wrapperCheckMark > .incompleteCheckMark {
+    position: relative;
+    top: 1rem;
 }
