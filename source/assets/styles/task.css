@@ -1,0 +1,21 @@
+.task {
+    background-color: white;
+    border: 1px #333844 solid;
+    border-radius: 0.25rem;
+    width: 25rem;
+    height: 5rem;
+}
+.task > .title {
+    color: #333844;
+    font-size: 1.3rem;
+    padding-left: 2rem;
+    padding-bottom: 1rem;
+    font-weight: bold;
+}
+.task > .description {
+    color: #333844;
+    font-size: 1.3rem;
+    padding-left: 2rem;
+    padding-bottom: 1rem;
+    font-weight: bold;
+}
