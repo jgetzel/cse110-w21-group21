@@ -12,12 +12,12 @@
     <body>
         <nav>
             <img src="logo.png">
-            <button>History</button>
-            <button id="about-pomo" style="position: absolute; right:0px; padding: 10px;">?</button>
+            <pomo-button type="nav">History</pomo-button>
+            <pomo-button id="about-pomo" type="nav" style="position: absolute; right:0px; padding: 10px;">?</pomo-button>
         </nav>
         <div class="flex-container" style="vertical-align: middle;">
-            <button id="btn-create">Create New Timer</button>
-            <button id="btn-check-leftover">Use leftover tasks from last time</button>
+            <a href="timer.html"><pomo-button id="btn-create">Create New Timer</pomo-button></a>
+            <pomo-button id="btn-check-leftover" type="outline">Use leftover tasks from last time</pomo-button>
             <button id="btn-modal">Open Modal</button>
         </div>
 
@@ -25,5 +25,6 @@
             <h2>My Task Table</h2>
         </div>
     </body>
+    <script src="components/button/button.js"></script>
 </html>
 
