@@ -21,9 +21,7 @@
 
          const description = document.createElement("p");
          description.setAttribute("class", "description");
-         description.innerText = this.descriptionText || "";
-         console.log(this);
-         console.log(this.value);
+         description.innerText = this.getAttribute("description") || "";
          wrapper.appendChild(description);
 
         //  // The Green, Red or Yellow circle that describes the ratio of Pomos expected vs Pomos Used
@@ -46,12 +44,13 @@
         //  }
         //  wrapper.appendChild(wrapperCheckMark);
 
-        //  // The Drag and Drop SVG
-        //  const wrapperDragAndDrop = document.createElement("svg");
-        //  wrapperDragAndDrop.setAttribute("class", "dragAndDrop");
-        //  wrapper.appendChild(wrapperDragAndDrop);
+         // The Drag and Drop SVG
+         const imgDragAndDrop = document.createElement("img");
+         imgDragAndDrop.setAttribute("class", "dragAndDrop");
+         imgDragAndDrop.setAttribute("src", "./assets/svgImages/drag-dots.svg");
+         wrapper.appendChild(imgDragAndDrop);
          
-        //  this.elements.wrapper = wrapper;
+         this.elements.wrapper = wrapper;
          
          const linkElem = document.createElement("link");
          linkElem.setAttribute("rel", "stylesheet");

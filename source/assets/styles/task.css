@@ -1,21 +1,35 @@
 .task {
     background-color: white;
     border: 1px #333844 solid;
+    font-family: 'Roboto';
     border-radius: 0.25rem;
     width: 25rem;
-    height: 5rem;
+    height: 7rem;
+    margin-bottom: 1rem;
 }
+
 .task > .title {
+    top: 0.01rem;
     color: #333844;
     font-size: 1.3rem;
-    padding-left: 2rem;
-    padding-bottom: 1rem;
-    font-weight: bold;
+    padding-left: 1rem;
+    font-weight: 500;
+    height: 0.5rem;
+    max-width: 13.5rem;
+    margin-top: 0.5rem;
+    word-wrap: break-word;
+    padding-bottom: 0rem;
 }
 .task > .description {
-    color: #333844;
-    font-size: 1.3rem;
-    padding-left: 2rem;
-    padding-bottom: 1rem;
-    font-weight: bold;
+    color: rgba(51, 56, 68, 0.5); 
+    font-size: 0.5rem;
+    padding-left: 1rem;
+    max-width: 13.5rem;
+}
+.task > .dragAndDrop {
+    position: relative;
+    top: -2.5rem;
+    left: 23rem;
+    height: 1.5rem;
+    vertical-align: middle;
 }
