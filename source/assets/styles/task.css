@@ -1,27 +1,37 @@
 .task {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     background-color: white;
     border: 1px #333844 solid;
     font-family: 'Roboto';
     border-radius: 0.25rem;
     width: 25rem;
-    height: 7rem;
+    height: 5rem;
     margin-bottom: 1rem;
 }
 .task > div {
-    /*border: 3px green solid;*/
-    margin-right: 1rem;
+    /* border: 1px green solid; */
+    padding-right: 0.5rem;
 }
-
+.task > .textwrapper{
+   width: 15.5rem;
+}
+.task > .wrapperCheckMark {
+    margin-left: 0rem;
+    margin-right: 0rem;
+}
+.task > .wrapperDragAndDrop {
+    padding-left: 0rem;
+}
 .textwrapper > .title {
+    position: relative;
     top: 0.01rem;
     color: #333844;
     font-size: 1.3rem;
-    padding-left: 1rem;
+    padding-left: 0.5rem;
     font-weight: 500;
     height: 0.5rem;
-    max-width: 13.5rem;
+    width: 13.5rem;
     margin-top: 0.5rem;
     word-wrap: break-word;
     padding-bottom: 0rem;
@@ -29,18 +39,34 @@
 .textwrapper > .description {
     color: rgba(51, 56, 68, 0.5); 
     font-size: 0.5rem;
-    padding-left: 1rem;
+    padding-left: 0.5rem;
     max-width: 13.5rem;
 }
+
 .wrapperDragAndDrop > .dragAndDrop {
     position: relative;
-    top: 2rem;
+    top: 1.5rem;
+    cursor: grab;
 }
 .wrapperCheckMark > .completeCheckMark {
     position: relative;
+    height: 3rem;
     top: 1rem;
 }
 .wrapperCheckMark > .incompleteCheckMark {
     position: relative;
+    height: 3rem;
     top: 1rem;
+}
+
+.wrapperCircle > .pomoCircle {
+    position: relative;
+    top: 1.22rem;
+    background-color: #333844;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+    line-height: 2.5rem;
 }

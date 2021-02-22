@@ -29,17 +29,17 @@
          wrapperText.appendChild(description);
          
 
-        
+         // A div wrapper for the completion circle
+         const wrapperCompletionCircle = document.createElement("div");
+         wrapperCompletionCircle.setAttribute("class", "wrapperCircle");
+         wrapper.appendChild(wrapperCompletionCircle);
+         // The Green, Red or Yellow circle that describes the ratio of Pomos expected vs Pomos Used
+         const pomoCircle = document.createElement("div");
+         pomoCircle.setAttribute("class", "pomoCircle");
+         pomoCircle.innerText = this.getAttribute("pomosUsed") + "/" + this.getAttribute("pomosRequired");
 
-        //  // The Green, Red or Yellow circle that describes the ratio of Pomos expected vs Pomos Used
-        //  const wrapperCompletionCircle = document.createElement("svg");
-        //  wrapperCompletionCircle.setAttribute("class", "svgCircle");
-        //  const completionCircle = document.createElement("circle");
-
-        //  this.colorDecider();
-
-        //  wrapperCompletionCircle.appendChild(completionCircle);
-        //  wrapper.appendChild(wrapperCompletionCircle);
+         wrapperCompletionCircle.appendChild(pomoCircle);
+         wrapper.appendChild(wrapperCompletionCircle);
 
          // A div wrapper for the check mark
          const wrapperCheckMark = document.createElement("div");
