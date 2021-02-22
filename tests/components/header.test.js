@@ -12,7 +12,7 @@ test('test header.js', () => {
 
     // find our component elements
     const header = document.querySelector("pomo-header");
-    const homeBtn = header.querySelector(".logo");
+    const homeBtn = header.querySelector(".pomo-header.logo");
     const links = header.getElementsByTagName("a");
     const homeLink = links[0];
     const histLink = links[1];
@@ -21,7 +21,7 @@ test('test header.js', () => {
     expect(homeBtn.src).toBe("./assets/images/logo.svg");
 
     // Check if 2 buttons load correctly
-    expect(header.querySelectorAll(".nav").length).toBe(2);
+    expect(header.querySelectorAll(".pomo-button.nav").length).toBe(2);
 
     // Check if links work correctly
     expect(homeLink.href).toBe("index.html");
