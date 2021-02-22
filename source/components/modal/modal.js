@@ -9,8 +9,9 @@ class ModalComponent extends HTMLElement {
 
         // Create an example element that will serve as our "root" element here
         const wrapper = document.createElement("div");
-        wrapper.setAttribute("class", "modal-wrapper");
-        wrapper.innerHTML = `
+        this.elements.wrapper = wrapper;
+        this.elements.wrapper.setAttribute("class", "modal-wrapper");
+        this.elements.wrapper.innerHTML = `
             <div class="shadow"></div>
             <div class="modal">
                 <button id="modal-close" class="close-btn">x</button>
@@ -21,7 +22,7 @@ class ModalComponent extends HTMLElement {
                 <div><pomo-input id="pomos-required"></pomo-input></div>
                 <div><pomo-input id="description"></pomo-input></div>
                 <div class="button-wrapper">
-                    <pomo-button>Save</pomo-button>
+                    <pomo-button id="save-btn">Save</pomo-button>
                 </div>
             </div>
         `
@@ -31,6 +32,7 @@ class ModalComponent extends HTMLElement {
         // make sure to link the correct stylesheet with the correct stylings
         linkElem.setAttribute("href", "./assets/styles/modal.css");
         this.elements.linkElem = linkElem;
+        this.elements.wrapper.style.display = "none";
 
         this.shadowRoot.appendChild(linkElem);
         this.shadowRoot.appendChild(wrapper);
@@ -40,8 +42,10 @@ class ModalComponent extends HTMLElement {
         this.elements.closeBtn = closeBtn;
         this.elements.closeBtn.onclick = function () {
             wrapper.style.display = "none";
-
-
+        }
+        this.elements.saveBtn = this.shadowRoot.getElementById("save-btn");
+        this.elements.saveBtn.onclick = function () {
+            wrapper.style.display = "none";
         }
     }
 
