@@ -12,11 +12,12 @@ test('test main.js', () => {
 
     // find our component elements
     const header = document.getElementsByName("pomo-header");
-    const histBtn = header.getElementById("hist");
+    const histBtn = header.elements.button;
+    console.log(histBtn.innerText);
     const helpBtn = header.getElementById("help");
 
     //TODO:check logo is loaded in
-    
+
 
     //TODO:check links work
 
