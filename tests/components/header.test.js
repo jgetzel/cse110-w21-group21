@@ -23,9 +23,9 @@ test('test header.js', () => {
     // Check if 2 buttons load correctly
     expect(header.querySelectorAll(".pomo-button.nav").length).toBe(2);
 
-    // Check if links work correctly
-    expect(homeLink.href).toBe("index.html");
-    expect(histLink.href).toBe("history.html");
+    // Check if links work correctly (new URL more efficient than creating <a> tags)
+    expect(homeLink.href).toBe(new URL("index.html", document.baseURI).href);
+    expect(histLink.href).toBe(new URL("history.html", document.baseURI).href);
 
     // TODO: Check help button functionality based on implementation
 });
