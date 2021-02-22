@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: input/input.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: input/input.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * InputField class to make a web component that can handle user input
+ * @class
+ * @author Ethan Huynh
+ */
+class InputField extends HTMLElement {
+    /** Constructor for pomo-input component creates a contentEditable div with
+     * a default max character limit of 50
+     * @constructor
+     */
+    constructor() {
+        super();
+
+        let self = this;
+        // use an object to store all relevant elements to the components for convenience
+        this.elements = {};
+
+        // Create a shadow root
+        this.attachShadow({ mode: "open" }); // sets and returns 'this.shadowRoot'
+
+        // Create an example element that will serve as our "root" element here
+        const wrapper = document.createElement("div");
+        // set class as an example, this can be later used for css!
+        wrapper.setAttribute("class", "pomo-input");
+
+        wrapper.placeholder = "Default Text";
+        wrapper.contentEditable = true;
+        wrapper.max = 50; //by default the max character count is 50
+
+        // store it for future reference
+        this.elements.wrapper = wrapper;
+
+        // Add Styles
+        const linkElem = document.createElement("link");
+        linkElem.setAttribute("rel", "stylesheet");
+        // make sure to link the correct stylesheet with the correct stylings
+        linkElem.setAttribute("href", "./assets/styles/input-field.css");
+        this.elements.linkElem = linkElem;
+
+        // attach the created elements to the shadow DOM
+        this.shadowRoot.append(linkElem, wrapper);
+
+        //add default style
+        this.elements.wrapper.setAttribute("class", this.elements.wrapper.getAttribute("class") + " placeholder");
+
+        /** 
+         * Checks input field if it's exceeded the maximum character limit on an event
+         * @function
+         * @param {Event} e Checks on keydown,paste, and input events
+         * @returns {Boolean} false If the max character limit has been reached
+        */
+        function limitCharCount(e) {
+            if (wrapper.textContent.length >= wrapper.max) {
+                wrapper.setAttribute("class", wrapper.getAttribute("class") + " max");
+                e.preventDefault();
+                return false;
+            }
+            else {
+                wrapper.setAttribute("class", "pomo-input");
+            }
+        }
+        //listen for max characters on these events
+        wrapper.addEventListener('keypress', limitCharCount, false);
+        wrapper.addEventListener('paste', limitCharCount, false);
+        wrapper.addEventListener('input', limitCharCount, false); //this is mainly for changing the backspace/del key
+
+        /**
+         * Anonymous function to replace placeholder text with empty string when user clicks on component
+         * @function
+         */
+        wrapper.addEventListener('focus', function () {
+            //if focused and current text is the placeholder text replace it with empty string
+            if (wrapper.textContent == wrapper.placeholder) {
+                wrapper.setAttribute("class", "pomo-input");
+                wrapper.textContent = '';
+            }
+        });
+
+        /**
+         * Anonymous function to replace empty string with placeholder text when user clicks away
+         * @function
+         */
+        wrapper.addEventListener('blur', function () {
+            //if not focused and there is no input, return back to placeholder string
+            if (wrapper.textContent == '') {
+                wrapper.setAttribute("class", wrapper.getAttribute("class") + " placeholder");
+                wrapper.textContent = wrapper.placeholder;
+            }
+
+        });
+    }
+
+    get value() {
+        return this.elements.wrapper.textContent;
+    }
+
+    connectedCallback() {
+        var maxChar = this.getAttribute("max")
+
+        //set attribute-specified max char
+        if (maxChar != null)
+            this.elements.wrapper.max = Number(maxChar);
+
+        if (this.getAttribute("required")) {
+            this.required = true;
+        }
+    }
+}
+
+customElements.define("pomo-input", InputField);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="InputField.html">InputField</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Feb 22 2021 04:53:00 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

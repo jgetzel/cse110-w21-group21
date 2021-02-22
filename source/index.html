@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/styles/home_style.css">
+        <link rel="stylesheet" href="assets/styles/base.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
         <script src="assets/scripts/main.js"></script>
@@ -12,16 +12,22 @@
     <body>
         <nav>
             <img src="logo.png">
-            <button>History</button>
-            <button id="about-pomo" style="position: absolute; right:0px; padding: 10px;">?</button>
+            <pomo-button type="nav">History</pomo-button>
+            <pomo-button id="about-pomo" type="nav" style="position: absolute; right:0px; padding: 10px;">?</pomo-button>
         </nav>
         <div class="flex-container" style="vertical-align: middle;">
-            <button id="btn-create">Create New Timer</button>
-            <button id="btn-check-leftover">Use leftover tasks from last time</button>
+            <a href="timer.html"><pomo-button id="btn-create">Create New Timer</pomo-button></a>
+            <pomo-button id="btn-check-leftover" type="outline">Use leftover tasks from last time</pomo-button>
+            <button id="btn-modal">Open Modal</button>
         </div>
 
         <div id = "Task-Table">
             <h2>My Task Table</h2>
+        </div>
     </body>
+    <script src="components/input/input.js"></script>
+    <script src="components/button/button.js"></script>
+    <script src="components/modal/modal.js"></script>
+    
 </html>
 
