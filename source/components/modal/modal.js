@@ -40,13 +40,10 @@ class ModalComponent extends HTMLElement {
 
         const closeBtn = this.shadowRoot.getElementById("modal-close")
         this.elements.closeBtn = closeBtn;
-        this.elements.closeBtn.onclick = function () {
-            wrapper.style.display = "none";
-        }
+        this.elements.closeBtn.onclick = this.hideModal;
         this.elements.saveBtn = this.shadowRoot.getElementById("save-btn");
-        this.elements.saveBtn.onclick = function () {
-            wrapper.style.display = "none";
-        }
+        this.elements.saveBtn.onclick = this.hideModal;
+        console.log(this.elements);
     }
 
     getValues() {
@@ -58,6 +55,14 @@ class ModalComponent extends HTMLElement {
             pomosRequired: pomosRequired.value,
             description: description.value,
         }
+    }
+
+    displayModal() {
+        console.log(this.elements);
+        this.elements.wrapper.style.display = "block";
+    }
+    hideModal() {
+        this.elements.wrapper.style.display = "none";
     }
 
     connectedCallback() {
