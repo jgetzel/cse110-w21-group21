@@ -70,3 +70,50 @@
     width: 2.5rem;
     line-height: 2.5rem;
 }
+.wrapperCircle > .incompleteTask {
+    position: relative;
+    top: 1.22rem;
+    background-color:#FA7F7F;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+    line-height: 2.5rem;
+}
+
+.wrapperCircle > .goodTimingTask {
+    position: relative;
+    top: 1.22rem;
+    background-color:#22DD9A;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+    line-height: 2.5rem;
+}
+
+.wrapperCircle > .badTimingTask {
+    position: relative;
+    top: 1.22rem;
+    background-color:#F9C644;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+    line-height: 2.5rem;
+}
+
+.wrapperCircle > .currentTask {
+    position: relative;
+    top: 1.22rem;
+    background-color:#333844;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+    line-height: 2.5rem;
+}

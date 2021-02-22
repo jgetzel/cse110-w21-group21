@@ -11,6 +11,11 @@
          this.elements = {};
          this.attachShadow({ mode: "open" });
 
+         const pomotask = this;
+         pomotask.isCurrentTask = true;
+         pomotask.incomplete = false;
+         // if we received stop signal from stop button of the pomo timer, it will trigger incomplete
+
          const wrapper = document.createElement("li");
          wrapper.setAttribute("class", "task");
          // A div wrapper for the title and description
@@ -36,6 +41,8 @@
          // The Green, Red or Yellow circle that describes the ratio of Pomos expected vs Pomos Used
          const pomoCircle = document.createElement("div");
          pomoCircle.setAttribute("class", "pomoCircle");
+         pomoCircle.pused = this.getAttribute("pomosUsed");
+         pomoCircle.preq = this.getAttribute("pomosRequired");
          pomoCircle.innerText = this.getAttribute("pomosUsed") + "/" + this.getAttribute("pomosRequired");
 
          wrapperCompletionCircle.appendChild(pomoCircle);
@@ -47,6 +54,7 @@
          wrapper.appendChild(wrapperCheckMark);
          // The Check mark that defines if a task is complete or not
          const checkMark = document.createElement("img");
+         
          if(this.completed == true) {
             checkMark.setAttribute("class", "completeCheckMark");
             checkMark.setAttribute("src", "./assets/svgImages/check_Complete.svg");
@@ -55,11 +63,17 @@
             checkMark.setAttribute("class", "incompleteCheckMark");
             checkMark.setAttribute("src", "./assets/svgImages/check_Incomplete.svg");
          }
+
          checkMark.onclick = function() {
             checkMark.setAttribute("class", "completeCheckMark");
             checkMark.setAttribute("src", "./assets/svgImages/check_Complete.svg");
-            this.completed = true;
+            pomotask.completed = true;
+            pomotask.isCurrentTask = false;
+            
+            colorDecider(pomoCircle, pomotask);
+            
          }
+
          wrapperCheckMark.appendChild(checkMark);
 
          // A div wrapper for the check mark
@@ -82,31 +96,55 @@
 
          this.shadowRoot.append(wrapper, linkElem);
      }
-    //  incrementPomosUsed() {
-    //      this.pomosUsed += 1;
-    //      colorDecider();
-    //  }
-    //  colorDecider() {
-    //     if(this.isCurrentTask === true) {
-    //         this.wrapper.completionCircle.setAttribute("class", "currentTask");
-    //     }
-    //     else if(this.completed === true){
-    //         if(this.pomosUsed < this.pomosRequired) {
-    //             this.wrapper.completionCircle.setAttribute("class", "goodTimingTask");
-    //         }
-    //         else {
-    //             this.wrapper.completionCircle.setAttribute("class", "badTimingTask");
-    //         }
-    //     }
-    //     else {
-    //         this.wrapper.completionCircle.setAttribute("class", "incompleteTask");
-    //     }
-    //  }
-    //  completeTask() {
-    //      this.completed = true;
-    //      this.wrapper.wrapperImage.checkMark.setAttribute("src", "./assets/svgImages/check_Complete.svg");
-    //     //  this.colorDecider();
-    //  }
+
+   //   incrementPomosUsed() {
+   //       this.pomosUsed += 1;
+   //       colorDecider();
+   //   }
+
+   //    colorDecider () {
+
+   //      if(this.isCurrentTask === true) {
+   //          this.wrapper.pomoCircle.setAttribute("class", "currentTask");
+   //      }
+   //      else if(this.completed === true){
+   //          if(this.pomosUsed < this.pomosRequired) {
+   //              this.wrapper.pomoCircle.setAttribute("class", "goodTimingTask");
+   //          }
+   //          else {
+   //              this.wrapper.pomoCircle.setAttribute("class", "badTimingTask");
+   //          }
+   //      }
+   //      else {
+   //          this.wrapper.pomoCircle.setAttribute("class", "incompleteTask");
+   //      }
+
+   //   }
+     
+   //   completeTask() {
+   //       this.completed = true;
+   //       this.wrapper.wrapperImage.checkMark.setAttribute("src", "./assets/svgImages/check_Complete.svg");
+   //      //  this.colorDecider();
+   //   }
  }
+
+ function colorDecider (pomoCircle, pomotask) {
+   // console.log(sth.pused);
+   if(pomotask.isCurrentTask === true) {
+      pomoCircle.setAttribute("class", "currentTask");
+   }
+   else if(pomotask.completed === true){
+       if(pomoCircle.pused < pomoCircle.preq) {
+         pomoCircle.setAttribute("class", "goodTimingTask");
+       }
+       else {
+         pomoCircle.setAttribute("class", "badTimingTask");
+       }
+   }
+   else if (pomotask.incomplete == true) {
+      pomoCircle.setAttribute("class", "incompleteTask")
+   }
+
+}
 
 customElements.define("pomo-task", TaskComponent);
