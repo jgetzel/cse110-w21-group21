@@ -11,6 +11,7 @@ class InputField extends HTMLElement {
     constructor() {
         super();
 
+        let self = this;
         // use an object to store all relevant elements to the components for convenience
         this.elements = {};
 
@@ -21,7 +22,7 @@ class InputField extends HTMLElement {
         const wrapper = document.createElement("div");
         // set class as an example, this can be later used for css!
         wrapper.setAttribute("class", "pomo-input");
-        
+
         wrapper.placeholder = "Default Text";
         wrapper.contentEditable = true;
         wrapper.max = 50; //by default the max character count is 50
@@ -49,7 +50,7 @@ class InputField extends HTMLElement {
          * @returns {Boolean} false If the max character limit has been reached
         */
         function limitCharCount(e) {
-            if(wrapper.textContent.length >= wrapper.max) {
+            if (wrapper.textContent.length >= wrapper.max) {
                 wrapper.setAttribute("class", wrapper.getAttribute("class") + " max");
                 e.preventDefault();
                 return false;
@@ -67,9 +68,9 @@ class InputField extends HTMLElement {
          * Anonymous function to replace placeholder text with empty string when user clicks on component
          * @function
          */
-        wrapper.addEventListener('focus', function() {
+        wrapper.addEventListener('focus', function () {
             //if focused and current text is the placeholder text replace it with empty string
-            if(wrapper.textContent == wrapper.placeholder) {
+            if (wrapper.textContent == wrapper.placeholder) {
                 wrapper.setAttribute("class", "pomo-input");
                 wrapper.textContent = '';
             }
@@ -79,9 +80,9 @@ class InputField extends HTMLElement {
          * Anonymous function to replace empty string with placeholder text when user clicks away
          * @function
          */
-        wrapper.addEventListener('blur', function() {
+        wrapper.addEventListener('blur', function () {
             //if not focused and there is no input, return back to placeholder string
-            if(wrapper.textContent == '') {
+            if (wrapper.textContent == '') {
                 wrapper.setAttribute("class", wrapper.getAttribute("class") + " placeholder");
                 wrapper.textContent = wrapper.placeholder;
             }
@@ -89,14 +90,18 @@ class InputField extends HTMLElement {
         });
     }
 
+    get value() {
+        return this.elements.wrapper.textContent;
+    }
+
     connectedCallback() {
         var maxChar = this.getAttribute("max")
 
         //set attribute-specified max char
-        if(maxChar != null)
+        if (maxChar != null)
             this.elements.wrapper.max = Number(maxChar);
 
-        if(this.getAttribute("required")) {
+        if (this.getAttribute("required")) {
             this.required = true;
         }
     }
