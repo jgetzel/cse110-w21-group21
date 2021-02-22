@@ -18,7 +18,7 @@ test('test header.js', () => {
     const histLink = links[1];
 
     // Check if logo is loaded in correctly
-    expect(homeBtn.src).toBe("./assets/images/logo.svg");
+    expect(homeBtn.src).toBe(new URL("./assets/images/logo.svg", document.baseURI).href);
 
     // Check if 2 buttons load correctly
     expect(header.querySelectorAll(".pomo-button.nav").length).toBe(2);
