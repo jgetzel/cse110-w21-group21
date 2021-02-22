@@ -10,10 +10,9 @@ test('test main.js', () => {
     // we use require here to load the component javascript
     require("../../source/components/header/header.js")
 
-    // find our component elements
+    //TODO: find our component elements
     const header = document.getElementsByName("pomo-header");
-    const histBtn = header.elements.button;
-    console.log(histBtn.innerText);
+    const histBtn = header.elements;
     const helpBtn = header.getElementById("help");
 
     //TODO:check logo is loaded in
