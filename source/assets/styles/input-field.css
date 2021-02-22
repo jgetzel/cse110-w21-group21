@@ -3,8 +3,6 @@
     cursor: text;
     border: none;
     outline: none;
-    min-width: 20rem;
-    max-width: 20rem;
     border-bottom: 0.2rem solid #C4C4C4;
     transition: border-bottom 0.2s;
     
