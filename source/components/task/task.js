@@ -26,11 +26,13 @@
          const title = document.createElement("p");
          title.setAttribute("class", "title");
          title.innerText = this.textContent || "";
+         this.elements.title = title;
          wrapperText.appendChild(title);
 
          const description = document.createElement("p");
          description.setAttribute("class", "description");
          description.innerText = this.getAttribute("description") || "";
+         this.elements.description = description;
          wrapperText.appendChild(description);
          
 
@@ -44,6 +46,7 @@
          pomoCircle.pused = this.getAttribute("pomosUsed");
          pomoCircle.preq = this.getAttribute("pomosRequired");
          pomoCircle.innerText = this.getAttribute("pomosUsed") + "/" + this.getAttribute("pomosRequired");
+         this.elements.pomoCircle = pomoCircle;
 
          wrapperCompletionCircle.appendChild(pomoCircle);
          wrapper.appendChild(wrapperCompletionCircle);
@@ -75,6 +78,7 @@
          }
 
          wrapperCheckMark.appendChild(checkMark);
+         this.elements.checkMark = checkMark;
 
          // A div wrapper for the check mark
          const wrapperDragAndDrop = document.createElement("div");
@@ -85,6 +89,7 @@
          imgDragAndDrop.setAttribute("class", "dragAndDrop");
          imgDragAndDrop.setAttribute("src", "./assets/svgImages/drag-dots.svg");
          wrapperDragAndDrop.appendChild(imgDragAndDrop);
+         this.elements.dragAndDrop = imgDragAndDrop;
          
          this.elements.wrapper = wrapper;
          
