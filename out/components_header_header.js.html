@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/button/button.js</title>
+    <title>JSDoc: Source: components/header/header.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/button/button.js</h1>
+    <h1 class="page-title">Source: components/header/header.js</h1>
 
     
 
@@ -26,55 +26,63 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// product-item.js
-
-/**
- * @class Button
+            <pre class="prettyprint source linenums"><code>/**
+ * Header class to create a web component implementing the functionality of our header bar.
  * 
- * A button component with 3 types, normal, outline, and nav
+ * @authors Ethan Huynh, Kevin Klimek
+ * @todo Refactor buttons to onClick events instead of simply appending to a link element,
+ *       Implement help button when Modal component is merged
  */
-class Button extends HTMLElement {
+class Header extends HTMLElement {
     constructor() {
         super();
         // use an object to store all relevant elements to the components for convenience
         this.elements = {};
 
-
         // Create a shadow root
         this.attachShadow({ mode: "open" }); // sets and returns 'this.shadowRoot'
 
         // Create an example element that will serve as our "root" element here
-        const button = document.createElement("button");
+        const wrapper = document.createElement("nav");
         // set class as an example, this can be later used for css!
-        button.setAttribute("class", "pomo-button");
-        button.innerText = this.textContent || ""
+        wrapper.setAttribute("class", "pomo-header");
 
-        // store it for future reference
-        this.elements.button = button;
-        button.setAttribute("part", "button")
+        var logo = document.createElement("img");
+        logo.src = "./assets/images/logo.svg"
+        logo.setAttribute("class", "pomo-header logo");
+
+        var homeLink = document.createElement("a");
+        homeLink.href="index.html";
+
+        homeLink.appendChild(logo);
+        wrapper.appendChild(homeLink);
+
+        /** For following links in an eventlistener
+         *  window.location.href = "http://www.w3schools.com";
+         *  or window.location.assign(url);
+         *  or window.location.replace if we don't want to add to history
+         */
+
+        wrapper.innerHTML += `&lt;a href="history.html">&lt;pomo-button type="nav" id="hist">History&lt;/pomo-button>&lt;/a>`;
+        //TODO: LINK HELP BUTTON TO FUTURE HELP MODAL/HTML
+        wrapper.innerHTML += `&lt;pomo-button type="nav" id="help">Help&lt;/pomo-button>`
+
+        // store it for easy access
+        this.elements.wrapper = wrapper;
 
         // Add Styles
         const linkElem = document.createElement("link");
         linkElem.setAttribute("rel", "stylesheet");
         // make sure to link the correct stylesheet with the correct stylings
-        linkElem.setAttribute("href", "./assets/styles/button.css");
+        linkElem.setAttribute("href", "./assets/styles/header.css");
         this.elements.linkElem = linkElem;
 
         // attach the created elements to the shadow DOM
-        this.shadowRoot.append(linkElem, button);
-
-        this.type = this.getAttribute("type");
-        if (this.type == "outline") {
-            this.elements.button.setAttribute("class", this.elements.button.getAttribute("class") + " outline");
-        } else if (this.type == "nav") {
-            this.elements.button.setAttribute("class", this.elements.button.getAttribute("class") + " nav");
-        }
-
-
+        this.shadowRoot.append(linkElem, wrapper);
     }
 }
 
-customElements.define("pomo-button", Button);</code></pre>
+customElements.define("pomo-header", Header);</code></pre>
         </article>
     </section>
 
