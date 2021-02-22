@@ -21,7 +21,7 @@ test('test header.js', () => {
     expect(homeBtn.src).toBe(new URL("./assets/images/logo.svg", document.baseURI).href);
 
     // Check if 2 buttons load correctly
-    expect(header.querySelectorAll(".pomo-button.nav").length).toBe(2);
+    expect(header.getElementsByTagName("pomo-button").length).toBe(2);
 
     // Check if links work correctly (new URL more efficient than creating <a> tags)
     expect(homeLink.href).toBe(new URL("index.html", document.baseURI).href);
