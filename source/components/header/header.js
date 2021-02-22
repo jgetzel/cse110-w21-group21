@@ -1,8 +1,7 @@
 /**
- * STEPS:
- * CHANGE NAME FROM TEMPLATE TO XYZ
+ * Header class to create a web component implementing the functionality of our header bar.
  * 
- * CHANGE DEFINITION AT BOTTOM FROM TEMPLATE TO XYZ (x-y-z or smth)
+ * @authors Ethan Huynh, Kevin Klimek
  */
 class Header extends HTMLElement {
     constructor() {
@@ -28,17 +27,17 @@ class Header extends HTMLElement {
         homeLink.appendChild(logo);
         wrapper.appendChild(homeLink);
 
+        /** For following links in an eventlistener
+         *  window.location.href = "http://www.w3schools.com";
+         *  or window.location.assign(url);
+         *  or window.location.replace if we don't want to add to history
+         */
+
         wrapper.innerHTML += `<a href="history.html"><pomo-button type="nav" id="hist">History</pomo-button></a>`;
         //TODO: LINK HELP BUTTON TO FUTURE HELP MODAL/HTML
-        wrapper.innerHTML += `<pomo-button id="about-pomo" type="nav" id="help">Help</pomo-button>`
+        wrapper.innerHTML += `<pomo-button type="nav" id="help">Help</pomo-button>`
 
-        /* Original
-        <img src="logo.png">
-        <pomo-button type="nav">History</pomo-button>
-        <pomo-button id="about-pomo" type="nav" style="position: absolute; right:0px; padding: 10px;">?</pomo-button>
-        */
-
-        // store it for future reference
+        // store it for easy access
         this.elements.wrapper = wrapper;
 
         // Add Styles
