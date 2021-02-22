@@ -11,8 +11,8 @@ test('test header.js', () => {
     require("../../source/components/header/header.js")
 
     // find our component elements
-    const header = document.querySelector("pomo-header");
-    const homeBtn = header.querySelector(".pomo-header.logo");
+    const header = document.querySelector("pomo-header").wrapper;
+    const homeBtn = header.querySelector(".logo");
     const links = header.getElementsByTagName("a");
     const homeLink = links[0];
     const histLink = links[1];
