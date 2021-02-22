@@ -134,7 +134,7 @@
       pomoCircle.setAttribute("class", "currentTask");
    }
    else if(pomotask.completed === true){
-       if(pomoCircle.pused < pomoCircle.preq) {
+       if(pomoCircle.pused <= pomoCircle.preq) {
          pomoCircle.setAttribute("class", "goodTimingTask");
        }
        else {
