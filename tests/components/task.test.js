@@ -30,13 +30,13 @@ test('test main.js', () => {
     expect(yellowTask.elements.pomoCircle.preq).toBe("3");
 
     // Checking if original color is #333844
-    expect(greenTask.elements.pomoCircle.style.background-color).toBe("#333844");
-    expect(yellowTask.elements.pomoCircle.style.background-color).toBe("#333844");
+    expect(greenTask.elements.pomoCircle.style["background-color"]).toBe("#333844");
+    expect(yellowTask.elements.pomoCircle.style["background-color"]).toBe("#333844");
 
     // Checking if color changes after task has been completed
     greenTask.elements.checkMark.click();
-    expect(greenTask.elements.pomoCircle.style.background-color).toBe("#22DD9A");
+    expect(greenTask.elements.pomoCircle.style["background-color"]).toBe("#22DD9A");
 
     yellowTask.elements.checkMark.click();
-    expect(yellowTask.elements.pomoCircle.style.background-color).toBe("#F9C644");
+    expect(yellowTask.elements.pomoCircle.style["background-color"]).toBe("#F9C644");
 });
