@@ -17,7 +17,7 @@ test('test header.js', () => {
     const homeLink = links[0];
     const histLink = links[1];
 
-    // Check if logo is loaded in correctly
+    // Check if logo is loaded in correctly (new URL more efficient than creating <a> tags)
     expect(homeBtn.src).toBe(new URL("./assets/images/logo.svg", document.baseURI).href);
 
     // Check if 2 buttons load correctly

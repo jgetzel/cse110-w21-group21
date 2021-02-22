@@ -2,6 +2,8 @@
  * Header class to create a web component implementing the functionality of our header bar.
  * 
  * @authors Ethan Huynh, Kevin Klimek
+ * @todo Refactor buttons to onClick events instead of simply appending to a link element,
+ *       Implement help button when Modal component is merged
  */
 class Header extends HTMLElement {
     constructor() {
