@@ -23,6 +23,7 @@ class Button extends HTMLElement {
 
         // store it for future reference
         this.elements.button = button;
+        button.setAttribute("part", "button")
 
         // Add Styles
         const linkElem = document.createElement("link");
