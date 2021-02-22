@@ -1,5 +1,10 @@
 /**
- * InputField class to make a web component that can handle user input
+ * InputField class to make a web component that can handle user input.
+ * By default the max character count is 50.
+ * 
+ * Example: <pomo-input required="true" max="10">Testing</pomo-input>
+ * Will make an input field of max 10 characters and the placeholder 
+ * text will be "Testing*". The "*" is because this input is set as required.
  * @class
  * @author Ethan Huynh
  */
@@ -10,7 +15,7 @@ class InputField extends HTMLElement {
      */
     constructor() {
         super();
-
+        let userTyped = "";
         // use an object to store all relevant elements to the components for convenience
         this.elements = {};
 
@@ -49,6 +54,7 @@ class InputField extends HTMLElement {
          * @returns {Boolean} false If the max character limit has been reached
         */
         function limitCharCount(e) {
+            userTyped = wrapper.textContent;
             if(wrapper.textContent.length >= wrapper.max) {
                 wrapper.setAttribute("class", wrapper.getAttribute("class") + " max");
                 e.preventDefault();
@@ -69,7 +75,7 @@ class InputField extends HTMLElement {
          */
         wrapper.addEventListener('focus', function() {
             //if focused and current text is the placeholder text replace it with empty string
-            if(wrapper.textContent == wrapper.placeholder) {
+            if(userTyped.length == 0) {
                 wrapper.setAttribute("class", "pomo-input");
                 wrapper.textContent = '';
             }
@@ -81,11 +87,10 @@ class InputField extends HTMLElement {
          */
         wrapper.addEventListener('blur', function() {
             //if not focused and there is no input, return back to placeholder string
-            if(wrapper.textContent == '') {
+            if(userTyped.length == 0) {
                 wrapper.setAttribute("class", wrapper.getAttribute("class") + " placeholder");
                 wrapper.textContent = wrapper.placeholder;
             }
-
         });
     }
 
@@ -96,9 +101,22 @@ class InputField extends HTMLElement {
         if(maxChar != null)
             this.elements.wrapper.max = Number(maxChar);
 
+        this.elements.wrapper.textContent = this.textContent;
         if(this.getAttribute("required")) {
             this.required = true;
+            this.elements.wrapper.textContent += "*";
         }
+
+        this.elements.wrapper.placeholder = this.elements.wrapper.textContent;
+    }
+
+    /**
+     * Returns the user input in the field
+     * @function
+     * @returns {String} user input
+     */
+    getInput() {
+        return userTyped;
     }
 }
 
