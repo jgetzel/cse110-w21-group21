@@ -16,7 +16,6 @@ class InputField extends HTMLElement {
     constructor() {
         super();
         this.userTyped = "";
-        let self = this;
         // use an object to store all relevant elements to the components for convenience
         this.elements = {};
 
