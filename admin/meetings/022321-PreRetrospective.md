@@ -6,6 +6,8 @@
 - Shwet
 - Ethan
 - Brian
+- Kevin
+- Jakob
 
 ### Description
 - Discussed local storage + adding tasks
