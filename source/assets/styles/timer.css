@@ -9,14 +9,14 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-55%,40%);
+    transform: translate(-58%,40%);
 }
 .timerWrapper {
     position: absolute;
     top: 60%;
     left: 50%;
     transform: translate(-55%,-200%);
-    width: 20rem;
+    width: 25rem;
     height: 10rem;
     display: flex;
     border: 1px black solid;
@@ -35,14 +35,15 @@
 }
 .timerCircle > .timerNumber {
     position: relative;
-    font-size: large;
+    font-size: larger;
+    font-weight: bold;
     left: 30%;
 }
 .startTimerWrapper pomo-button::part(button){
     position: relative;
-    top: 1rem;
-    left: 0.5rem;
+    top: 2.8rem;
+    left: 2rem;
     background-color: white;
     color: black;
-    line-height: 25%;
+    line-height: 12.5%;
 }
