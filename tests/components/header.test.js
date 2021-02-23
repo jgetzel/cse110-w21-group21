@@ -1,7 +1,7 @@
 'use strict';
 // we use fs to read the html file to load it up
 const fs = require('fs');
-test('test main.js', () => {
+test('test header.js', () => {
     // we create a fake testing document here:
     document.body.innerHTML = `<div>
         <pomo-header></pomo-header>
@@ -10,22 +10,22 @@ test('test main.js', () => {
     // we use require here to load the component javascript
     require("../../source/components/header/header.js")
 
-    //TODO: find our component elements
-    const header = document.getElementsByName("pomo-header");
-    const histBtn = header.elements;
-    const helpBtn = header.getElementById("help");
+    // find our component elements
+    const header = document.querySelector("pomo-header").elements.wrapper;
+    const homeBtn = header.querySelector(".logo");
+    const links = header.getElementsByTagName("a");
+    const homeLink = links[0];
+    const histLink = links[1];
 
-    //TODO:check logo is loaded in
+    // Check if logo is loaded in correctly (new URL more efficient than creating <a> tags)
+    expect(homeBtn.src).toBe(new URL("./assets/images/logo.svg", document.baseURI).href);
 
+    // Check if 2 buttons load correctly
+    expect(header.getElementsByTagName("pomo-button").length).toBe(2);
 
-    //TODO:check links work
+    // Check if links work correctly (new URL more efficient than creating <a> tags)
+    expect(homeLink.href).toBe(new URL("index.html", document.baseURI).href);
+    expect(histLink.href).toBe(new URL("history.html", document.baseURI).href);
 
-
-    // test that the text content between the nav buttons is correct
-    expect(histBtn.innerText).toBe("History");
-    expect(helpBtn.innerText).toBe("Help");
-
-    // verify the correct classes are applied
-    expect(histBtn.elements.button.className).toBe("pomo-button nav");
-    expect(helpBtn.elements.button.className).toBe("pomo-button nav");
+    // TODO: Check help button functionality based on implementation
 });

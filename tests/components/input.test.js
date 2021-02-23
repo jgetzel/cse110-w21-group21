@@ -10,12 +10,24 @@ test('test main.js', () => {
     // we use require here to load the component javascript
     require("../../source/components/input/input.js");
 
-    // find our component elements
+    // find our component element
     const input = document.getElementById("input");
 
     // test that when we make the component there is nothing for user typed
-    expect(input.getUserTyped()).toBe("");
+    expect(input.getInput()).toBe("");
 
     // verify the correct placeholder is there
     expect(input.elements.wrapper.textContent).toBe("Testing*");
+
+    input.elements.wrapper.focus();
+    //simulate the user typing
+    var userInput = "User is Typing".split("");
+    for(let i = 0; i < userInput.length; i++) {
+        const event = new KeyboardEvent('keypress', {'keyCode': userInput[i].charCodeAt(0)});
+        document.dispatchEvent(event);
+    }
+
+    //test if the user types something, it shows up
+    expect(input.elements.wrapper.textContent).toBe("User is Typing");
+    expect(input.getInput()).toBe("User is Typing");
 });
