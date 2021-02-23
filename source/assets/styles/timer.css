@@ -24,6 +24,45 @@
     background-color: rgba(0,0,0,0.25);
     ;
 }
+.timerWrapperWorkTime {
+
+    position: absolute;
+    top: 82%;
+    left: 88%;
+    transform: translate(-55%,-200%);
+    width: 20rem;
+    height: 20rem;
+    display: flex;
+    border: 1px black solid;
+    border-radius: 0.25rem;
+    background-color: rgba(0,0,0,0.25);
+    
+}
+
+.timerWrapperWorkTime > .startTimerWrapper {
+    display: none;
+}
+
+.timerWrapperWorkTime > .timerCircle {
+    border-radius: 50%;
+    height: 18rem;
+    width: 18rem;
+    padding-left: 1rem;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    background-color:white;
+    line-height: 8rem;
+}
+
+.timerWrapperWorkTime > .timerCircle > .timerNumber {
+    position: relative;
+    font-size: 4rem;
+    top: 25%;
+    left: 18%;
+    font-weight: bold;
+    
+}
+
 .timerCircle {
     border-radius: 50%;
     height: 8rem;
@@ -45,5 +84,15 @@
     left: 2rem;
     background-color: white;
     color: black;
+    line-height: 12.5%;
+}
+
+.completeSessionWrapper {
+    display: none;
+}
+.completeSessionWrapper pomo-button::part(button){
+    position: absolute;
+    top: 45%;
+    left: 78%;
     line-height: 12.5%;
 }
