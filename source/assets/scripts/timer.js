@@ -6,6 +6,8 @@ window.addEventListener("DOMContentLoaded", () => {
     let timer = document.getElementById("timerNumber");
     let startTimerButton = document.getElementById("startTimer");
 
+    let breakNumbers = 0;
+
     startTimerButton.onclick = function (e) {
         let timerWrapper = document.getElementById("timerWrapper");
         timerWrapper.setAttribute('class', 'timerWrapperWorkTime');
@@ -17,6 +19,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
         let timeBool = false;
         let timerLoop = setInterval(timeChanger, 1000);
+
+        let isBreak = false;
         
         function timeChanger() {
             minutes = timerNumber.textContent.split(":")[0].replace(/\s+/g, '');
@@ -24,7 +28,27 @@ window.addEventListener("DOMContentLoaded", () => {
             
             if (minutes == "00" && seconds == "00") {
                 console.log("DONE")
-                clearInterval(timerLoop);
+                //timerNumber.textContent = "01:00";
+                console.log("YES");
+                if(!isBreak) {
+                    //timerWrapper.setAttribute('class', 'timerWrapper');
+                    if(breakNumbers % 4 == 3 ) {
+                        minutes = "00";
+                        seconds = "12";
+                    }
+                    else {
+                        minutes = "00";
+                        seconds = "10";
+                    }
+                    isBreak = true;
+                }
+                else {
+                    minutes = "00";
+                    seconds = "15"
+                    isBreak = false;
+                    breakNumbers = breakNumbers + 1;
+                }
+
             }
 
             else if (seconds == "00") {
@@ -49,7 +73,6 @@ window.addEventListener("DOMContentLoaded", () => {
             timerNumber.textContent = minutes + ":" + seconds;
         }
 
-        
     }
 
     modal.elements.saveBtn.addEventListener("click", contentsSaved);
