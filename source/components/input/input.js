@@ -15,7 +15,7 @@ class InputField extends HTMLElement {
      */
     constructor() {
         super();
-        let userTyped = "";
+        this.userTyped = "";
         let self = this;
         // use an object to store all relevant elements to the components for convenience
         this.elements = {};
@@ -55,7 +55,7 @@ class InputField extends HTMLElement {
          * @returns {Boolean} false If the max character limit has been reached
         */
         function limitCharCount(e) {
-            userTyped = wrapper.textContent;
+            this.userTyped = wrapper.textContent;
             if(wrapper.textContent.length >= wrapper.max) {
                 wrapper.setAttribute("class", wrapper.getAttribute("class") + " max");
                 e.preventDefault();
@@ -76,7 +76,7 @@ class InputField extends HTMLElement {
          */
         wrapper.addEventListener('focus', function () {
             //if focused and current text is the placeholder text replace it with empty string
-            if(userTyped.length == 0) {
+            if(!this.userTyped) {
                 wrapper.setAttribute("class", "pomo-input");
                 wrapper.textContent = '';
             }
@@ -88,7 +88,7 @@ class InputField extends HTMLElement {
          */
         wrapper.addEventListener('blur', function () {
             //if not focused and there is no input, return back to placeholder string
-            if(userTyped.length == 0) {
+            if(!this.userTyped) {
                 wrapper.setAttribute("class", wrapper.getAttribute("class") + " placeholder");
                 wrapper.textContent = wrapper.placeholder;
             }
@@ -121,7 +121,7 @@ class InputField extends HTMLElement {
      * @returns {String} user input
      */
     getInput() {
-        return userTyped;
+        return this.userTyped;
     }
 }
 
