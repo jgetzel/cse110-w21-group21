@@ -7,24 +7,33 @@
         <link rel="stylesheet" href="assets/styles/timer.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-        <script src="assets/scripts/timer.js"></script>
     </head>
 
     <body>
-        <!-- Replace with header component -->
-        <nav>
-            <img src="logo.png">
-            <button>History</button>
-            <button>?</button>
-        </nav>
+        <pomo-header></pomo-header>
         <main>
+            <div class = "timerWrapper">
+                <div class = "timerCircle">
+                    <span class = "timerNumber">
+                    25:00
+                    </span>
+                </div>
+                <div class = "startTimerWrapper">
+                    <pomo-button class = "startTimer" id = "startTimer"> Start Timer </pomo-button>
+                </div>
+            </div>
+            <ul class = "taskList" id = "taskList" style = "list-style-type: none;">
+            </ul>
             <pomo-button class = "taskCreator" id = "taskCreator"> + Add New Task </pomo-button>
             <pomo-modal id = "addTaskModal">
             </pomo-modal>
         </main>
     </body>
+    <script src="components/header/header.js"></script>
+    <script src="components/task/task.js"></script>
     <script src="components/input/input.js"></script>
     <script src="components/button/button.js"></script>
     <script src="components/modal/modal.js"></script>
+    <script src="assets/scripts/timer.js"></script>
 </html>
 

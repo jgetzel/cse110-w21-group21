@@ -42,7 +42,10 @@ class ModalComponent extends HTMLElement {
         this.elements.closeBtn = closeBtn;
         this.elements.closeBtn.onclick = this.hideModal.bind(this);
         this.elements.saveBtn = this.shadowRoot.getElementById("save-btn");
-        this.elements.saveBtn.onclick = this.hideModal.bind(this);
+        this.elements.saveBtn.onclick = function() {
+            this.hideModal();
+            this.elements.values = this.getValues();
+        }.bind(this)
     }
 
     getValues() {
