@@ -10,6 +10,8 @@ window.addEventListener("DOMContentLoaded", () => {
     let startTimerButton = document.getElementById("startTimer");
     let pomosCompleted = 0;                       // # of pomos completed for long break, stats, etc.
 
+    let currentTask = null;
+
     initializeDatabase();
     if (loadSaved == "false") {
         let oldTasksLeft = areThereUnfinishedTasksFromLastSession();
@@ -17,13 +19,16 @@ window.addEventListener("DOMContentLoaded", () => {
             let confirmed = confirm("By starting a new timer, you will lose any unfinished tasks from your previous session");
             if (!confirmed) {
                 window.location = "./index.html"
+                return;
             }
         }
     }
 
+    let allTasks = []
+
     // Use leftover tasks
     if (loadSaved == "true") {
-        loadTasks();
+        allTasks = loadTasks();
     }
     else if (loadSaved == "false") {
         // note, if you refresh for now, you will lose your session's changes...
@@ -38,8 +43,12 @@ window.addEventListener("DOMContentLoaded", () => {
         })
 
     }
+    let allInProgressTasks = allTasks.filter((task) => task.completed);
+    currentTask = allInProgressTasks[0];
 
-
+    function renderCurrentSetOfTasks() {
+        allInProgressTasks = allInProgressTasks.filter((task) => task.completed);
+    }
 
 
     /**
@@ -153,6 +162,9 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    /**
+     * Load all tasks from storage for the current session and return them
+     */
     function loadTasks() {
         let id = getLatestSessionID();
         if (id !== null) {
@@ -166,7 +178,8 @@ window.addEventListener("DOMContentLoaded", () => {
             });
             allTasks.forEach((task) => {
                 renderTaskIntoList(task);
-            })
+            });
         }
+        return allTasks;
     }
 });
