@@ -1,5 +1,18 @@
 window.addEventListener("DOMContentLoaded", () => {
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('loadSaved');
+    initializeDatabase();
+
+    // Use leftover tasks
+    if(myParam=="true"){
+        loadTasks();
+    }
+    else {
+        
+    }
+
+
     let addTaskButton = document.getElementById("taskCreator");
     let modal = document.getElementById("addTaskModal");
     let taskList = document.getElementById("taskList");
@@ -89,12 +102,28 @@ window.addEventListener("DOMContentLoaded", () => {
     addTaskButton.onclick = function() {
         modal.displayModal();
     }
+
+    /**
+     * Function that gets called when we save a new task.
+     * Adds new task to the current tasks list.
+     */
     function contentsSaved() {
         let taskValues = modal.elements.values;
         if((taskValues.taskName != "Default Text" && taskValues.taskName != "")  && (taskValues.pomosRequired != "Default Text" && taskValues.pomosRequired != "")) {
             if(taskValues.description == "Default Text") taskValues.description = "";
             const currentTask = `<pomo-task description = "`+ taskValues.description +`" pomosUsed = "0", pomosRequired = "`+taskValues.pomosRequired+`">`+taskValues.taskName+`</pomo-task>`;
             taskList.insertAdjacentHTML('beforeend',currentTask);
+        }
+        let newTask = new Task(-1,taskValues.taskName, taskValues.description, taskValues.pomosRequired);
+        storeTask(newTask);
+
+        //console.log(newTask.serializeIntoObj());
+    }
+
+
+    function loadTasks() {
+        for(let task in getAllTasks) {
+
         }
     }
 });

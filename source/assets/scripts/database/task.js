@@ -1,6 +1,7 @@
 
 class Task {
-    constructor(title, description, pomos) {
+    constructor(sessionID, title, description, pomos) {
+        this.sessionID = sessionID;
         this.id = -1;
         this.title = title;
         this.description = description;
@@ -43,7 +44,7 @@ function storeTask(task) {
     let obj = task.serializeIntoObj();
     task_map[task.id] = obj;
     storeObject(POMO_TASK_MAP, task_map);
-    return id;
+    return task.id;
 }
 
 /**
