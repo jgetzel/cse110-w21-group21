@@ -1,3 +1,6 @@
 .flex-container > p{
     color: rgba(51, 56, 68, 0.5);
 }
+#leftover-tasks-wrapper {
+    text-align: center;
+}
