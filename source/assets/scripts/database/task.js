@@ -104,3 +104,20 @@ function deleteTaskByTaskID(id) {
     delete task_map[id];
     storeObject(POMO_TASK_MAP, task_map);
 }
+
+
+/**
+ * Checks if there are any unfinished tasks from the previous session
+ * @returns {boolean} - true if unifinished tasks exist, false otherwise
+ */
+function areThereUnfinishedTasksFromLastSession() {
+    let oldSessionID = getLatestSessionID();
+    let oldSessionTasks = getAllSessionTasks(oldSessionID);
+    let oldTasksLeft = false;
+    for (let task of oldSessionTasks) {
+        if (!task.completed) {
+            return true;
+        }
+    }
+    return false;
+}

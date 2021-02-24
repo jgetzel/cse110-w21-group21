@@ -7,6 +7,9 @@
         <link rel="stylesheet" href="assets/styles/home_style.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+        <script src="assets/scripts/database/index.js"></script>
+        <script src="assets/scripts/database/task.js"></script>
+        <script src="assets/scripts/database/session.js"></script>
         <script src="assets/scripts/main.js"></script>
     </head>
 
@@ -17,11 +20,13 @@
                 <a href="timer.html?loadSaved=false"><pomo-button id="btn-create">Create New Timer</pomo-button></a>
                 
             </div>
-            <div>
-                <p>or</p>
-            </div>
-            <div>
-                <a href="timer.html?loadSaved=true"><pomo-button id="btn-check-leftover" type="outline">Use leftover tasks from last time</pomo-button></a>
+            <div id="leftover-tasks-wrapper">
+                <div>
+                    <p>or</p>
+                </div>
+                <div>
+                    <a href="timer.html?loadSaved=true"><pomo-button id="btn-check-leftover" type="outline">Use leftover tasks from last time</pomo-button></a>
+                </div>
             </div>
             
         </div>

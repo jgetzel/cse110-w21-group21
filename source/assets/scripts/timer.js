@@ -12,9 +12,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
     initializeDatabase();
     if (loadSaved == "false") {
-        let confirmed = confirm("By starting a new timer, you will lose any unfinished tasks from your previous session");
-        if (!confirmed) {
-            window.location = "./index.html"
+        let oldTasksLeft = areThereUnfinishedTasksFromLastSession();
+        if (oldTasksLeft) {
+            let confirmed = confirm("By starting a new timer, you will lose any unfinished tasks from your previous session");
+            if (!confirmed) {
+                window.location = "./index.html"
+            }
         }
     }
 
