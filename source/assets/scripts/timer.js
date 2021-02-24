@@ -78,8 +78,6 @@ window.addEventListener("DOMContentLoaded", () => {
                 if (seconds.length == 1) {
                     seconds = "0" + seconds;
                 }
-
-                // timeBool = false;
             }
             // Push updated time to the page
             timerNumber.textContent = minutes + ":" + seconds;
