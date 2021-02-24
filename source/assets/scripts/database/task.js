@@ -10,14 +10,14 @@ class Task {
         this.pomosCompleted = 0;
     }
     parseTaskFromObj(task_obj) {
-        let task = new Task(task_obj.title, task_obj.description, task_obj.pomos);
+        let task = new Task(task_obj.sessionID, task_obj.title, task_obj.description, task_obj.pomos);
         task.completed = task_obj.completed;
         task.id = task_obj.id;
         task.pomosCompleted = task_obj.pomosCompleted;
         return task;
     }
     serializeIntoObj() {
-        return { title: this.title, description: this.description, pomos: this.pomos, completed: this.completed, pomosCompleted: this.pomosCompleted, id: this.id }
+        return { title: this.title, description: this.description, pomos: this.pomos, completed: this.completed, pomosCompleted: this.pomosCompleted, id: this.id, sessionID: this.sessionID }
     }
 }
 
@@ -75,4 +75,32 @@ function getAllTasks() {
         parsed_task_map[id] = t;
     }
     return parsed_task_map
+}
+
+/**
+ * Get all tasks associated with a particular sessionID
+ * @param {number} sessionID 
+ */
+function getAllSessionTasks(sessionID) {
+    if (sessionID !== null) {
+        let tasks = getAllTasks();
+        let allTasks = []
+        Object.values(tasks).forEach((task) => {
+            if (task.sessionID === sessionID) {
+                allTasks.push(task);
+            }
+        });
+        return allTasks;
+    }
+}
+
+/**
+ * Delete a specific task from database by the unique task ID
+ * 
+ * @param {number} id 
+ */
+function deleteTaskByTaskID(id) {
+    let task_map = getObject(POMO_TASK_MAP);
+    delete task_map[id];
+    storeObject(POMO_TASK_MAP, task_map);
 }

@@ -7,11 +7,11 @@ function initializeDatabase() {
     if (!getObject(POMO_TASK_INDEX) === null) {
         needToInitialize = true;
     }
-    if (!getObject(POMO_SESSION_ID) === null) {
+    if (!localStorage.getItem(POMO_SESSION_ID) === null) {
         needToInitialize = true;
     }
-    if (!getObject(LATEST_POMO_SESSION_STATUS) === null) {
-
+    if (!localStorage.getItem(LATEST_POMO_SESSION_STATUS) === null) {
+        needToInitialize = true;
     }
 
     // then initialize
@@ -25,6 +25,8 @@ function initializeDatabase() {
 function resetDatabase() {
     delete localStorage[POMO_TASK_MAP];
     delete localStorage[POMO_TASK_INDEX];
+    delete localStorage[LATEST_POMO_SESSION_STATUS];
+    delete localStorage[POMO_SESSION_ID];
 }
 
 function storeObject(key, object) {

@@ -16,9 +16,17 @@ class PomoSession {
 
 
 function getNewSessionID() {
-  let prevID = localStorage.getItem(POMO_SESSION_ID);
+  let prevID = parseInt(localStorage.getItem(POMO_SESSION_ID));
   localStorage.setItem(POMO_SESSION_ID, prevID + 1);
   return prevID;
+}
+
+/**
+ * Set the current session's status
+ * @param {string} status - can be "complete" or "in-progress"
+ */
+function setCurrentSessionStatus(status) {
+  localStorage.setItem(LATEST_POMO_SESSION_STATUS, status);
 }
 
 /**

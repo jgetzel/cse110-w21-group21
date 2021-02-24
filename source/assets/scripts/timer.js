@@ -1,17 +1,7 @@
 window.addEventListener("DOMContentLoaded", () => {
 
     const urlParams = new URLSearchParams(window.location.search);
-    const myParam = urlParams.get('loadSaved');
-    initializeDatabase();
-
-    // Use leftover tasks
-    if(myParam=="true"){
-        loadTasks();
-    }
-    else {
-        
-    }
-
+    const loadSaved = urlParams.get('loadSaved');
 
     let addTaskButton = document.getElementById("taskCreator");
     let modal = document.getElementById("addTaskModal");
@@ -19,6 +9,35 @@ window.addEventListener("DOMContentLoaded", () => {
     let timer = document.getElementById("timerNumber");
     let startTimerButton = document.getElementById("startTimer");
     let pomosCompleted = 0;                       // # of pomos completed for long break, stats, etc.
+
+    initializeDatabase();
+    if (loadSaved == "false") {
+        let confirmed = confirm("By starting a new timer, you will lose any unfinished tasks from your previous session");
+        if (!confirmed) {
+            window.location = "./index.html"
+        }
+    }
+
+    // Use leftover tasks
+    if (loadSaved == "true") {
+        loadTasks();
+    }
+    else if (loadSaved == "false") {
+        // note, if you refresh for now, you will lose your session's changes...
+        let oldSessionID = getLatestSessionID();
+        let sessionID = getNewSessionID();
+        setCurrentSessionStatus("in-progress");
+
+        let oldSessionTasks = getAllSessionTasks(oldSessionID);
+        // remove all old session tasks from database that have not been completed (we are starting a new session)
+        oldSessionTasks.forEach((task) => {
+            deleteTaskByTaskID(task.id);
+        })
+
+    }
+
+
+
 
     /**
      * Implements the onClick functionality of the Start Timer button, which starts the pomo timer and cycles
@@ -44,23 +63,23 @@ window.addEventListener("DOMContentLoaded", () => {
         // TODO: timerLoop no longer used since we use timeChanger() for break also, need to clearInterval when final pomo is completed
         let timerLoop = setInterval(timeChanger, 1000);
 
-        
+
         function timeChanger() {
             // Extract minutes and seconds from the page
             let minutes = timerNumber.textContent.split(":")[0].replace(/\s+/g, '');
             let seconds = timerNumber.textContent.split(":")[1].replace(/\s+/g, '');
-            
+
             // If timer hits 0, toggle to next break or pomo timer
             if (minutes == "00" && seconds == "00") {
                 console.log("Timer hit 0");
                 isBreak = !isBreak;
                 // Next timer should be break timer
-                if(isBreak) {
+                if (isBreak) {
                     // TODO: Change css, etc to indicate we swapped to break timer
                     //timerWrapper.setAttribute('class', 'timerWrapper');
                     ++pomosCompleted;
                     // Long break, currently hardcoded after every 4 pomos
-                    if(pomosCompleted % 4 == 0 ) {
+                    if (pomosCompleted % 4 == 0) {
                         minutes = longBreakMin;
                         seconds = "10"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                     }
@@ -83,7 +102,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 if (minutes.length == 1) {
                     minutes = "0" + minutes;
                 }
-                seconds = "59";           
+                seconds = "59";
             }
             // Case for timer not hitting 0
             else {
@@ -99,7 +118,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     modal.elements.saveBtn.addEventListener("click", contentsSaved);
-    addTaskButton.onclick = function() {
+    addTaskButton.onclick = function () {
         modal.displayModal();
     }
 
@@ -109,21 +128,42 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     function contentsSaved() {
         let taskValues = modal.elements.values;
-        if((taskValues.taskName != "Default Text" && taskValues.taskName != "")  && (taskValues.pomosRequired != "Default Text" && taskValues.pomosRequired != "")) {
-            if(taskValues.description == "Default Text") taskValues.description = "";
-            const currentTask = `<pomo-task description = "`+ taskValues.description +`" pomosUsed = "0", pomosRequired = "`+taskValues.pomosRequired+`">`+taskValues.taskName+`</pomo-task>`;
-            taskList.insertAdjacentHTML('beforeend',currentTask);
-        }
-        let newTask = new Task(-1,taskValues.taskName, taskValues.description, taskValues.pomosRequired);
+        // if ((taskValues.taskName != "Default Text" && taskValues.taskName != "") && (taskValues.pomosRequired != "Default Text" && taskValues.pomosRequired != "")) {
+        //     if (taskValues.description == "Default Text") taskValues.description = "";
+        //     const currentTask = `<pomo-task description = "` + taskValues.description + `" pomosUsed = "0", pomosRequired = "` + taskValues.pomosRequired + `">` + taskValues.taskName + `</pomo-task>`;
+        //     taskList.insertAdjacentHTML('beforeend', currentTask);
+        // }
+        let sessionID = getLatestSessionID()
+        console.log(taskValues);
+        let newTask = new Task(sessionID, taskValues.taskName, taskValues.description, parseInt(taskValues.pomosRequired));
+        renderTaskIntoList(newTask);
         storeTask(newTask);
-
-        //console.log(newTask.serializeIntoObj());
+    }
+    /**
+     * Render a task onto the 
+     * @param {Task} task 
+     */
+    function renderTaskIntoList(task) {
+        console.log(task);
+        const currentTask = `<pomo-task description = "` + task.description + `" pomosUsed = "0", pomosRequired = "` + task.pomos + `">` + task.title + `</pomo-task>`;
+        taskList.insertAdjacentHTML('beforeend', currentTask);
     }
 
 
     function loadTasks() {
-        for(let task in getAllTasks) {
-
+        let id = getLatestSessionID();
+        if (id !== null) {
+            let tasks = getAllTasks();
+            let allTasks = []
+            Object.values(tasks).forEach((task) => {
+                console.log(task.sessionID, id);
+                if (task.sessionID === id) {
+                    allTasks.push(task);
+                }
+            });
+            allTasks.forEach((task) => {
+                renderTaskIntoList(task);
+            })
         }
     }
 });
