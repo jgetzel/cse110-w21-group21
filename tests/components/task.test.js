@@ -22,13 +22,6 @@ test('test main.js', () => {
     expect(greenTask.elements.description.innerText).toBe("Heat Pizza. Make Juice");
     expect(yellowTask.elements.description.innerText).toBe("Learn HTML, CSS, JS. Adding few more lines to see how the text gets re aligned.");
 
-    // Checking if the requiredPomos and usedPomos are correct
-    expect(greenTask.elements.pomoCircle.pused).toBe("2");
-    expect(greenTask.elements.pomoCircle.preq).toBe("3");
-
-    expect(yellowTask.elements.pomoCircle.pused).toBe("4");
-    expect(yellowTask.elements.pomoCircle.preq).toBe("3");
-
     // Checking if original class is pomoCircle
     expect(greenTask.elements.pomoCircle.className).toBe("pomoCircle");
     expect(yellowTask.elements.pomoCircle.className).toBe("pomoCircle");

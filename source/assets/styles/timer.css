@@ -1,6 +1,126 @@
-.taskCreator {
+#timer-status {
+    text-align: center;
+}
+.taskCreatorWrapper {
+    width: 25rem;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+.currentTask {
+    display: none;
+
+}
+
+
+.taskList, .taskListWorkTime, .currentTaskWorkTime, .taskListBreakTime, .currentTaskBreakTime {
+    margin: auto;
+    width: 25rem;
+    padding-left: 0px;
+    position: relative;
+}
+
+.timerWrapper, .timerWrapperBreakTime {
+    position: relative;
+    width: 25rem;
+    margin: auto;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    height: 10rem;
+    display: flex;
+    border: 1px black solid;
+    border-radius: 0.25rem;
+    background-color: rgba(0,0,0,0.25);
+    ;
+}
+
+.timerCircle {
+    border-radius: 50%;
+    height: 8rem;
+    width: 8rem;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    background-color: white;
+    line-height: 8rem;
+    text-align: center;
+}
+.timerCircle > .timerNumber {
+    position: relative;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.timerWrapperWorkTime {
+    width: 18rem;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    top: 4rem;
+    right: 4rem;
+    height: 18rem;
+    display: flex;
+    border: 1px black solid;
+    border-radius: 0.25rem;
+    background-color: rgba(0,0,0,0.25);
+    
+}
+.completeSessionWrapperBreakTime {
+    width: 25rem;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+.completeSessionWrapperWorkTime {
+    position: absolute;
+    top: 24rem;
+    width: 18rem;
+    right: 4rem;
+}
+
+.timerWrapperWorkTime > .startTimerWrapper {
+    display: none;
+}
+
+.timerWrapperWorkTime > .timerCircle {
+    border-radius: 50%;
+    height: 12rem;
+    width: 12rem;
+    margin:auto;
+    background-color:white;
+    line-height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timerWrapperWorkTime > .timerCircle > .timerNumber {
+    position: relative;
+    font-size: 2rem;
+    font-weight: bold;
+    
+}
+.timerWrapperBreakTime > .timerCircle {
+    margin-left: 8rem;
+}
+.timerWrapperBreakTime > .startTimerWrapper {
+    display: none;
+}
+
+.startTimerWrapper pomo-button::part(button){
+    position: relative;
+    top: 2.8rem;
+    left: 2rem;
+    background-color: white;
+    color: black;
+    line-height: 12.5%;
+}
+
+.completeSessionWrapper {
+    display: none;
+}
+#currentTaskWrapper {
+    display: none;
+}
+#currentTaskWrapper, #taskListWrapper {
+    margin: auto;
+    width: 25rem;
+    padding-left: 0px;
+    position: relative;
 }
