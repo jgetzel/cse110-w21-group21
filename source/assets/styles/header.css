@@ -1,7 +1,12 @@
 .pomo-header {
     display: flex;
     padding: 0.6rem 1rem;
-    align-items: center;
+    align-items: center;  
+}
+
+
+#help {
+    padding-left: 1rem;
 }
 
 .pomo-header.logo {
