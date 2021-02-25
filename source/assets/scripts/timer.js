@@ -15,8 +15,10 @@ window.addEventListener("DOMContentLoaded", () => {
     let currentTask = null;
 
     initializeDatabase();
+    let allTasks = []
     if (loadSaved == "false") {
         let oldTasksLeft = areThereUnfinishedTasksFromLastSession();
+        allTasks = loadTasks();
         if (oldTasksLeft) {
             let confirmed = confirm("By starting a new timer, you will lose any unfinished tasks from your previous session");
             if (!confirmed) {
@@ -25,8 +27,6 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         }
     }
-
-    let allTasks = []
 
     // Use leftover tasks
     if (loadSaved == "true") {
@@ -54,7 +54,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-
     /**
      * Implements the onClick functionality of the Start Timer button, which starts the pomo timer and cycles
      * pomo and break timers until all pomos are completed.
@@ -74,7 +73,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
         let completeSessionWrapper = document.getElementById("completeSessionWrapper");
         completeSessionWrapper.setAttribute('class', 'completeSessionWrapperWorkTime');
-
         let taskCreatorWrapper = document.getElementById("taskCreatorWrapper");
         taskCreatorWrapper.style.display = 'none';
         // Sets up local variables for timer functionality. Currently, the pomo work time is hardcoded in the HTML
@@ -243,10 +241,10 @@ window.addEventListener("DOMContentLoaded", () => {
     function getTotalPomosLeft() {
         let total = 0;
         for (let node of currentTaskHTML.childNodes) {
-            total += node.task.pomosRequired - node.task.pomosCompleted;
+            total += parseInt(node.task.pomos) - parseInt(node.task.pomosCompleted);
         }
         for (let node of taskListHTML.childNodes) {
-            total += node.task.pomosRequired - node.task.pomosCompleted;
+            total += parseInt(node.task.pomos) - parseInt(node.task.pomosCompleted);
         }
         return total
     }
