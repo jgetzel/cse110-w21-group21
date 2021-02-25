@@ -203,6 +203,7 @@ window.addEventListener("DOMContentLoaded", () => {
         let newTask = new Task(sessionID, taskValues.taskName, taskValues.description, parseInt(taskValues.pomosRequired));
         renderTaskIntoTaskList(newTask);
         storeTask(newTask);
+        allTasks.push(newTask);
     }
 
 

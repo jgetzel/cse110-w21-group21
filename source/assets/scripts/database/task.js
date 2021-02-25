@@ -91,6 +91,8 @@ function getAllSessionTasks(sessionID) {
             }
         });
         return allTasks;
+    } else {
+        return [];
     }
 }
 
