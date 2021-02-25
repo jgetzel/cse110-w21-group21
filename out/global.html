@@ -94,9 +94,834 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="POMO_SESSION_ID"><span class="type-signature">(constant) </span>POMO_SESSION_ID<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    This file is related to finding pomo sessions
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="assets_scripts_database_session.js.html">assets/scripts/database/session.js</a>, <a href="assets_scripts_database_session.js.html#line6">line 6</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="areThereUnfinishedTasksFromLastSession"><span class="type-signature"></span>areThereUnfinishedTasksFromLastSession<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Checks if there are any unfinished tasks from the previous session
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="assets_scripts_database_task.js.html">assets/scripts/database/task.js</a>, <a href="assets_scripts_database_task.js.html#line113">line 113</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - true if unifinished tasks exist, false otherwise
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="deleteTaskByTaskID"><span class="type-signature"></span>deleteTaskByTaskID<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Delete a specific task from database by the unique task ID
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="assets_scripts_database_task.js.html">assets/scripts/database/task.js</a>, <a href="assets_scripts_database_task.js.html#line102">line 102</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getAllSessionTasks"><span class="type-signature"></span>getAllSessionTasks<span class="signature">(sessionID)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get all tasks associated with a particular sessionID
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sessionID</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="assets_scripts_database_task.js.html">assets/scripts/database/task.js</a>, <a href="assets_scripts_database_task.js.html#line84">line 84</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getAllTasks"><span class="type-signature"></span>getAllTasks<span class="signature">()</span><span class="type-signature"> &rarr; {Map.&lt;number, Task>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get all tasks
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="assets_scripts_database_task.js.html">assets/scripts/database/task.js</a>, <a href="assets_scripts_database_task.js.html#line68">line 68</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - a map from task id to task
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Map.&lt;number, Task></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getLatestSessionID"><span class="type-signature"></span>getLatestSessionID<span class="signature">()</span><span class="type-signature"> &rarr; {number|null}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Will return the session ID of the last session if it was not ended. Otherwise if the last session does not exist 
+or was ended already, this function returns null
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="assets_scripts_database_session.js.html">assets/scripts/database/session.js</a>, <a href="assets_scripts_database_session.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+|
+
+<span class="param-type">null</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getTask"><span class="type-signature"></span>getTask<span class="signature">(id)</span><span class="type-signature"> &rarr; {Task}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get the task associated with this id
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="assets_scripts_database_task.js.html">assets/scripts/database/task.js</a>, <a href="assets_scripts_database_task.js.html#line55">line 55</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Task</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
 
         
             
@@ -442,6 +1267,304 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="setCurrentSessionStatus"><span class="type-signature"></span>setCurrentSessionStatus<span class="signature">(status)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Set the current session's status
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">can be "complete" or "in-progress"</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="assets_scripts_database_session.js.html">assets/scripts/database/session.js</a>, <a href="assets_scripts_database_session.js.html#line28">line 28</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="storeTask"><span class="type-signature"></span>storeTask<span class="signature">(task)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Will store a new or updated task into local storage
+
+Has a side effect of adding the id of the new task if it wasnt stored in storage before
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Task</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="assets_scripts_database_task.js.html">assets/scripts/database/task.js</a>, <a href="assets_scripts_database_task.js.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - the id of the task
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -457,13 +1580,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Header.html">Header</a></li><li><a href="InputField.html">InputField</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Header.html">Header</a></li><li><a href="InputField.html">InputField</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#getAllSessionTasks">getAllSessionTasks</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#POMO_SESSION_ID">POMO_SESSION_ID</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Feb 25 2021 01:53:30 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Feb 25 2021 06:39:54 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
