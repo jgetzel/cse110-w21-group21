@@ -85,10 +85,10 @@ window.addEventListener("DOMContentLoaded", () => {
         // TODO: timerLoop no longer used since we use timeChanger() for break also, need to clearInterval when final pomo is completed
         let timerLoop = setInterval(timeChanger, 1000);
 
-        
+
         //removes first child from task list and adds to current task
         let taskListFirstChild = taskListHTML.childNodes[0];
-        
+
         const currentTaskToBeAdded = `<pomo-task description = "` + taskListFirstChild.getAttribute('description') + `" pomosUsed = "` + taskListFirstChild.getAttribute('pomosused') + `", pomosRequired = "` + taskListFirstChild.getAttribute('pomosrequired') + `">` + taskListFirstChild.textContent + `</pomo-task>`;
         currentTaskHTML.insertAdjacentHTML('beforeend', currentTaskToBeAdded);
         taskListHTML.removeChild(taskListHTML.childNodes[0]);
@@ -113,11 +113,11 @@ window.addEventListener("DOMContentLoaded", () => {
                     // TODO: Change css, etc to indicate we swapped to break timer
                     //timerWrapper.setAttribute('class', 'timerWrapper');
                     ++pomosCompleted;
-                    
+
                     let currentTaskFirstChild = currentTaskHTML.childNodes[0];
-                    console.log(currentTaskFirstChild);
-                    
-                    currentTaskFirstChild.setAttribute('pomosused', 1 + parseInt(currentTaskFirstChild.getAttribute('pomosused'))); 
+                    console.log(currentTaskFirstChild.incrementPomosUsed());
+
+                    currentTaskFirstChild.setAttribute('pomosused', 1 + parseInt(currentTaskFirstChild.getAttribute('pomosused')));
 
                     //increment in display only TODO -> increment in local storage
                     // Long break, currently hardcoded after every 4 pomos
@@ -169,6 +169,15 @@ window.addEventListener("DOMContentLoaded", () => {
     addTaskButton.onclick = function () {
         modal.displayModal();
     }
+    /**
+    * Render a task onto the 
+    * @param {Task} task 
+    */
+    function renderTaskIntoTaskList(task) {
+        // console.log(task);
+        const currentTask = `<pomo-task description = "` + task.description + `" pomosUsed = "0", pomosRequired = "` + task.pomos + `">` + task.title + `</pomo-task>`;
+        taskList.insertAdjacentHTML('beforeend', currentTask);
+    }
 
     /**
      * Function that gets called when we save a new task.
@@ -187,15 +196,7 @@ window.addEventListener("DOMContentLoaded", () => {
         renderTaskIntoTaskList(newTask);
         storeTask(newTask);
     }
-    /**
-     * Render a task onto the 
-     * @param {Task} task 
-     */
-    function renderTaskIntoTaskList(task) {
-        // console.log(task);
-        const currentTask = `<pomo-task description = "` + task.description + `" pomosUsed = "0", pomosRequired = "` + task.pomos + `">` + task.title + `</pomo-task>`;
-        taskList.insertAdjacentHTML('beforeend', currentTask);
-    }
+
 
 
 
@@ -215,7 +216,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
             });
             allTasks.forEach((task) => {
-                renderTaskIntoList(task);
+                renderTaskIntoTaskList(task);
             });
         }
         return allTasks;

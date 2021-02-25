@@ -43,7 +43,7 @@ class TaskComponent extends HTMLElement {
       // The Green, Red or Yellow circle that describes the ratio of Pomos expected vs Pomos Used
       const pomoCircle = document.createElement("div");
       pomoCircle.setAttribute("class", "pomoCircle");
-      pomoCircle.pused = this.getAttribute("pomosUsed");
+      this.pomosUsed = parseInt(this.getAttribute("pomosUsed"));
       pomoCircle.preq = this.getAttribute("pomosRequired");
       pomoCircle.innerText = this.getAttribute("pomosUsed") + "/" + this.getAttribute("pomosRequired");
       this.elements.pomoCircle = pomoCircle;
@@ -100,6 +100,22 @@ class TaskComponent extends HTMLElement {
       this.elements.linkElem = linkElem;
 
       this.shadowRoot.append(wrapper, linkElem);
+   }
+   set pomosused(val) {
+      console.log("HELLO");
+   }
+   attributeChangedCallback(name, oldValue, newValue) {
+      console.log(name, oldValue, newValue)
+      if (name === "pomosused") {
+         console.log(newValue);
+         this.elements.pomoCircle.innerText = newValue + "/" + this.getAttribute("pomosRequired");
+      }
+   }
+
+   incrementPomosUsed() {
+      this.pomosUsed += 1;
+      this.elements.pomoCircle.innerText = this.pomosUsed + "/" + this.getAttribute("pomosRequired");
+
    }
 
    //   incrementPomosUsed() {
