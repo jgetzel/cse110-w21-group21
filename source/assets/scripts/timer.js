@@ -8,6 +8,8 @@ window.addEventListener("DOMContentLoaded", () => {
     let taskList = document.getElementById("taskList");
     let timer = document.getElementById("timerNumber");
     let startTimerButton = document.getElementById("startTimer");
+    let currentTaskHTML = document.getElementById("currentTask");
+    let taskListHTML = document.getElementById("taskList");
     let pomosCompleted = 0;                       // # of pomos completed for long break, stats, etc.
 
     let currentTask = null;
@@ -51,6 +53,8 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
 
+
+
     /**
      * Implements the onClick functionality of the Start Timer button, which starts the pomo timer and cycles
      * pomo and break timers until all pomos are completed.
@@ -58,10 +62,8 @@ window.addEventListener("DOMContentLoaded", () => {
     startTimerButton.onclick = function () {
         // Update CSS to change to the ongoing timer frame without refreshing the page.
 
-        let currentTaskHTML = document.getElementById("currentTask");
         currentTaskHTML.setAttribute('class', 'currentTaskWorkTime');
 
-        let taskListHTML = document.getElementById("taskList");
         taskList.setAttribute('class', 'taskListWorkTime');
 
         let timerWrapper = document.getElementById("timerWrapper");
@@ -80,23 +82,21 @@ window.addEventListener("DOMContentLoaded", () => {
         let pomoMin = "00";
         let breakMin = "00";
         let longBreakMin = "00";
-        // let pomoMin = timerNumber.textContent.split(":")[0].replace(/\s+/g, '');
-        // let breakMin = "05";
-        // let longBreakMin = "25";
+
         let isBreak = false;
         // TODO: timerLoop no longer used since we use timeChanger() for break also, need to clearInterval when final pomo is completed
 
-
+        startNewTask();
 
         //removes first child from task list and adds to current task
-        let taskListFirstChild = taskListHTML.childNodes[0];
-
-        const currentTaskToBeAdded = `<pomo-task description = "` + taskListFirstChild.getAttribute('description') + `" pomosUsed = "` + taskListFirstChild.getAttribute('pomosused') + `", pomosRequired = "` + taskListFirstChild.getAttribute('pomosrequired') + `">` + taskListFirstChild.textContent + `</pomo-task>`;
-        currentTaskHTML.insertAdjacentHTML('beforeend', currentTaskToBeAdded);
-        taskListHTML.removeChild(taskListHTML.childNodes[0]);
 
         let timerLoop = setInterval(timeChanger, 1000);
 
+        let currentTask = currentTaskHTML.childNodes[0];
+        currentTask.setFinishTaskCallback(function () {
+            removeCompletedTasks();
+            startNewTask();
+        });
         function timeChanger() {
             // Extract minutes and seconds from the page
             let minutes = timerNumber.textContent.split(":")[0].replace(/\s+/g, '');
@@ -120,7 +120,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     ++pomosCompleted;
 
                     let currentTaskFirstChild = currentTaskHTML.childNodes[0];
-                    console.log(currentTaskFirstChild.incrementPomosUsed());
+                    currentTaskFirstChild.incrementPomosUsed();
 
                     currentTaskFirstChild.setAttribute('pomosused', 1 + parseInt(currentTaskFirstChild.getAttribute('pomosused')));
 
@@ -133,7 +133,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     // Short break
                     else {
                         minutes = breakMin;
-                        seconds = "1500000"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                        seconds = "500"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                     }
                 }
                 // Next timer should be a pomo timer
@@ -204,7 +204,29 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    function startNewTask() {
+        let taskListFirstChild = taskListHTML.childNodes[0];
+        let nextTask = allTasks.shift();
+        const currentTaskToBeAdded = `<pomo-task description = "` + nextTask.description + `" pomosUsed = "` + nextTask.pomosCompleted + `", pomosRequired = "` + nextTask.pomos + `">` + nextTask.title + `</pomo-task>`;
+        currentTaskHTML.insertAdjacentHTML('beforeend', currentTaskToBeAdded);
+        taskListHTML.removeChild(taskListHTML.childNodes[0]);
 
+    }
+
+    function removeCompletedTasks() {
+        for (let node of currentTaskHTML.childNodes) {
+            if (node.completed) {
+                currentTaskHTML.removeChild(node);
+            }
+        }
+
+        for (let node of taskListHTML.childNodes) {
+            if (node.completed) {
+                taskListHTML.removeChild(node);
+            }
+        }
+
+    }
 
 
     /**
@@ -212,17 +234,22 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     function loadTasks() {
         let id = getLatestSessionID();
+        let allTasks = []
         if (id !== null) {
             let tasks = getAllTasks();
-            let allTasks = []
             Object.values(tasks).forEach((task) => {
-                console.log(task.sessionID, id);
-                if (task.sessionID === id) {
+                console.log(task);
+                if (task.sessionID === id && !task.completed) {
                     allTasks.push(task);
                 }
             });
             allTasks.forEach((task) => {
                 renderTaskIntoTaskList(task);
+            });
+        }
+        for (let node of taskListHTML.childNodes) {
+            node.setFinishTaskCallback(() => {
+                removeCompletedTasks();
             });
         }
         return allTasks;

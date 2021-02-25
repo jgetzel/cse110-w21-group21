@@ -113,6 +113,20 @@ class TaskComponent extends HTMLElement {
       }
    }
 
+   setFinishTaskCallback(cb) {
+      const checkMark = this.elements.checkMark;
+      const pomotask = this;
+      checkMark.onclick = function () {
+         checkMark.setAttribute("class", "completeCheckMark");
+         checkMark.setAttribute("src", "./assets/svgImages/check_Complete.svg");
+         pomotask.completed = true;
+         pomotask.isCurrentTask = false;
+
+         colorDecider(pomotask.elements.pomoCircle, pomotask);
+         cb();
+      }
+   }
+
    incrementPomosUsed() {
       this.pomosUsed += 1;
       this.elements.pomoCircle.innerText = this.pomosUsed + "/" + this.getAttribute("pomosRequired");
