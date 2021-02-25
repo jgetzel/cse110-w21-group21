@@ -62,6 +62,9 @@ window.addEventListener("DOMContentLoaded", () => {
     startTimerButton.onclick = function () {
         // Update CSS to change to the ongoing timer frame without refreshing the page.
 
+
+        let totalPomosForTheSession = getTotalPomosLeft();
+        console.log({ totalPomosForTheSession })
         currentTaskHTML.setAttribute('class', 'currentTaskWorkTime');
 
         taskList.setAttribute('class', 'taskListWorkTime');
@@ -133,7 +136,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     // Short break
                     else {
                         minutes = breakMin;
-                        seconds = "500"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                        seconds = "5"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                     }
                 }
                 // Next timer should be a pomo timer
@@ -183,6 +186,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // console.log(task);
         const currentTask = `<pomo-task description = "` + task.description + `" pomosUsed = "0", pomosRequired = "` + task.pomos + `">` + task.title + `</pomo-task>`;
         taskList.insertAdjacentHTML('beforeend', currentTask);
+        taskList.childNodes[taskList.childNodes.length - 1].task = task;
     }
 
     /**
@@ -210,22 +214,41 @@ window.addEventListener("DOMContentLoaded", () => {
         const currentTaskToBeAdded = `<pomo-task description = "` + nextTask.description + `" pomosUsed = "` + nextTask.pomosCompleted + `", pomosRequired = "` + nextTask.pomos + `">` + nextTask.title + `</pomo-task>`;
         currentTaskHTML.insertAdjacentHTML('beforeend', currentTaskToBeAdded);
         taskListHTML.removeChild(taskListHTML.childNodes[0]);
+        currentTaskHTML.childNodes[0].setFinishTaskCallback(() => {
+            removeCompletedTasks();
+        })
+        currentTaskHTML.childNodes[0].task = nextTask;
 
     }
 
     function removeCompletedTasks() {
         for (let node of currentTaskHTML.childNodes) {
             if (node.completed) {
+                node.task.completed = true;
+                storeTask(node.task);
                 currentTaskHTML.removeChild(node);
             }
         }
 
         for (let node of taskListHTML.childNodes) {
             if (node.completed) {
+                node.task.completed = true;
+                storeTask(node.task);
                 taskListHTML.removeChild(node);
             }
         }
 
+    }
+
+    function getTotalPomosLeft() {
+        let total = 0;
+        for (let node of currentTaskHTML.childNodes) {
+            total += node.task.pomosRequired - node.task.pomosCompleted;
+        }
+        for (let node of taskListHTML.childNodes) {
+            total += node.task.pomosRequired - node.task.pomosCompleted;
+        }
+        return total
     }
 
 
