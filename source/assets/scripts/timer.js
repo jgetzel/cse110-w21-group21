@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", () => {
 
     const urlParams = new URLSearchParams(window.location.search);
-    const loadSaved = urlParams.get('loadSaved');
+    const loadSaved = urlParams.get("loadSaved");
 
     let addTaskButton = document.getElementById("taskCreator");
     let modal = document.getElementById("addTaskModal");
@@ -15,14 +15,14 @@ window.addEventListener("DOMContentLoaded", () => {
     let currentTask = null;
 
     initializeDatabase();
-    let allTasks = []
+    let allTasks = [];
     if (loadSaved == "false") {
         let oldTasksLeft = areThereUnfinishedTasksFromLastSession();
         allTasks = loadTasks();
         if (oldTasksLeft) {
             let confirmed = confirm("By starting a new timer, you will lose any unfinished tasks from your previous session");
             if (!confirmed) {
-                window.location = "./index.html"
+                window.location = "./index.html";
                 return;
             }
         }
@@ -42,7 +42,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // remove all old session tasks from database that have not been completed (we are starting a new session)
         oldSessionTasks.forEach((task) => {
             deleteTaskByTaskID(task.id);
-        })
+        });
 
     }
     let allInProgressTasks = allTasks.filter((task) => task.completed);
@@ -63,18 +63,18 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
         let totalPomosForTheSession = getTotalPomosLeft();
-        console.log({ totalPomosForTheSession })
-        currentTaskHTML.setAttribute('class', 'currentTaskWorkTime');
+        console.log({ totalPomosForTheSession });
+        currentTaskHTML.setAttribute("class", "currentTaskWorkTime");
 
-        taskList.setAttribute('class', 'taskListWorkTime');
+        taskList.setAttribute("class", "taskListWorkTime");
 
         let timerWrapper = document.getElementById("timerWrapper");
-        timerWrapper.setAttribute('class', 'timerWrapperWorkTime');
+        timerWrapper.setAttribute("class", "timerWrapperWorkTime");
 
         let completeSessionWrapper = document.getElementById("completeSessionWrapper");
-        completeSessionWrapper.setAttribute('class', 'completeSessionWrapperWorkTime');
+        completeSessionWrapper.setAttribute("class", "completeSessionWrapperWorkTime");
         let taskCreatorWrapper = document.getElementById("taskCreatorWrapper");
-        taskCreatorWrapper.style.display = 'none';
+        taskCreatorWrapper.style.display = "none";
         // Sets up local variables for timer functionality. Currently, the pomo work time is hardcoded in the HTML
         let timerNumber = document.getElementById("timerNumber");
 
@@ -100,8 +100,8 @@ window.addEventListener("DOMContentLoaded", () => {
         });
         function timeChanger() {
             // Extract minutes and seconds from the page
-            let minutes = timerNumber.textContent.split(":")[0].replace(/\s+/g, '');
-            let seconds = timerNumber.textContent.split(":")[1].replace(/\s+/g, '');
+            let minutes = timerNumber.textContent.split(":")[0].replace(/\s+/g, "");
+            let seconds = timerNumber.textContent.split(":")[1].replace(/\s+/g, "");
 
             // If timer hits 0, toggle to next break or pomo timer
             if (minutes == "00" && seconds == "00") {
@@ -110,12 +110,12 @@ window.addEventListener("DOMContentLoaded", () => {
                 // Next timer should be break timer
                 if (isBreak) {
                     //break 
-                    currentTaskHTML.setAttribute('class', 'currentTaskBreakTime');
-                    taskListHTML.setAttribute('class', 'taskListBreakTime');
+                    currentTaskHTML.setAttribute("class", "currentTaskBreakTime");
+                    taskListHTML.setAttribute("class", "taskListBreakTime");
                     document.getElementById("timer-status").innerText = "Break Time";
 
-                    timerWrapper.setAttribute('class', 'timerWrapperBreakTime');
-                    completeSessionWrapper.setAttribute('class', 'completeSessionWrapperBreakTime');
+                    timerWrapper.setAttribute("class", "timerWrapperBreakTime");
+                    completeSessionWrapper.setAttribute("class", "completeSessionWrapperBreakTime");
                     // TODO: Change css, etc to indicate we swapped to break timer
                     //timerWrapper.setAttribute('class', 'timerWrapper');
                     ++pomosCompleted;
@@ -123,7 +123,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     let currentTaskFirstChild = currentTaskHTML.childNodes[0];
                     currentTaskFirstChild.incrementPomosUsed();
 
-                    currentTaskFirstChild.setAttribute('pomosused', 1 + parseInt(currentTaskFirstChild.getAttribute('pomosused')));
+                    currentTaskFirstChild.setAttribute("pomosused", 1 + parseInt(currentTaskFirstChild.getAttribute("pomosused")));
 
                     //increment in display only TODO -> increment in local storage
                     // Long break, currently hardcoded after every 4 pomos
@@ -140,14 +140,14 @@ window.addEventListener("DOMContentLoaded", () => {
                 // Next timer should be a pomo timer
                 else {
                     document.getElementById("timer-status").innerText = "Pomo Time";
-                    currentTaskHTML.setAttribute('class', 'currentTaskWorkTime');
-                    taskListHTML.setAttribute('class', 'taskListWorkTime');
+                    currentTaskHTML.setAttribute("class", "currentTaskWorkTime");
+                    taskListHTML.setAttribute("class", "taskListWorkTime");
 
-                    timerWrapper.setAttribute('class', 'timerWrapperWorkTime');
-                    completeSessionWrapper.setAttribute('class', 'completeSessionWrapperWorkTime');
+                    timerWrapper.setAttribute("class", "timerWrapperWorkTime");
+                    completeSessionWrapper.setAttribute("class", "completeSessionWrapperWorkTime");
 
                     minutes = pomoMin;
-                    seconds = "01" // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                    seconds = "01"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                     // TODO: Add functionality for moving onto next task, updating pomos used on current task, etc.
                 }
             }
@@ -170,20 +170,20 @@ window.addEventListener("DOMContentLoaded", () => {
             timerNumber.textContent = minutes + ":" + seconds;
         }
 
-    }
+    };
 
     modal.elements.saveBtn.addEventListener("click", contentsSaved);
     addTaskButton.onclick = function () {
         modal.displayModal();
-    }
+    };
     /**
     * Render a task onto the 
     * @param {Task} task 
     */
     function renderTaskIntoTaskList(task) {
         // console.log(task);
-        const currentTask = `<pomo-task description = "` + task.description + `" pomosUsed = "0", pomosRequired = "` + task.pomos + `">` + task.title + `</pomo-task>`;
-        taskList.insertAdjacentHTML('beforeend', currentTask);
+        const currentTask = "<pomo-task description = \"" + task.description + "\" pomosUsed = \"0\", pomosRequired = \"" + task.pomos + "\">" + task.title + "</pomo-task>";
+        taskList.insertAdjacentHTML("beforeend", currentTask);
         taskList.childNodes[taskList.childNodes.length - 1].task = task;
     }
 
@@ -198,7 +198,7 @@ window.addEventListener("DOMContentLoaded", () => {
         //     const currentTask = `<pomo-task description = "` + taskValues.description + `" pomosUsed = "0", pomosRequired = "` + taskValues.pomosRequired + `">` + taskValues.taskName + `</pomo-task>`;
         //     taskList.insertAdjacentHTML('beforeend', currentTask);
         // }
-        let sessionID = getLatestSessionID()
+        let sessionID = getLatestSessionID();
         // console.log(taskValues);
         let newTask = new Task(sessionID, taskValues.taskName, taskValues.description, parseInt(taskValues.pomosRequired));
         renderTaskIntoTaskList(newTask);
@@ -210,12 +210,12 @@ window.addEventListener("DOMContentLoaded", () => {
     function startNewTask() {
         let taskListFirstChild = taskListHTML.childNodes[0];
         let nextTask = allTasks.shift();
-        const currentTaskToBeAdded = `<pomo-task description = "` + nextTask.description + `" pomosUsed = "` + nextTask.pomosCompleted + `", pomosRequired = "` + nextTask.pomos + `">` + nextTask.title + `</pomo-task>`;
-        currentTaskHTML.insertAdjacentHTML('beforeend', currentTaskToBeAdded);
+        const currentTaskToBeAdded = "<pomo-task description = \"" + nextTask.description + "\" pomosUsed = \"" + nextTask.pomosCompleted + "\", pomosRequired = \"" + nextTask.pomos + "\">" + nextTask.title + "</pomo-task>";
+        currentTaskHTML.insertAdjacentHTML("beforeend", currentTaskToBeAdded);
         taskListHTML.removeChild(taskListHTML.childNodes[0]);
         currentTaskHTML.childNodes[0].setFinishTaskCallback(() => {
             removeCompletedTasks();
-        })
+        });
         currentTaskHTML.childNodes[0].task = nextTask;
 
     }
@@ -247,7 +247,7 @@ window.addEventListener("DOMContentLoaded", () => {
         for (let node of taskListHTML.childNodes) {
             total += parseInt(node.task.pomos) - parseInt(node.task.pomosCompleted);
         }
-        return total
+        return total;
     }
 
 
@@ -256,7 +256,7 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     function loadTasks() {
         let id = getLatestSessionID();
-        let allTasks = []
+        let allTasks = [];
         if (id !== null) {
             let tasks = getAllTasks();
             Object.values(tasks).forEach((task) => {

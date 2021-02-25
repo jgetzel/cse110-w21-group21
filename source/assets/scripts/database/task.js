@@ -17,12 +17,12 @@ class Task {
         return task;
     }
     serializeIntoObj() {
-        return { title: this.title, description: this.description, pomos: this.pomos, completed: this.completed, pomosCompleted: this.pomosCompleted, id: this.id, sessionID: this.sessionID }
+        return { title: this.title, description: this.description, pomos: this.pomos, completed: this.completed, pomosCompleted: this.pomosCompleted, id: this.id, sessionID: this.sessionID };
     }
 }
 
-const POMO_TASK_MAP = "pomo_task_map"
-const POMO_TASK_INDEX = "pomo_task_index"
+const POMO_TASK_MAP = "pomo_task_map";
+const POMO_TASK_INDEX = "pomo_task_index";
 
 /**
  * Will store a new or updated task into local storage
@@ -67,14 +67,14 @@ function getTask(id) {
  */
 function getAllTasks() {
     let task_map = getObject(POMO_TASK_MAP);
-    let parsed_task_map = {}
+    let parsed_task_map = {};
     for (let id in task_map) {
         let task_obj = task_map[id];
         let t = new Task();
         t = t.parseTaskFromObj(task_obj);
         parsed_task_map[id] = t;
     }
-    return parsed_task_map
+    return parsed_task_map;
 }
 
 /**
@@ -84,7 +84,7 @@ function getAllTasks() {
 function getAllSessionTasks(sessionID) {
     if (sessionID !== null) {
         let tasks = getAllTasks();
-        let allTasks = []
+        let allTasks = [];
         Object.values(tasks).forEach((task) => {
             if (task.sessionID === sessionID) {
                 allTasks.push(task);

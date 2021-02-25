@@ -19,11 +19,11 @@ class Button extends HTMLElement {
         const button = document.createElement("button");
         // set class as an example, this can be later used for css!
         button.setAttribute("class", "pomo-button");
-        button.innerText = this.textContent || ""
+        button.innerText = this.textContent || "";
 
         // store it for future reference
         this.elements.button = button;
-        button.setAttribute("part", "button")
+        button.setAttribute("part", "button");
 
         // Add Styles
         const linkElem = document.createElement("link");

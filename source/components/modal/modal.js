@@ -28,7 +28,7 @@ class ModalComponent extends HTMLElement {
                     <pomo-button id="save-btn">Save</pomo-button>
                 </div>
             </div>
-        `
+        `;
         // Add Styles
         const linkElem = document.createElement("link");
         linkElem.setAttribute("rel", "stylesheet");
@@ -41,25 +41,25 @@ class ModalComponent extends HTMLElement {
         this.shadowRoot.appendChild(wrapper);
 
 
-        const closeBtn = this.shadowRoot.getElementById("modal-close")
+        const closeBtn = this.shadowRoot.getElementById("modal-close");
         this.elements.closeBtn = closeBtn;
         this.elements.closeBtn.onclick = this.hideModal.bind(this);
         this.elements.saveBtn = this.shadowRoot.getElementById("save-btn");
         this.elements.saveBtn.onclick = function () {
             this.hideModal();
             this.elements.values = this.getValues();
-        }.bind(this)
+        }.bind(this);
     }
 
     getValues() {
-        const taskName = this.shadowRoot.getElementById("task-name")
-        const pomosRequired = this.shadowRoot.getElementById("pomos-required")
-        const description = this.shadowRoot.getElementById("description")
+        const taskName = this.shadowRoot.getElementById("task-name");
+        const pomosRequired = this.shadowRoot.getElementById("pomos-required");
+        const description = this.shadowRoot.getElementById("description");
         return {
             taskName: taskName.value,
             pomosRequired: pomosRequired.value,
             description: description.value,
-        }
+        };
     }
 
     displayModal() {

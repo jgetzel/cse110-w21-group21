@@ -21,7 +21,7 @@ class ModalComponent extends HTMLElement {
 
         close.onclick = function() {
             wrapper.style.display = "none";
-        }
+        };
 
         // Adds a title to the Modal
         const title = document.createElement("p");

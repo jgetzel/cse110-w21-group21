@@ -65,19 +65,19 @@ class InputField extends HTMLElement {
             }
         }
         //listen for max characters on these events
-        wrapper.addEventListener('keypress', limitCharCount, false);
-        wrapper.addEventListener('paste', limitCharCount, false);
-        wrapper.addEventListener('input', limitCharCount, false); //this is mainly for changing the backspace/del key
+        wrapper.addEventListener("keypress", limitCharCount, false);
+        wrapper.addEventListener("paste", limitCharCount, false);
+        wrapper.addEventListener("input", limitCharCount, false); //this is mainly for changing the backspace/del key
 
         /**
          * Anonymous function to replace placeholder text with empty string when user clicks on component
          * @function
          */
-        wrapper.addEventListener('focus', function () {
+        wrapper.addEventListener("focus", function () {
             //if focused and current text is the placeholder text replace it with empty string
             if(!this.userTyped) {
                 wrapper.setAttribute("class", "pomo-input");
-                wrapper.textContent = '';
+                wrapper.textContent = "";
             }
         });
 
@@ -85,7 +85,7 @@ class InputField extends HTMLElement {
          * Anonymous function to replace empty string with placeholder text when user clicks away
          * @function
          */
-        wrapper.addEventListener('blur', function () {
+        wrapper.addEventListener("blur", function () {
             //if not focused and there is no input, return back to placeholder string
             if(!this.userTyped) {
                 wrapper.setAttribute("class", wrapper.getAttribute("class") + " placeholder");
@@ -99,7 +99,7 @@ class InputField extends HTMLElement {
     }
 
     connectedCallback() {
-        var maxChar = this.getAttribute("max")
+        var maxChar = this.getAttribute("max");
 
         //set attribute-specified max char
         if (maxChar != null)

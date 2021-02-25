@@ -76,7 +76,7 @@ class TaskComponent extends HTMLElement {
 
          colorDecider(pomoCircle, pomotask);
 
-      }
+      };
 
       wrapperCheckMark.appendChild(checkMark);
       this.elements.checkMark = checkMark;
@@ -106,7 +106,7 @@ class TaskComponent extends HTMLElement {
       console.log("HELLO");
    }
    attributeChangedCallback(name, oldValue, newValue) {
-      console.log(name, oldValue, newValue)
+      console.log(name, oldValue, newValue);
       if (name === "pomosused") {
          console.log(newValue);
          this.elements.pomoCircle.innerText = newValue + "/" + this.getAttribute("pomosRequired");
@@ -124,7 +124,7 @@ class TaskComponent extends HTMLElement {
 
          colorDecider(pomotask.elements.pomoCircle, pomotask);
          cb();
-      }
+      };
    }
 
    incrementPomosUsed() {
@@ -178,7 +178,7 @@ function colorDecider(pomoCircle, pomotask) {
       }
    }
    else if (!pomotask.completed) {
-      pomoCircle.setAttribute("class", "incompleteTask")
+      pomoCircle.setAttribute("class", "incompleteTask");
    }
 
 }

@@ -20,7 +20,7 @@ class Header extends HTMLElement {
         wrapper.setAttribute("class", "pomo-header");
 
         var logo = document.createElement("img");
-        logo.src = "./assets/images/logo.svg"
+        logo.src = "./assets/images/logo.svg";
         logo.setAttribute("class", "pomo-header logo");
 
         var homeLink = document.createElement("a");
@@ -35,9 +35,9 @@ class Header extends HTMLElement {
          *  or window.location.replace if we don't want to add to history
          */
 
-        wrapper.innerHTML += `<a href="history.html"><pomo-button type="nav" id="hist">History</pomo-button></a>`;
+        wrapper.innerHTML += "<a href=\"history.html\"><pomo-button type=\"nav\" id=\"hist\">History</pomo-button></a>";
         //TODO: LINK HELP BUTTON TO FUTURE HELP MODAL/HTML
-        wrapper.innerHTML += `<pomo-button type="nav" id="help">Help</pomo-button>`
+        wrapper.innerHTML += "<pomo-button type=\"nav\" id=\"help\">Help</pomo-button>";
 
         // store it for easy access
         this.elements.wrapper = wrapper;
