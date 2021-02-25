@@ -16,10 +16,13 @@ class ModalComponent extends HTMLElement {
             <div class="modal">
                 <button id="modal-close" class="close-btn">x</button>
                 <p class="title">Add New Task</p>
+                <label>Title</label>
                 <div>
                     <pomo-input placeholder="1" id="task-name"></pomo-input>
                 </div>
+                <label>Pomos Required</label>
                 <div><pomo-input id="pomos-required"></pomo-input></div>
+                <label>Description</label>
                 <div><pomo-input id="description"></pomo-input></div>
                 <div class="button-wrapper">
                     <pomo-button id="save-btn">Save</pomo-button>
@@ -42,7 +45,7 @@ class ModalComponent extends HTMLElement {
         this.elements.closeBtn = closeBtn;
         this.elements.closeBtn.onclick = this.hideModal.bind(this);
         this.elements.saveBtn = this.shadowRoot.getElementById("save-btn");
-        this.elements.saveBtn.onclick = function() {
+        this.elements.saveBtn.onclick = function () {
             this.hideModal();
             this.elements.values = this.getValues();
         }.bind(this)
