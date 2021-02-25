@@ -23,6 +23,6 @@ test('test main.js', () => {
     // verify the correct classes are applied
     expect(btn1.elements.button.className).toBe("pomo-button")
     expect(btn2.elements.button.className).toBe("pomo-button nav")
-    expect(btn3.elements.button.className).toBe("pomo-button outline")
+    expect(btn3.elements.button.className).toBe("pomo-button broken")
 
 });
