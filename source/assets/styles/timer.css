@@ -11,12 +11,48 @@
 
 }
 
+.currentTask {
+    display: none;
+
+}
+
+.currentTaskWorkTime {
+    position: absolute;
+    display: block;
+    left: 29rem;
+    top: 20rem;
+}
+
+
+.currentTaskBreakTime {
+    position: absolute;
+    display: block;
+    left: 29rem;
+    top: 36rem;
+
+}
+
 .taskList {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-58%,40%);
 }
+
+.taskListWorkTime {
+    position: absolute;
+    display: block;
+    left: 29rem;
+    top: 28rem;
+}
+
+.taskListBreakTime {
+    position: absolute;
+    display: block;
+    left: 29rem;
+    top: 44rem;
+}
+
 .timerWrapper {
     position: absolute;
     top: 60%;
@@ -30,6 +66,23 @@
     background-color: rgba(0,0,0,0.25);
     ;
 }
+
+.timerCircle {
+    border-radius: 50%;
+    height: 8rem;
+    width: 8rem;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    background-color: white;
+    line-height: 8rem;
+}
+.timerCircle > .timerNumber {
+    position: relative;
+    font-size: larger;
+    font-weight: bold;
+    left: 30%;
+}
+
 .timerWrapperWorkTime {
 
     position: absolute;
@@ -69,20 +122,43 @@
     
 }
 
-.timerCircle {
+.timerWrapperBreakTime {
+
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-55%,-200%);
+    width: 20rem;
+    height: 20rem;
+    display: flex;
+    border: 1px black solid;
+    border-radius: 0.25rem;
+    background-color: rgba(0,0,0,0.25);
+    
+}
+
+.timerWrapperBreakTime > .startTimerWrapper {
+    display: none;
+}
+
+.timerWrapperBreakTime > .timerCircle {
     border-radius: 50%;
-    height: 8rem;
-    width: 8rem;
+    height: 18rem;
+    width: 18rem;
+    padding-left: 1rem;
     margin-top: 1rem;
     margin-left: 0.5rem;
-    background-color: white;
+    background-color:white;
     line-height: 8rem;
 }
-.timerCircle > .timerNumber {
+
+.timerWrapperBreakTime > .timerCircle > .timerNumber {
     position: relative;
-    font-size: larger;
+    font-size: 4rem;
+    top: 25%;
+    left: 18%;
     font-weight: bold;
-    left: 30%;
+    
 }
 .startTimerWrapper pomo-button::part(button){
     position: relative;
@@ -96,10 +172,21 @@
 .completeSessionWrapper {
     display: none;
 }
-.completeSessionWrapper pomo-button::part(button){
+
+.completeSessionWrapperWorkTime pomo-button::part(button){
     position: absolute;
     top: 45%;
     left: 76%;
     width: 20rem;
     line-height: 12.5%;
+    display: block;
+}
+
+.completeSessionWrapperBreakTime pomo-button::part(button){
+    position: absolute;
+    top: 32rem;
+    left: 34rem;
+    width: 20rem;
+    line-height: 12.5%;
+    display: block;
 }

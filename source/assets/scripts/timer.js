@@ -57,11 +57,21 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     startTimerButton.onclick = function () {
         // Update CSS to change to the ongoing timer frame without refreshing the page.
+
+        let currentTaskHTML = document.getElementById("currentTask");
+        currentTaskHTML.setAttribute('class', 'currentTaskWorkTime');
+
+        let taskListHTML = document.getElementById("taskList");
+        taskList.setAttribute('class', 'taskListWorkTime');
+
         let timerWrapper = document.getElementById("timerWrapper");
         timerWrapper.setAttribute('class', 'timerWrapperWorkTime');
-        let completeSessionWrapper = document.getElementById("completeSessionWrapper");
-        completeSessionWrapper.style.display = 'block';
 
+        let completeSessionWrapper = document.getElementById("completeSessionWrapper");
+        completeSessionWrapper.setAttribute('class', 'completeSessionWrapperWorkTime');
+
+        let taskCreatorWrapper = document.getElementById("taskCreatorWrapper");
+        taskCreatorWrapper.style.display = 'none';
         // Sets up local variables for timer functionality. Currently, the pomo work time is hardcoded in the HTML
         let timerNumber = document.getElementById("timerNumber");
         // **Set to 0 for testing**
@@ -75,6 +85,13 @@ window.addEventListener("DOMContentLoaded", () => {
         // TODO: timerLoop no longer used since we use timeChanger() for break also, need to clearInterval when final pomo is completed
         let timerLoop = setInterval(timeChanger, 1000);
 
+        
+        //removes first child from task list and adds to current task
+        let taskListFirstChild = taskListHTML.childNodes[0];
+        
+        const currentTaskToBeAdded = `<pomo-task description = "` + taskListFirstChild.getAttribute('description') + `" pomosUsed = "` + taskListFirstChild.getAttribute('pomosused') + `", pomosRequired = "` + taskListFirstChild.getAttribute('pomosrequired') + `">` + taskListFirstChild.textContent + `</pomo-task>`;
+        currentTaskHTML.insertAdjacentHTML('beforeend', currentTaskToBeAdded);
+        taskListHTML.removeChild(taskListHTML.childNodes[0]);
 
         function timeChanger() {
             // Extract minutes and seconds from the page
@@ -83,13 +100,26 @@ window.addEventListener("DOMContentLoaded", () => {
 
             // If timer hits 0, toggle to next break or pomo timer
             if (minutes == "00" && seconds == "00") {
-                console.log("Timer hit 0");
+                // console.log("Timer hit 0");
                 isBreak = !isBreak;
                 // Next timer should be break timer
                 if (isBreak) {
+                    //break 
+                    currentTaskHTML.setAttribute('class', 'currentTaskBreakTime');
+                    taskListHTML.setAttribute('class', 'taskListBreakTime');
+
+                    timerWrapper.setAttribute('class', 'timerWrapperBreakTime');
+                    completeSessionWrapper.setAttribute('class', 'completeSessionWrapperBreakTime');
                     // TODO: Change css, etc to indicate we swapped to break timer
                     //timerWrapper.setAttribute('class', 'timerWrapper');
                     ++pomosCompleted;
+                    
+                    let currentTaskFirstChild = currentTaskHTML.childNodes[0];
+                    console.log(currentTaskFirstChild);
+                    
+                    currentTaskFirstChild.setAttribute('pomosused', 1 + parseInt(currentTaskFirstChild.getAttribute('pomosused'))); 
+
+                    //increment in display only TODO -> increment in local storage
                     // Long break, currently hardcoded after every 4 pomos
                     if (pomosCompleted % 4 == 0) {
                         minutes = longBreakMin;
@@ -98,13 +128,19 @@ window.addEventListener("DOMContentLoaded", () => {
                     // Short break
                     else {
                         minutes = breakMin;
-                        seconds = "05"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                        seconds = "15"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                     }
                 }
                 // Next timer should be a pomo timer
                 else {
+                    currentTaskHTML.setAttribute('class', 'currentTaskWorkTime');
+                    taskListHTML.setAttribute('class', 'taskListWorkTime');
+
+                    timerWrapper.setAttribute('class', 'timerWrapperWorkTime');
+                    completeSessionWrapper.setAttribute('class', 'completeSessionWrapperWorkTime');
+
                     minutes = pomoMin;
-                    seconds = "20" // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                    seconds = "01" // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                     // TODO: Add functionality for moving onto next task, updating pomos used on current task, etc.
                 }
             }
@@ -146,20 +182,22 @@ window.addEventListener("DOMContentLoaded", () => {
         //     taskList.insertAdjacentHTML('beforeend', currentTask);
         // }
         let sessionID = getLatestSessionID()
-        console.log(taskValues);
+        // console.log(taskValues);
         let newTask = new Task(sessionID, taskValues.taskName, taskValues.description, parseInt(taskValues.pomosRequired));
-        renderTaskIntoList(newTask);
+        renderTaskIntoTaskList(newTask);
         storeTask(newTask);
     }
     /**
      * Render a task onto the 
      * @param {Task} task 
      */
-    function renderTaskIntoList(task) {
-        console.log(task);
+    function renderTaskIntoTaskList(task) {
+        // console.log(task);
         const currentTask = `<pomo-task description = "` + task.description + `" pomosUsed = "0", pomosRequired = "` + task.pomos + `">` + task.title + `</pomo-task>`;
         taskList.insertAdjacentHTML('beforeend', currentTask);
     }
+
+
 
 
     /**
