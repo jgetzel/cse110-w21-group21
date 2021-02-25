@@ -4,4 +4,4 @@ btn_timercreater.onclick = CreatTaskTable();
 
 CreatTaskTable = () => {
     var li = document.createElement("li");
-}
+};

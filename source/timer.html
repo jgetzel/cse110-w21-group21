@@ -3,18 +3,56 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/styles/home.css">
+        <link rel="stylesheet" href="assets/styles/base.css">
+        <link rel="stylesheet" href="assets/styles/timer.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-        <script src="assets/scripts/main.js"></script>
+        <script src="assets/scripts/database/index.js"></script>
+        <script src="assets/scripts/database/task.js"></script>
+        <script src="assets/scripts/database/session.js"></script>
+        <script src="assets/scripts/timer.js"></script>
     </head>
 
     <body>
-        <nav>
-            <img src="logo.png">
-            <button>History</button>
-            <button>?</button>
-        </nav>
+        <pomo-header page="timer"></pomo-header>
+        <main>
+            <h2 id="timer-status"></h2>
+            <div class = "timerWrapper" id = "timerWrapper">
+                <div class = "timerCircle">
+                    <span class = "timerNumber" id="timerNumber">
+                        00:00
+                    </span>
+                </div>
+                <div class = "startTimerWrapper">
+                    <pomo-button class = "startTimer" id = "startTimer"> Start Timer </pomo-button>
+                </div>
+                
+            </div>
+            <div class="completeSessionWrapper" id = "completeSessionWrapper">
+                <a href="history.html"><pomo-button class="completeSession" id="completeSession">Complete Session</pomo-button></a>
+            </div>
+            <div id="currentTaskWrapper">
+                <p>Current Task</p>
+                <ul class="currentTask" id="currentTask"></ul>
+            </div>
+            <div class = "taskCreatorWrapper" id = "taskCreatorWrapper">
+                <pomo-button class = "taskCreator" id = "taskCreator"> + Add New Task </pomo-button>
+            </div>
+            <div id="taskListWrapper">
+                <p>Task List</p>
+                <ul class = "taskList" id = "taskList" style = "list-style-type: none;"></ul>
+            </div>
+            
+            <!-- <pomo-button class = "taskCreator" id = "taskCreator"> + Add New Task </pomo-button> -->
+            <pomo-modal id = "addTaskModal">
+            </pomo-modal>
+        </main>
     </body>
+    <script src="components/header/header.js"></script>
+    <script src="components/task/task.js"></script>
+    <script src="components/input/input.js"></script>
+    <script src="components/button/button.js"></script>
+    <script src="components/header/header.js"></script>
+    <script src="components/modal/modal.js"></script>
 </html>
 
