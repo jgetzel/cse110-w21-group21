@@ -1,14 +1,10 @@
-.taskCreator {  
-    transform: translate(-50%,-50%);
-} 
-
-.taskCreatorWrapper pomo-button::part(button){
-    width: 25.2rem;
-    position: absolute;
-    top: 45%;
-    left: 35%;
-    line-height: 12.5%;
-
+#timer-status {
+    text-align: center;
+}
+.taskCreatorWrapper {
+    width: 25rem;
+    margin: auto;
+    margin-bottom: 2rem;
 }
 
 .currentTask {
@@ -16,49 +12,20 @@
 
 }
 
-.currentTaskWorkTime {
-    position: absolute;
-    display: block;
-    left: 29rem;
-    top: 20rem;
-}
 
-
-.currentTaskBreakTime {
-    position: absolute;
-    display: block;
-    left: 29rem;
-    top: 36rem;
-
-}
-
-.taskList {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-58%,40%);
-}
-
-.taskListWorkTime {
-    position: absolute;
-    display: block;
-    left: 29rem;
-    top: 28rem;
-}
-
-.taskListBreakTime {
-    position: absolute;
-    display: block;
-    left: 29rem;
-    top: 44rem;
-}
-
-.timerWrapper {
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-55%,-200%);
+.taskList, .taskListWorkTime, .currentTaskWorkTime, .taskListBreakTime, .currentTaskBreakTime {
+    margin: auto;
     width: 25rem;
+    padding-left: 0px;
+    position: relative;
+}
+
+.timerWrapper, .timerWrapperBreakTime {
+    position: relative;
+    width: 25rem;
+    margin: auto;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
     height: 10rem;
     display: flex;
     border: 1px black solid;
@@ -75,27 +42,36 @@
     margin-left: 0.5rem;
     background-color: white;
     line-height: 8rem;
+    text-align: center;
 }
 .timerCircle > .timerNumber {
     position: relative;
     font-size: larger;
     font-weight: bold;
-    left: 30%;
 }
 
 .timerWrapperWorkTime {
-
+    width: 18rem;
     position: absolute;
-    top: 82%;
-    left: 88%;
-    transform: translate(-55%,-200%);
-    width: 20rem;
-    height: 20rem;
+    top: 4rem;
+    right: 4rem;
+    height: 18rem;
     display: flex;
     border: 1px black solid;
     border-radius: 0.25rem;
     background-color: rgba(0,0,0,0.25);
     
+}
+.completeSessionWrapperBreakTime {
+    width: 25rem;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+.completeSessionWrapperWorkTime {
+    position: absolute;
+    top: 24rem;
+    width: 18rem;
+    right: 4rem;
 }
 
 .timerWrapperWorkTime > .startTimerWrapper {
@@ -104,62 +80,29 @@
 
 .timerWrapperWorkTime > .timerCircle {
     border-radius: 50%;
-    height: 18rem;
-    width: 18rem;
-    padding-left: 1rem;
-    margin-top: 1rem;
-    margin-left: 0.5rem;
+    height: 12rem;
+    width: 12rem;
+    margin:auto;
     background-color:white;
     line-height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .timerWrapperWorkTime > .timerCircle > .timerNumber {
     position: relative;
-    font-size: 4rem;
-    top: 25%;
-    left: 18%;
+    font-size: 2rem;
     font-weight: bold;
     
 }
-
-.timerWrapperBreakTime {
-
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-55%,-200%);
-    width: 20rem;
-    height: 20rem;
-    display: flex;
-    border: 1px black solid;
-    border-radius: 0.25rem;
-    background-color: rgba(0,0,0,0.25);
-    
+.timerWrapperBreakTime > .timerCircle {
+    margin-left: 8rem;
 }
-
 .timerWrapperBreakTime > .startTimerWrapper {
     display: none;
 }
 
-.timerWrapperBreakTime > .timerCircle {
-    border-radius: 50%;
-    height: 18rem;
-    width: 18rem;
-    padding-left: 1rem;
-    margin-top: 1rem;
-    margin-left: 0.5rem;
-    background-color:white;
-    line-height: 8rem;
-}
-
-.timerWrapperBreakTime > .timerCircle > .timerNumber {
-    position: relative;
-    font-size: 4rem;
-    top: 25%;
-    left: 18%;
-    font-weight: bold;
-    
-}
 .startTimerWrapper pomo-button::part(button){
     position: relative;
     top: 2.8rem;
@@ -172,21 +115,12 @@
 .completeSessionWrapper {
     display: none;
 }
-
-.completeSessionWrapperWorkTime pomo-button::part(button){
-    position: absolute;
-    top: 45%;
-    left: 76%;
-    width: 20rem;
-    line-height: 12.5%;
-    display: block;
+#currentTaskWrapper {
+    display: none;
 }
-
-.completeSessionWrapperBreakTime pomo-button::part(button){
-    position: absolute;
-    top: 32rem;
-    left: 34rem;
-    width: 20rem;
-    line-height: 12.5%;
-    display: block;
+#currentTaskWrapper, #taskListWrapper {
+    margin: auto;
+    width: 25rem;
+    padding-left: 0px;
+    position: relative;
 }

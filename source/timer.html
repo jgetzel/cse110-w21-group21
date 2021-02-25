@@ -16,25 +16,33 @@
     <body>
         <pomo-header page="timer"></pomo-header>
         <main>
-            <div class="completeSessionWrapper" id = "completeSessionWrapper">
-                <pomo-button class="completeSession" id="completeSession">Complete Session</pomo-button>
-            </div>
-            
+            <h2 id="timer-status"></h2>
             <div class = "timerWrapper" id = "timerWrapper">
                 <div class = "timerCircle">
                     <span class = "timerNumber" id="timerNumber">
-                        00: 00
+                        00:00
                     </span>
                 </div>
                 <div class = "startTimerWrapper">
                     <pomo-button class = "startTimer" id = "startTimer"> Start Timer </pomo-button>
                 </div>
+                
             </div>
-            <ul class="currentTask" id="currentTask"></ul>
-            <ul class = "taskList" id = "taskList" style = "list-style-type: none;"></ul>
+            <div class="completeSessionWrapper" id = "completeSessionWrapper">
+                <pomo-button class="completeSession" id="completeSession">Complete Session</pomo-button>
+            </div>
+            <div id="currentTaskWrapper">
+                <p>Current Task</p>
+                <ul class="currentTask" id="currentTask"></ul>
+            </div>
             <div class = "taskCreatorWrapper" id = "taskCreatorWrapper">
                 <pomo-button class = "taskCreator" id = "taskCreator"> + Add New Task </pomo-button>
             </div>
+            <div id="taskListWrapper">
+                <p>Task List</p>
+                <ul class = "taskList" id = "taskList" style = "list-style-type: none;"></ul>
+            </div>
+            
             <!-- <pomo-button class = "taskCreator" id = "taskCreator"> + Add New Task </pomo-button> -->
             <pomo-modal id = "addTaskModal">
             </pomo-modal>

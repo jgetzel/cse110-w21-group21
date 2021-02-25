@@ -74,6 +74,8 @@ window.addEventListener("DOMContentLoaded", () => {
         taskCreatorWrapper.style.display = 'none';
         // Sets up local variables for timer functionality. Currently, the pomo work time is hardcoded in the HTML
         let timerNumber = document.getElementById("timerNumber");
+
+        document.getElementById("currentTaskWrapper").style.display = "block";
         // **Set to 0 for testing**
         let pomoMin = "00";
         let breakMin = "00";
@@ -83,7 +85,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // let longBreakMin = "25";
         let isBreak = false;
         // TODO: timerLoop no longer used since we use timeChanger() for break also, need to clearInterval when final pomo is completed
-        let timerLoop = setInterval(timeChanger, 1000);
+
 
 
         //removes first child from task list and adds to current task
@@ -92,6 +94,8 @@ window.addEventListener("DOMContentLoaded", () => {
         const currentTaskToBeAdded = `<pomo-task description = "` + taskListFirstChild.getAttribute('description') + `" pomosUsed = "` + taskListFirstChild.getAttribute('pomosused') + `", pomosRequired = "` + taskListFirstChild.getAttribute('pomosrequired') + `">` + taskListFirstChild.textContent + `</pomo-task>`;
         currentTaskHTML.insertAdjacentHTML('beforeend', currentTaskToBeAdded);
         taskListHTML.removeChild(taskListHTML.childNodes[0]);
+
+        let timerLoop = setInterval(timeChanger, 1000);
 
         function timeChanger() {
             // Extract minutes and seconds from the page
@@ -107,6 +111,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     //break 
                     currentTaskHTML.setAttribute('class', 'currentTaskBreakTime');
                     taskListHTML.setAttribute('class', 'taskListBreakTime');
+                    document.getElementById("timer-status").innerText = "Break Time";
 
                     timerWrapper.setAttribute('class', 'timerWrapperBreakTime');
                     completeSessionWrapper.setAttribute('class', 'completeSessionWrapperBreakTime');
@@ -128,11 +133,12 @@ window.addEventListener("DOMContentLoaded", () => {
                     // Short break
                     else {
                         minutes = breakMin;
-                        seconds = "15"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                        seconds = "1500000"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                     }
                 }
                 // Next timer should be a pomo timer
                 else {
+                    document.getElementById("timer-status").innerText = "Pomo Time";
                     currentTaskHTML.setAttribute('class', 'currentTaskWorkTime');
                     taskListHTML.setAttribute('class', 'taskListWorkTime');
 

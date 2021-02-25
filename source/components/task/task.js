@@ -15,9 +15,10 @@ class TaskComponent extends HTMLElement {
       pomotask.isCurrentTask = true;
       pomotask.completed = false;
       // if we received stop signal from stop button of the pomo timer, it will trigger incomplete
-
+      const wrapperDiv = document.createElement("div");
       const wrapper = document.createElement("li");
       wrapper.setAttribute("class", "task");
+      wrapperDiv.appendChild(wrapper);
       // A div wrapper for the title and description
       const wrapperText = document.createElement("div");
       wrapperText.setAttribute("class", "textwrapper");
@@ -99,7 +100,7 @@ class TaskComponent extends HTMLElement {
       linkElem.setAttribute("href", "./assets/styles/task.css");
       this.elements.linkElem = linkElem;
 
-      this.shadowRoot.append(wrapper, linkElem);
+      this.shadowRoot.append(wrapperDiv, linkElem);
    }
    set pomosused(val) {
       console.log("HELLO");
