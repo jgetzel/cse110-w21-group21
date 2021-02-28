@@ -15,21 +15,24 @@
 
     <body>
         <pomo-header page="home"></pomo-header>
-         <div class="flex-container" style="vertical-align: middle; flex-direction: column;">
-            <div>
-                <a href="timer.html?loadSaved=false"><pomo-button id="btn-create">Create New Timer</pomo-button></a>
+        <div class="backdrop"></div>
+        <main class="content">
+            <div class="flex-container" style="vertical-align: middle; flex-direction: column;">
+                <div>
+                    <a href="timer.html?loadSaved=false"><pomo-button id="btn-create">Create New Timer</pomo-button></a>
+                    
+                </div>
+                <div id="leftover-tasks-wrapper">
+                    <div>
+                        <p>or</p>
+                    </div>
+                    <div>
+                        <a href="timer.html?loadSaved=true"><pomo-button id="btn-check-leftover" type="outline">Use leftover tasks from last time</pomo-button></a>
+                    </div>
+                </div>
                 
             </div>
-            <div id="leftover-tasks-wrapper">
-                <div>
-                    <p>or</p>
-                </div>
-                <div>
-                    <a href="timer.html?loadSaved=true"><pomo-button id="btn-check-leftover" type="outline">Use leftover tasks from last time</pomo-button></a>
-                </div>
-            </div>
-            
-        </div>
+        </main>
     </body>
     <script src="components/input/input.js"></script>
     <script src="components/button/button.js"></script>
