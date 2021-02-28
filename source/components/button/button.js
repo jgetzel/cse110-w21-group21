@@ -3,7 +3,9 @@
 /**
  * @class Button
  * 
- * A button component with 3 types, normal, outline, and nav
+ * A button component with 3 types, normal, outline, and nav specified with the type attribute
+ * 
+ * It also has two sizes, "small" and "normal" specified by the size attribute
  */
 class Button extends HTMLElement {
     constructor() {
@@ -24,6 +26,7 @@ class Button extends HTMLElement {
         // store it for future reference
         this.elements.button = button;
         button.setAttribute("part", "button");
+        button.style.display = "none";
 
         // Add Styles
         const linkElem = document.createElement("link");
@@ -42,7 +45,10 @@ class Button extends HTMLElement {
             this.elements.button.setAttribute("class", this.elements.button.getAttribute("class") + " nav");
         }
 
-
+        this.size = this.getAttribute("size");
+        if (this.size == "small") {
+            this.elements.button.setAttribute("class", this.elements.button.getAttribute("class") + " small");
+        }
     }
 }
 

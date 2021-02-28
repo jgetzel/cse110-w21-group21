@@ -4,6 +4,9 @@ html {
 body {
   margin: 0px;
 }
+a { 
+  text-decoration: none;
+}
 .backdrop {
   background: url("../images/backgrounds/bg0.jpg");
   height: 100vh;
@@ -11,4 +14,7 @@ body {
   z-index: -1;
   position: fixed;
   top: 0;
+}
+button {
+  background-color: rgba(51,56, 68, 0.75);
 }
