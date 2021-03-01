@@ -18,7 +18,7 @@ class ProgressCircleComponent extends HTMLElement {
         // store it for future reference
         this.elements.wrapper = wrapper;
 
-        this.displayText = "0%"
+        this.displayText = "0%";
 
         wrapper.innerHTML = `
         <div id="progress-circle" class="progress-circle">
@@ -30,14 +30,14 @@ class ProgressCircleComponent extends HTMLElement {
                 <div class="value-bar" id="progress-bar"></div>
             </div>
         </div>
-        `
+        `;
         wrapper.innerHTML = `
         <span id="displayText">0%</span>
         <svg id="circular-loader"viewBox="25 25 50 50" >
             <circle id="loader-path" cx="50" cy="50" r="20" fill="none" />
             <circle id="loader-path-bg" cx="50" cy="50" r="20" fill="none" />
         </svg>
-        `
+        `;
 
         // Add Styles
         const linkElem = document.createElement("link");

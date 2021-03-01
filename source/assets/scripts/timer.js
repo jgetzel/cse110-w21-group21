@@ -19,7 +19,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let maxBreakTime = 5000;
     let maxLongBreakTime = 10;
     let currentTime = maxPomoTime;
-    let mode = "pomo"
+    let mode = "pomo";
     timerProgressCircle.setDisplayText(formatTime(currentTime));
     timerProgressCircle.setPercentage(1);
 
@@ -149,14 +149,14 @@ window.addEventListener("DOMContentLoaded", () => {
                         // minutes = longBreakMin;
                         // seconds = "10"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                         currentTime = maxLongBreakTime;
-                        mode = "long-break"
+                        mode = "long-break";
                     }
                     // Short break
                     else {
                         // minutes = breakMin;
                         // seconds = "5"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                         currentTime = maxBreakTime;
-                        mode = "break"
+                        mode = "break";
                     }
                 }
                 // Next timer should be a pomo timer
@@ -168,7 +168,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     timerWrapper.setAttribute("class", "timerWrapperWorkTime");
                     completeSessionWrapper.setAttribute("class", "completeSessionWrapperWorkTime");
                     currentTime = maxPomoTime;
-                    mode = "pomo"
+                    mode = "pomo";
                     // minutes = pomoMin;
                     // seconds = "01"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                     // TODO: Add functionality for moving onto next task, updating pomos used on current task, etc.
