@@ -1,4 +1,4 @@
-const { formatTime } = require("../../source/assets/scripts/utils/format-time.js");
+require("../../source/assets/scripts/utils/format-time.js");
 // we use fs to read the html file to load it up
 const fs = require('fs');
 describe("Test utility JS", () => {

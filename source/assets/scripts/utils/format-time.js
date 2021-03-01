@@ -20,4 +20,3 @@ function formatTime(seconds) {
   }
   return mstr + ":" + sstr;
 }
-module.exports = { formatTime };

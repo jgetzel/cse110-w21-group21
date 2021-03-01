@@ -46,8 +46,10 @@ class Button extends HTMLElement {
         }
 
         this.size = this.getAttribute("size");
-        if (this.size == "small") {
+        if (this.size === "small") {
             this.elements.button.setAttribute("class", this.elements.button.getAttribute("class") + " small");
+        } else if (this.size === "tiny") {
+            this.elements.button.setAttribute("class", this.elements.button.getAttribute("class") + " tiny");
         }
     }
 }

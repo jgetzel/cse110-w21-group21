@@ -18,6 +18,11 @@
 .pomo-button.small {
     padding: 0.75rem 0.5rem;
 }
+.pomo-button.tiny {
+    padding: 0.5rem 0.5rem;
+    font-size: 1rem;
+}
+
 
 .pomo-button:hover {
     /* transform: translateY(-4px); */

@@ -14,7 +14,7 @@ class ProgressCircleComponent extends HTMLElement {
         // Create an example element that will serve as our "root" element here
         const wrapper = document.createElement("div");
         // set class as an example, this can be later used for css!
-        wrapper.setAttribute("class", "template");
+        wrapper.setAttribute("id", "wrapper");
         // store it for future reference
         this.elements.wrapper = wrapper;
 
@@ -31,6 +31,13 @@ class ProgressCircleComponent extends HTMLElement {
             </div>
         </div>
         `
+        wrapper.innerHTML = `
+        <span id="displayText">0%</span>
+        <svg id="circular-loader"viewBox="25 25 50 50" >
+            <circle id="loader-path" cx="50" cy="50" r="20" fill="none" />
+            <circle id="loader-path-bg" cx="50" cy="50" r="20" fill="none" />
+        </svg>
+        `
 
         // Add Styles
         const linkElem = document.createElement("link");
@@ -42,6 +49,15 @@ class ProgressCircleComponent extends HTMLElement {
         // attach the created elements to the shadow DOM
         this.shadowRoot.append(linkElem, wrapper);
     }
+    /**
+     * Set size of progress circle
+     * @param {string} fontSize - example: `1rem`
+     */
+    setSize(fontSize) {
+        const element = this.shadowRoot.getElementById("wrapper");
+        element.style.fontSize = fontSize;
+    }
+
     /**
      * Set the display text of the progress circle
      * @param {*} text 
@@ -57,14 +73,8 @@ class ProgressCircleComponent extends HTMLElement {
      * @param {number} percent - a percent value ranging from 0 to 1
      */
     setPercentage(percent) {
-        let element = this.shadowRoot.getElementById("progress-bar");
-        element.style.transform = `rotate(${percent * 360}deg)`;
-        const circleElement = this.shadowRoot.getElementById("progress-circle");
-        if (percent > 0.5) {
-            circleElement.setAttribute("class", "progress-circle over50");
-        } else {
-            circleElement.setAttribute("class", "progress-circle");
-        }
+        let element = this.shadowRoot.getElementById("loader-path");
+        element.style.strokeDashoffset = - (1 - percent) * 150;
     }
 }
 

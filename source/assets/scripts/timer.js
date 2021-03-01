@@ -11,11 +11,12 @@ window.addEventListener("DOMContentLoaded", () => {
     let currentTaskHTML = document.getElementById("currentTask");
     let taskListHTML = document.getElementById("taskList");
     let timerProgressCircle = document.getElementById("timer-progress");
+    let distractedButton = document.getElementById("distractedWrapper");
 
 
     // TODO: move this time variable into the pomo session object class using localstorage
-    let maxPomoTime = 10;
-    let maxBreakTime = 5;
+    let maxPomoTime = 1;
+    let maxBreakTime = 5000;
     let maxLongBreakTime = 10;
     let currentTime = maxPomoTime;
     let mode = "pomo"
@@ -78,11 +79,15 @@ window.addEventListener("DOMContentLoaded", () => {
         let totalPomosForTheSession = getTotalPomosLeft();
         console.log({ totalPomosForTheSession });
         currentTaskHTML.setAttribute("class", "currentTaskWorkTime");
+        timerProgressCircle.setSize("1.5rem");
 
         taskList.setAttribute("class", "taskListWorkTime");
 
         let timerWrapper = document.getElementById("timerWrapper");
         timerWrapper.setAttribute("class", "timerWrapperWorkTime");
+
+        distractedButton.style.display = "block";
+
 
         let completeSessionWrapper = document.getElementById("completeSessionWrapper");
         completeSessionWrapper.setAttribute("class", "completeSessionWrapperWorkTime");
@@ -125,6 +130,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     currentTaskHTML.setAttribute("class", "currentTaskBreakTime");
                     taskListHTML.setAttribute("class", "taskListBreakTime");
                     document.getElementById("timer-status").innerText = "Break Time";
+                    distractedButton.style.display = "none";
 
                     timerWrapper.setAttribute("class", "timerWrapperBreakTime");
                     completeSessionWrapper.setAttribute("class", "completeSessionWrapperBreakTime");
