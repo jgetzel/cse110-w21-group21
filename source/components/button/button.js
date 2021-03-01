@@ -41,8 +41,12 @@ class Button extends HTMLElement {
         } else if (this.type == "nav") {
             this.elements.button.setAttribute("class", this.elements.button.getAttribute("class") + " nav");
         }
-
-
+    }
+    disable(){
+        this.elements.button.disabled = true;
+    }
+    enable(){
+        this.elements.button.disabled = false;
     }
 }
 

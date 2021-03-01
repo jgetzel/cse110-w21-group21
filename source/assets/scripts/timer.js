@@ -34,6 +34,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     else if (loadSaved == "false") {
         // note, if you refresh for now, you will lose your session's changes...
+        allTasks = [];
         let oldSessionID = getLatestSessionID();
         let sessionID = getNewSessionID();
         setCurrentSessionStatus("in-progress");
@@ -50,6 +51,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
     function renderCurrentSetOfTasks() {
         allInProgressTasks = allInProgressTasks.filter((task) => task.completed);
+    }
+
+    //Renders into task list directly
+    allTasks.forEach((task) => {
+        renderTaskIntoTaskList(task);
+    });
+
+    if(allInProgressTasks.length == 0){ 
+        startTimerButton.disable();
     }
 
 
@@ -204,6 +214,7 @@ window.addEventListener("DOMContentLoaded", () => {
         renderTaskIntoTaskList(newTask);
         storeTask(newTask);
         allTasks.push(newTask);
+        startTimerButton.enable();
     }
 
 
@@ -265,9 +276,11 @@ window.addEventListener("DOMContentLoaded", () => {
                     allTasks.push(task);
                 }
             });
+            /*
             allTasks.forEach((task) => {
                 renderTaskIntoTaskList(task);
             });
+            */
         }
         for (let node of taskListHTML.childNodes) {
             node.setFinishTaskCallback(() => {
