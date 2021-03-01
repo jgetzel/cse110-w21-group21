@@ -12,7 +12,6 @@
   border-radius: 50%;
   line-height: 8rem;
   float: left;
-  transform: rotate(180deg);
 }
 
 .progress-circle:after{
@@ -36,7 +35,6 @@
    text-align: center;
    display: block;
    color: rgb(51,56,68);
-   transform: rotate(180deg);
    z-index: 2;
 }
 .left-half-clipper { 

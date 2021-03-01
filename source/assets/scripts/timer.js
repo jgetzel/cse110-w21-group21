@@ -11,8 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let currentTaskHTML = document.getElementById("currentTask");
     let taskListHTML = document.getElementById("taskList");
     let timerProgressCircle = document.getElementById("timer-progress");
-    timerProgressCircle.setDisplayText("25:00");
-    timerProgressCircle.setPercentage(1);
+
 
     // TODO: move this time variable into the pomo session object class using localstorage
     let maxPomoTime = 10;
@@ -20,6 +19,9 @@ window.addEventListener("DOMContentLoaded", () => {
     let maxLongBreakTime = 10;
     let currentTime = maxPomoTime;
     let mode = "pomo"
+    timerProgressCircle.setDisplayText(formatTime(currentTime));
+    timerProgressCircle.setPercentage(1);
+
 
     let pomosCompleted = 0;                       // # of pomos completed for long break, stats, etc.
 
@@ -168,7 +170,7 @@ window.addEventListener("DOMContentLoaded", () => {
             }
             // Push updated time to the page
             // timerNumber.textContent = minutes + ":" + seconds;
-            timerProgressCircle.setDisplayText(currentTime);
+            timerProgressCircle.setDisplayText(formatTime(currentTime));
             if (mode === "pomo") {
                 timerProgressCircle.setPercentage(currentTime / maxPomoTime);
             }
