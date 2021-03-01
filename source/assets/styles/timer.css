@@ -32,20 +32,6 @@
     flex-flow: wrap;
 }
 
-.timerCircle {
-    border-radius: 50%;
-    height: 8rem;
-    width: 8rem;
-    background-color: transparent;
-    text-align: center;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background:linear-gradient(270deg, black 50%, transparent 50%), linear-gradient(0deg, black 50%, lightgray 50%); */
-    
-}
-
 .c100 {
     position: relative;
 	font-size: 160px;
@@ -119,15 +105,6 @@
 }
 
 
-
-
-
-.timerCircle > .timerNumber {
-    position: relative;
-    font-size: larger;
-    font-weight: bold;
-}
-
 .timerWrapperWorkTime {
     width: 18rem;
     position: absolute;
@@ -156,23 +133,6 @@
     display: none;
 }
 
-.timerWrapperWorkTime > .timerCircle {
-    border-radius: 50%;
-    height: 12rem;
-    width: 12rem;
-    margin:auto;
-
-}
-
-.timerWrapperWorkTime > .timerCircle > .timerNumber {
-    position: relative;
-    font-size: 2rem;
-    font-weight: bold;
-    
-}
-.timerWrapperBreakTime > .timerCircle {
-    margin-left: 8rem;
-}
 .timerWrapperBreakTime > .startTimerWrapper {
     display: none;
 }

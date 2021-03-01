@@ -20,20 +20,7 @@
         <main>
             <h2 id="timer-status"></h2>
             <div class = "timerWrapper" id = "timerWrapper">
-                <!-- <div class = "timerCircle">
-                    <span class = "timerNumber" id="timerNumber">
-                        00:00
-                    </span>
-                </div> -->
-                <div class="timerWrapper progress-circle over50 p83" id="timerWrapper">
-                    <span class = "timerNumber" id="timerNumber">
-                        00:00
-                    </span>
-                    <div class="left-half-clipper">
-                       <div class="first50-bar"></div>
-                       <div class="value-bar"></div>
-                    </div>
-                 </div>
+                <progress-circle id="timer-progress"></progress-circle>
                 <div class = "startTimerWrapper">
                     <pomo-button class = "startTimer" size="small" id = "startTimer"> Start Timer </pomo-button>
                 </div>
@@ -63,5 +50,6 @@
     <script src="components/button/button.js"></script>
     <script src="components/header/header.js"></script>
     <script src="components/modal/modal.js"></script>
+    <script src="components/progress-circle/progress-circle.js"></script>
 </html>
 

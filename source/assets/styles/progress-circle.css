@@ -36,6 +36,7 @@
    text-align: center;
    display: block;
    color: rgb(51,56,68);
+   transform: rotate(180deg);
    z-index: 2;
 }
 .left-half-clipper { 
