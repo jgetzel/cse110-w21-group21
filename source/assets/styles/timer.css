@@ -28,22 +28,100 @@
     margin-bottom: 2rem;
     height: 10rem;
     display: flex;
-    border: 1px black solid;
-    border-radius: 0.25rem;
-    background-color: rgba(0,0,0,0.25);
-    ;
+    align-items: center;
+    flex-flow: wrap;
 }
 
 .timerCircle {
     border-radius: 50%;
     height: 8rem;
     width: 8rem;
-    margin-top: 1rem;
-    margin-left: 0.5rem;
-    background-color: white;
-    line-height: 8rem;
+    background-color: transparent;
     text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background:linear-gradient(270deg, black 50%, transparent 50%), linear-gradient(0deg, black 50%, lightgray 50%); */
+    
 }
+
+.c100 {
+    position: relative;
+	font-size: 160px;
+	width: 1em;
+	height: 1em;
+	border-radius: 50%;
+	float: left;
+	margin: 0.4em;
+	background-color: blue;
+    box-sizing: content-box;
+}
+.c100 span {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 5em;
+    line-height: 5em;
+    font-size: 0.2em;
+    color: white;
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+    /* @include transition-property(all);
+    @include transition-duration(0.2s);
+    @include transition-timing-function(ease-out); */
+}
+.c100:after{
+    position: absolute;
+    top: 8rem;
+    left: 8rem;
+    display: block;
+    content: " ";
+    border-radius: 50%;
+    background-color: black;
+    width: calc(100% - (2 * 8rem));
+    height: calc(100% - (2 * 8rem));
+    /* @include transition-property(all);
+    @include transition-duration(0.2s);
+    @include transition-timing-function(ease-in); */
+
+}
+.c100 .slice {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    clip: rect(0em, 1em, 1em, 0.5em);
+}
+
+.rect-auto{
+	clip: rect(auto, auto, auto, auto);
+}
+
+.pie {
+	position: absolute;
+	border: 8rem solid black;
+	width: calc(100% - (2 * 8rem));
+	height: calc(100% - (2 * 8rem));
+	clip: rect(0em, 0.5em, 1em, 0em);
+	border-radius: 50%;
+	transform: rotate(0deg);
+}
+
+.pie-fill {
+	transform: rotate(180deg);
+}
+.wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+
+
+
+
 .timerCircle > .timerNumber {
     position: relative;
     font-size: larger;
@@ -83,11 +161,7 @@
     height: 12rem;
     width: 12rem;
     margin:auto;
-    background-color:white;
-    line-height: 8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
 }
 
 .timerWrapperWorkTime > .timerCircle > .timerNumber {
@@ -103,13 +177,15 @@
     display: none;
 }
 
-.startTimerWrapper pomo-button::part(button){
-    position: relative;
-    top: 2.8rem;
-    left: 2rem;
-    background-color: white;
-    color: black;
-    line-height: 12.5%;
+.startTimerWrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    width: 13.5rem;
+    display: inline-block;
+}
+#startTimer {
+    width: 100%;
 }
 
 .completeSessionWrapper {
@@ -123,4 +199,13 @@
     width: 25rem;
     padding-left: 0px;
     position: relative;
+}
+
+#taskList-title, #currentTask-title {
+    font-size: 1.2rem;
+    color: white;
+    background-color: rgba(51,56,68, 0.75);
+    border-radius: 0.25rem;
+    width: fit-content;
+    padding: 0.5rem;
 }

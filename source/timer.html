@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="assets/styles/base.css">
         <link rel="stylesheet" href="assets/styles/timer.css">
+        <link rel="stylesheet" href="assets/styles/progress-circle.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
         <script src="assets/scripts/database/index.js"></script>
@@ -19,13 +20,22 @@
         <main>
             <h2 id="timer-status"></h2>
             <div class = "timerWrapper" id = "timerWrapper">
-                <div class = "timerCircle">
+                <!-- <div class = "timerCircle">
                     <span class = "timerNumber" id="timerNumber">
                         00:00
                     </span>
-                </div>
+                </div> -->
+                <div class="timerWrapper progress-circle over50 p83" id="timerWrapper">
+                    <span class = "timerNumber" id="timerNumber">
+                        00:00
+                    </span>
+                    <div class="left-half-clipper">
+                       <div class="first50-bar"></div>
+                       <div class="value-bar"></div>
+                    </div>
+                 </div>
                 <div class = "startTimerWrapper">
-                    <pomo-button class = "startTimer" id = "startTimer"> Start Timer </pomo-button>
+                    <pomo-button class = "startTimer" size="small" id = "startTimer"> Start Timer </pomo-button>
                 </div>
                 
             </div>
@@ -33,18 +43,16 @@
                 <a href="history.html"><pomo-button class="completeSession" id="completeSession">Complete Session</pomo-button></a>
             </div>
             <div id="currentTaskWrapper">
-                <p>Current Task</p>
+                <p id="currentTask-title">Current Task</p>
                 <ul class="currentTask" id="currentTask"></ul>
             </div>
             <div class = "taskCreatorWrapper" id = "taskCreatorWrapper">
                 <pomo-button class = "taskCreator" id = "taskCreator" size="small"> + Add New Task </pomo-button>
             </div>
             <div id="taskListWrapper">
-                <p>Task List</p>
+                <p id="taskList-title">Task List</p>
                 <ul class = "taskList" id = "taskList" style = "list-style-type: none;"></ul>
             </div>
-            
-            <!-- <pomo-button class = "taskCreator" id = "taskCreator"> + Add New Task </pomo-button> -->
             <pomo-modal id = "addTaskModal">
             </pomo-modal>
         </main>
