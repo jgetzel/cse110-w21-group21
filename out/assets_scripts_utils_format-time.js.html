@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: TaskComponent</title>
+    <title>JSDoc: Source: assets/scripts/utils/format-time.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,139 +17,39 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: TaskComponent</h1>
+    <h1 class="page-title">Source: assets/scripts/utils/format-time.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>TaskComponent<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Task
-
-Contains information about a given Task</div>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="TaskComponent"><span class="type-signature"></span>new TaskComponent<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_task_task.js.html">components/task/task.js</a>, <a href="components_task_task.js.html#line8">line 8</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Takes a number of seconds and formats it into a MM:SS format
+ * @param {number} seconds 
+ * @returns {string}
+ */
+function formatTime(seconds) {
+  let s = seconds % 60;
+  let sstr = "";
+  if (s &lt; 10) {
+    sstr = "0" + s;
+  } else {
+    sstr = s;
+  }
+  let m = Math.floor(seconds / 60);
+  let mstr = "";
+  if (m &lt; 10) {
+    mstr = "0" + m;
+  } else {
+    mstr = m;
+  }
+  return mstr + ":" + sstr;
+}</code></pre>
+        </article>
+    </section>
 
 
 

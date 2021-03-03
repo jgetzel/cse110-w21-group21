@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/header/header.js</title>
+    <title>JSDoc: Source: components/progress-circle/progress-circle.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/header/header.js</h1>
+    <h1 class="page-title">Source: components/progress-circle/progress-circle.js</h1>
 
     
 
@@ -27,15 +27,12 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Header class to create a web component implementing the functionality of our header bar.
- * 
- * @authors Ethan Huynh, Kevin Klimek
- * @todo Refactor buttons to onClick events instead of simply appending to a link element,
- *       Implement help button when Modal component is merged
+ * @class ProgressCircleComponent
  */
-class Header extends HTMLElement {
+class ProgressCircleComponent extends HTMLElement {
     constructor() {
         super();
+
         // use an object to store all relevant elements to the components for convenience
         this.elements = {};
 
@@ -43,46 +40,73 @@ class Header extends HTMLElement {
         this.attachShadow({ mode: "open" }); // sets and returns 'this.shadowRoot'
 
         // Create an example element that will serve as our "root" element here
-        const wrapper = document.createElement("nav");
+        const wrapper = document.createElement("div");
         // set class as an example, this can be later used for css!
-        wrapper.setAttribute("class", "pomo-header");
-
-        var logo = document.createElement("img");
-        logo.src = "./assets/images/logo.svg";
-        logo.setAttribute("class", "pomo-header logo");
-
-        var homeLink = document.createElement("a");
-        homeLink.href="index.html";
-
-        homeLink.appendChild(logo);
-        wrapper.appendChild(homeLink);
-
-        /** For following links in an eventlistener
-         *  window.location.href = "http://www.w3schools.com";
-         *  or window.location.assign(url);
-         *  or window.location.replace if we don't want to add to history
-         */
-
-        wrapper.innerHTML += "&lt;a href=\"history.html\">&lt;pomo-button type=\"nav\" id=\"hist\">History&lt;/pomo-button>&lt;/a>";
-        //TODO: LINK HELP BUTTON TO FUTURE HELP MODAL/HTML
-        wrapper.innerHTML += "&lt;pomo-button type=\"nav\" id=\"help\">Help&lt;/pomo-button>";
-
-        // store it for easy access
+        wrapper.setAttribute("id", "wrapper");
+        // store it for future reference
         this.elements.wrapper = wrapper;
+
+        this.displayText = "0%";
+
+        wrapper.innerHTML = `
+        &lt;div id="progress-circle" class="progress-circle">
+            &lt;span id="displayText">
+                0%
+            &lt;/span>
+            &lt;div class="left-half-clipper">
+                &lt;div class="first50-bar">&lt;/div>
+                &lt;div class="value-bar" id="progress-bar">&lt;/div>
+            &lt;/div>
+        &lt;/div>
+        `;
+        wrapper.innerHTML = `
+        &lt;span id="displayText">0%&lt;/span>
+        &lt;svg id="circular-loader"viewBox="25 25 50 50" >
+            &lt;circle id="loader-path" cx="50" cy="50" r="20" fill="none" />
+            &lt;circle id="loader-path-bg" cx="50" cy="50" r="20" fill="none" />
+        &lt;/svg>
+        `;
 
         // Add Styles
         const linkElem = document.createElement("link");
         linkElem.setAttribute("rel", "stylesheet");
         // make sure to link the correct stylesheet with the correct stylings
-        linkElem.setAttribute("href", "./assets/styles/header.css");
+        linkElem.setAttribute("href", "./assets/styles/progress-circle.css");
         this.elements.linkElem = linkElem;
 
         // attach the created elements to the shadow DOM
         this.shadowRoot.append(linkElem, wrapper);
     }
+    /**
+     * Set size of progress circle
+     * @param {string} fontSize - example: `1rem`
+     */
+    setSize(fontSize) {
+        const element = this.shadowRoot.getElementById("wrapper");
+        element.style.fontSize = fontSize;
+    }
+
+    /**
+     * Set the display text of the progress circle
+     * @param {*} text 
+     */
+    setDisplayText(text) {
+        this.displayText = text;
+        let element = this.shadowRoot.getElementById("displayText");
+        element.textContent = text;
+    }
+    /**
+     * Set the percentage of the progress bar 
+     * 
+     * @param {number} percent - a percent value ranging from 0 to 1
+     */
+    setPercentage(percent) {
+        let element = this.shadowRoot.getElementById("loader-path");
+        element.style.strokeDashoffset = - (1 - percent) * 150;
+    }
 }
 
-customElements.define("pomo-header", Header);</code></pre>
+customElements.define("progress-circle", ProgressCircleComponent);</code></pre>
         </article>
     </section>
 
