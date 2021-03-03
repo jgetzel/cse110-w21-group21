@@ -165,12 +165,12 @@ class TaskComponent extends HTMLElement {
 }
 
 function colorDecider(pomoCircle, pomotask) {
-   // console.log(sth.pused);
+   //console.log(pomoCircle.preq);
    if (pomotask.isCurrentTask === true) {
       pomoCircle.setAttribute("class", "currentTask");
    }
    else if (pomotask.completed === true) {
-      if (pomoCircle.pused <= pomoCircle.preq) {
+      if (pomotask.pomosUsed <= pomoCircle.preq) {
          pomoCircle.setAttribute("class", "goodTimingTask");
       }
       else {

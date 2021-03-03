@@ -1,0 +1,38 @@
+#wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#displayText {
+  position: absolute;
+  line-height: 8em;
+  width: 8em;
+  text-align: center;
+  display: block;
+  color: white;
+  z-index: 2;
+  font-size: 1.5em;
+}
+#circular-loader {
+  transform: rotate(270deg);
+  transform-origin: center center;
+  /* position: absolute; */
+  height: 8em;
+  width: 8em;
+  margin: auto;
+}
+
+#loader-path {
+  stroke-dasharray: 150,200;
+  stroke-dashoffset: -100;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: white;
+}
+#loader-path-bg {
+  stroke-dasharray: 150,200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: rgba(255, 255, 255 ,0.5);
+}

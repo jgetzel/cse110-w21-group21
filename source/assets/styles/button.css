@@ -1,5 +1,5 @@
 .pomo-button {
-    background-color: #333844;
+    background-color: rgba(51,56, 68, 0.75);
     border: none;
     border-radius: 0.25rem;
     color: white;
@@ -8,15 +8,29 @@
     min-width: 12rem;
     margin-right: 1rem;
     cursor: pointer;
-    transition: transform 0.2s;
+    
+
     padding: 2rem 2rem;
     width: 100%;
+    transition: transform 0.2s, background-color 0.2s;
+    display: block !important;
 }
+.pomo-button.small {
+    padding: 0.75rem 0.5rem;
+}
+.pomo-button.tiny {
+    padding: 0.5rem 0.5rem;
+    font-size: 1rem;
+}
+
+
 .pomo-button:hover {
-    transform: translateY(-3px);
+    /* transform: translateY(-4px); */
+    background-color: rgba(51,56, 68, 0.95);
 }
 .pomo-button:active {
-    transform: translateY(-2px);
+    /* transform: translateY(-2px); */
+    background-color: rgba(51,56, 68, 0.85);
 }
 
 .pomo-button.outline {
@@ -25,10 +39,14 @@
     color: #333844;
 }
 
+
 .pomo-button.nav {
     margin-right: 2rem;
     background-color: #FA7F7F;
     font-size: 1rem;
     padding: 0.5rem 1rem;
     min-width: 6rem;
+}
+.pomo-button.nav:hover {
+    background-color: rgba(233, 105, 105, 1);
 }
