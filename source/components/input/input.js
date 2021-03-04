@@ -47,28 +47,6 @@ class InputField extends HTMLElement {
         //add default style
         this.elements.wrapper.setAttribute("class", this.elements.wrapper.getAttribute("class") + " placeholder");
 
-        /** 
-         * Checks input field if it's exceeded the maximum character limit on an event
-         * @function
-         * @param {Event} e Checks on keydown,paste, and input events
-         * @returns {Boolean} false If the max character limit has been reached
-        */
-        function limitCharCount(e) {
-            this.userTyped = wrapper.textContent;
-            if(wrapper.textContent.length >= wrapper.max) {
-                wrapper.setAttribute("class", wrapper.getAttribute("class") + " max");
-                e.preventDefault();
-                return false;
-            }
-            else {
-                wrapper.setAttribute("class", "pomo-input");
-            }
-        }
-        //listen for max characters on these events
-        wrapper.addEventListener("keypress", limitCharCount, false);
-        wrapper.addEventListener("paste", limitCharCount, false);
-        wrapper.addEventListener("input", limitCharCount, false); //this is mainly for changing the backspace/del key
-
         /**
          * Anonymous function to replace placeholder text with empty string when user clicks on component
          * @function
@@ -88,10 +66,68 @@ class InputField extends HTMLElement {
         wrapper.addEventListener("blur", function () {
             //if not focused and there is no input, return back to placeholder string
             if(!this.userTyped) {
-                wrapper.setAttribute("class", wrapper.getAttribute("class") + " placeholder");
+                wrapper.setAttribute("class", "pomo-input placeholder");
                 wrapper.textContent = wrapper.placeholder;
             }
         });
+    }
+
+    /**
+     * Returns the user input in the field
+     * @function
+     * @returns {String} user input
+     */
+    getInput() {
+        return this.userTyped;
+    }
+
+    /** 
+     * Checks input field if it's exceeded the maximum character limit on an event
+     * @function
+     * @param {Event} e Checks on keydown,paste, and input events
+     * @returns {Boolean} false If the max character limit has been reached
+    */
+    limitCharCount(e) {
+        this.userTyped = this.textContent;
+        if(this.textContent.length >= this.max) {
+            this.setAttribute("class", "pomo-input max");
+            e.preventDefault();
+            return false;
+        }
+        else {
+            this.setAttribute("class", "pomo-input");
+            return true;
+        }
+    }
+
+    /** 
+     * Stop the user from inputting anything but numbers
+     * @function
+     * @param {Event} event Checks on keydown,paste, and input events
+    */
+    numericInputOnly(event) {
+        this.userTyped = this.textContent;
+        if(this.textContent.length >= this.max) {
+            this.setAttribute("class", "pomo-input max");
+            event.preventDefault();
+            return false;
+        }
+        else
+            this.setAttribute("class", "pomo-input");
+            
+        //different events store the text in different ways so we need these ifs
+        if(event.type == "keypress" && isNaN(event.key)) {
+            this.classList.add("invalid");
+            event.preventDefault();
+        }
+        else if(event.type == "input" && isNaN(event.data)) {
+            this.setAttribute("class", "pomo-input invalid");
+            event.preventDefault();
+        }
+        else if(event.type == "paste" && isNaN(event.clipboardData.getData("Text"))) {
+            this.setAttribute("class", "pomo-input invalid");
+            event.preventDefault();
+        }
     }
 
     get value() {
@@ -111,16 +147,19 @@ class InputField extends HTMLElement {
             this.elements.wrapper.textContent += "*";
         }
 
-        this.elements.wrapper.placeholder = this.elements.wrapper.textContent;
-    }
+        if(this.getAttribute("type") == "number") {
+            this.elements.wrapper.addEventListener("keypress", this.numericInputOnly, false);
+            this.elements.wrapper.addEventListener("paste", this.numericInputOnly, false);
+            this.elements.wrapper.addEventListener("input", this.numericInputOnly, false); //this is mainly for changing the backspace/del key
+        }
+        else {
+            //listen for max characters on these events
+            this.elements.wrapper.addEventListener("keypress", this.limitCharCount, false);
+            this.elements.wrapper.addEventListener("paste", this.limitCharCount, false);
+            this.elements.wrapper.addEventListener("input", this.limitCharCount, false); //this is mainly for changing the backspace/del key
+        }
 
-    /**
-     * Returns the user input in the field
-     * @function
-     * @returns {String} user input
-     */
-    getInput() {
-        return this.userTyped;
+        this.elements.wrapper.placeholder = this.elements.wrapper.textContent;
     }
 }
 
