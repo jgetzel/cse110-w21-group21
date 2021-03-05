@@ -8,7 +8,7 @@ test('test main.js', () => {
     </div>`
 
     // we use require here to load the component javascript
-    require("../../source/components/modal/modal.js")
+    require("../../source/assets/scripts/components/modal/modal")
 
     // find our component elements
     const modal = document.getElementById("modal")

@@ -1,5 +1,5 @@
 import { POMO_TASK_INDEX, POMO_TASK_MAP } from "./task";
-import { POMO_SESSION_ID, LATEST_POMO_SESSION_STATUS } from './session';
+import { POMO_SESSION_ID, LATEST_POMO_SESSION_STATUS } from "./session";
 
 export function initializeDatabase() {
     // check if we need to initialize

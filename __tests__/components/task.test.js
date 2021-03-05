@@ -1,6 +1,5 @@
 'use strict'
 
-const fs = require('fs');
 test('test main.js', () => {
     document.body.innerHTML = `<div>
     <ul class="TaskList" style = "list-style-type: none;">
@@ -9,7 +8,7 @@ test('test main.js', () => {
     </ul>
     <div>`
 
-    require("../../source/components/task/task.js")
+    require("../../source/assets/scripts/components/task/task")
 
     const greenTask = document.getElementById("Green");
     const yellowTask = document.getElementById("Yellow");

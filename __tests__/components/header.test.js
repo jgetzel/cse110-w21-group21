@@ -8,7 +8,7 @@ test('test header.js', () => {
     </div>`
 
     // we use require here to load the component javascript
-    require("../../source/components/header/header.js")
+    require("../../source/assets/scripts/components/header/header")
 
     // find our component elements
     const header = document.querySelector("pomo-header").elements.wrapper;

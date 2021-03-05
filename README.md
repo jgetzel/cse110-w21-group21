@@ -17,3 +17,11 @@ npm run start
 ```
 
 
+To create a production build of our code, run
+
+
+```
+npm run build
+```
+
+and the production build can be located in the newly created `dist` folder.

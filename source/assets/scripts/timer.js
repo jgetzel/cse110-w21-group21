@@ -1,4 +1,4 @@
-import { formatTime } from "./utils/format-time"
+import { formatTime } from "./utils/format-time";
 import { initializeDatabase } from "./database";
 import { getLatestSessionID, getNewSessionID, setCurrentSessionStatus } from "./database/session";
 import { areThereUnfinishedTasksFromLastSession, getAllSessionTasks } from "./database/task";

@@ -1,8 +1,6 @@
-require("../../source/assets/scripts/utils/format-time.js");
-// we use fs to read the html file to load it up
-const fs = require('fs');
+import { formatTime } from '../../source/assets/scripts/utils/format-time';
 describe("Test utility JS", () => {
-  test.skip('test formatTime', () => {
+  test('test formatTime', () => {
     expect(formatTime(0)).toEqual("00:00");
     expect(formatTime(10)).toEqual("00:10");
 

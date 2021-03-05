@@ -8,7 +8,7 @@ test('test main.js', () => {
     </div>`;
 
     // we use require here to load the component javascript
-    require("../../source/components/input/input.js");
+    require("../../source/assets/scripts/components/input/input.js");
 
     // find our component element
     const input = document.getElementById("input");
