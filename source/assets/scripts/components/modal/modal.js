@@ -1,4 +1,4 @@
-class ModalComponent extends HTMLElement {
+export default class ModalComponent extends HTMLElement {
     constructor() {
         super();
 

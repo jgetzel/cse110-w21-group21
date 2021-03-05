@@ -1,4 +1,7 @@
-function initializeDatabase() {
+import { POMO_TASK_INDEX, POMO_TASK_MAP } from "./task";
+import { POMO_SESSION_ID, LATEST_POMO_SESSION_STATUS } from './session';
+
+export function initializeDatabase() {
     // check if we need to initialize
     let needToInitialize = false;
     if (getObject(POMO_TASK_MAP) === null) {
@@ -22,16 +25,16 @@ function initializeDatabase() {
         storeObject(POMO_SESSION_ID, 0);
     }
 }
-function resetDatabase() {
+export function resetDatabase() {
     delete localStorage[POMO_TASK_MAP];
     delete localStorage[POMO_TASK_INDEX];
     delete localStorage[LATEST_POMO_SESSION_STATUS];
     delete localStorage[POMO_SESSION_ID];
 }
 
-function storeObject(key, object) {
+export function storeObject(key, object) {
     localStorage.setItem(key, JSON.stringify(object));
 }
-function getObject(key) {
+export function getObject(key) {
     return JSON.parse(localStorage.getItem(key));
 }

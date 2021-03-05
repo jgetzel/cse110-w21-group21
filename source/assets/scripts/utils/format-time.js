@@ -3,7 +3,7 @@
  * @param {number} seconds 
  * @returns {string}
  */
-function formatTime(seconds) {
+export function formatTime(seconds) {
   let s = seconds % 60;
   let sstr = "";
   if (s < 10) {
