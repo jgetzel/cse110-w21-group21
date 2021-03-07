@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: TaskComponent</title>
+    <title>JSDoc: Source: database/session.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,139 +17,62 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: TaskComponent</h1>
+    <h1 class="page-title">Source: database/session.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>TaskComponent<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Task
-
-Contains information about a given Task</div>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="TaskComponent"><span class="type-signature"></span>new TaskComponent<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_task_task.js.html">components/task/task.js</a>, <a href="components_task_task.js.html#line8">line 8</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This file is related to finding pomo sessions
+ */
+
+
+export const POMO_SESSION_ID = "pomo_session_id";
+export const LATEST_POMO_SESSION_STATUS = "latest_pomo_session_status";
+export class PomoSession {
+  constructor() {
+    this.id = -1;
+  }
+  serializeIntoObj() {
+    return { id: this.id };
+  }
+}
+
+
+export function getNewSessionID() {
+  let prevID = parseInt(localStorage.getItem(POMO_SESSION_ID));
+  localStorage.setItem(POMO_SESSION_ID, prevID + 1);
+  return prevID;
+}
+
+/**
+ * Set the current session's status
+ * @param {string} status - can be "complete" or "in-progress"
+ */
+export function setCurrentSessionStatus(status) {
+  localStorage.setItem(LATEST_POMO_SESSION_STATUS, status);
+}
+
+/**
+ * Will return the session ID of the last session if it was not ended. Otherwise if the last session does not exist 
+ * or was ended already, this function returns null
+ * 
+ * @returns {number | null}
+ */
+export function getLatestSessionID() {
+  let status = localStorage.getItem(LATEST_POMO_SESSION_STATUS);
+  if (status === "complete") {
+    return null;
+  } else {
+    return localStorage.getItem(POMO_SESSION_ID);
+  }
+}</code></pre>
+        </article>
+    </section>
 
 
 
