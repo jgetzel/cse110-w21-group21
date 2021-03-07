@@ -1,6 +1,6 @@
+// import { jest } from '@jest/globals';
 'use strict';
 // we use fs to read the html file to load it up
-const fs = require('fs');
 test('test main.js', () => {
     // we create a fake testing document here:
     document.body.innerHTML = `<div>
@@ -8,9 +8,10 @@ test('test main.js', () => {
         <pomo-button id='btn2' type="nav">nav</pomo-button>
         <pomo-button id='btn3' type="outline">outlined</pomo-button>
     </div>`
+    // jest.mock('../../source/assets/scripts/components/button/button.js');
 
     // we use require here to load the component javascript
-    require("../../source/components/button/button.js")
+    require("../../source/assets/scripts/components/button/button.js")
 
     // find our component elements
     const btn1 = document.getElementById("btn1")
