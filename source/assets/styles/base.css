@@ -3,31 +3,20 @@ html {
 }
 body {
   margin: 0px;
+  color: white;
 }
-main {
-  margin: 1rem;
+a { 
+  text-decoration: none;
 }
-
-.flex-container {
-  /*background-color: ;*/
-  font-size: 30px;
+.backdrop {
+  background: url("../images/backgrounds/bg0.jpg");
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  position: absolute;
+  width: 100vw;
+  z-index: -1;
+  position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  
+  /* filter: brightness(0.85); */
 }
-
-.flex-container > button {
-  min-width: 20%;
-  min-height: 10%;
-}
-
-.flex-container pomo-button::part(button){
-  width: 30rem;
+button {
+  background-color: rgba(51,56, 68, 0.75);
 }

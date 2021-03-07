@@ -1,3 +1,4 @@
+import { areThereUnfinishedTasksFromLastSession } from "./database/task";
 window.addEventListener("DOMContentLoaded", () => {
     // create example button i guess
     let oldTasksLeft = areThereUnfinishedTasksFromLastSession();

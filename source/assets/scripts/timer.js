@@ -1,3 +1,8 @@
+import { formatTime } from "./utils/format-time";
+import { initializeDatabase } from "./database";
+import { getLatestSessionID, getNewSessionID, setCurrentSessionStatus } from "./database/session";
+import { areThereUnfinishedTasksFromLastSession, getAllSessionTasks } from "./database/task";
+import { getAllTasks, storeTask, Task } from "./database/task";
 window.addEventListener("DOMContentLoaded", () => {
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -10,6 +15,20 @@ window.addEventListener("DOMContentLoaded", () => {
     let startTimerButton = document.getElementById("startTimer");
     let currentTaskHTML = document.getElementById("currentTask");
     let taskListHTML = document.getElementById("taskList");
+    let timerProgressCircle = document.getElementById("timer-progress");
+    let distractedButton = document.getElementById("distractedWrapper");
+
+
+    // TODO: move this time variable into the pomo session object class using localstorage
+    let maxPomoTime = 1;
+    let maxBreakTime = 5000;
+    let maxLongBreakTime = 10;
+    let currentTime = maxPomoTime;
+    let mode = "pomo";
+    timerProgressCircle.setDisplayText(formatTime(currentTime));
+    timerProgressCircle.setPercentage(1);
+
+
     let pomosCompleted = 0;                       // # of pomos completed for long break, stats, etc.
 
     let currentTask = null;
@@ -65,11 +84,15 @@ window.addEventListener("DOMContentLoaded", () => {
         let totalPomosForTheSession = getTotalPomosLeft();
         console.log({ totalPomosForTheSession });
         currentTaskHTML.setAttribute("class", "currentTaskWorkTime");
+        timerProgressCircle.setSize("1.5rem");
 
         taskList.setAttribute("class", "taskListWorkTime");
 
         let timerWrapper = document.getElementById("timerWrapper");
         timerWrapper.setAttribute("class", "timerWrapperWorkTime");
+
+        distractedButton.style.display = "block";
+
 
         let completeSessionWrapper = document.getElementById("completeSessionWrapper");
         completeSessionWrapper.setAttribute("class", "completeSessionWrapperWorkTime");
@@ -99,12 +122,11 @@ window.addEventListener("DOMContentLoaded", () => {
             startNewTask();
         });
         function timeChanger() {
+            currentTime -= 1;
             // Extract minutes and seconds from the page
-            let minutes = timerNumber.textContent.split(":")[0].replace(/\s+/g, "");
-            let seconds = timerNumber.textContent.split(":")[1].replace(/\s+/g, "");
 
             // If timer hits 0, toggle to next break or pomo timer
-            if (minutes == "00" && seconds == "00") {
+            if (currentTime == 0) {
                 // console.log("Timer hit 0");
                 isBreak = !isBreak;
                 // Next timer should be break timer
@@ -113,6 +135,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     currentTaskHTML.setAttribute("class", "currentTaskBreakTime");
                     taskListHTML.setAttribute("class", "taskListBreakTime");
                     document.getElementById("timer-status").innerText = "Break Time";
+                    distractedButton.style.display = "none";
 
                     timerWrapper.setAttribute("class", "timerWrapperBreakTime");
                     completeSessionWrapper.setAttribute("class", "completeSessionWrapperBreakTime");
@@ -128,13 +151,17 @@ window.addEventListener("DOMContentLoaded", () => {
                     //increment in display only TODO -> increment in local storage
                     // Long break, currently hardcoded after every 4 pomos
                     if (pomosCompleted % 4 == 0) {
-                        minutes = longBreakMin;
-                        seconds = "10"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                        // minutes = longBreakMin;
+                        // seconds = "10"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                        currentTime = maxLongBreakTime;
+                        mode = "long-break";
                     }
                     // Short break
                     else {
-                        minutes = breakMin;
-                        seconds = "5"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                        // minutes = breakMin;
+                        // seconds = "5"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                        currentTime = maxBreakTime;
+                        mode = "break";
                     }
                 }
                 // Next timer should be a pomo timer
@@ -145,29 +172,25 @@ window.addEventListener("DOMContentLoaded", () => {
 
                     timerWrapper.setAttribute("class", "timerWrapperWorkTime");
                     completeSessionWrapper.setAttribute("class", "completeSessionWrapperWorkTime");
-
-                    minutes = pomoMin;
-                    seconds = "01"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                    currentTime = maxPomoTime;
+                    mode = "pomo";
+                    // minutes = pomoMin;
+                    // seconds = "01"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                     // TODO: Add functionality for moving onto next task, updating pomos used on current task, etc.
                 }
             }
-            // Case for timer not hitting 0
-            else if (seconds == "00") {
-                minutes = (parseInt(minutes) - 1).toString();
-                if (minutes.length == 1) {
-                    minutes = "0" + minutes;
-                }
-                seconds = "59";
-            }
-            // Case for timer not hitting 0
-            else {
-                seconds = (parseInt(seconds) - 1).toString();
-                if (seconds.length == 1) {
-                    seconds = "0" + seconds;
-                }
-            }
             // Push updated time to the page
-            timerNumber.textContent = minutes + ":" + seconds;
+            // timerNumber.textContent = minutes + ":" + seconds;
+            timerProgressCircle.setDisplayText(formatTime(currentTime));
+            if (mode === "pomo") {
+                timerProgressCircle.setPercentage(currentTime / maxPomoTime);
+            }
+            else if (mode === "break") {
+                timerProgressCircle.setPercentage(currentTime / maxBreakTime);
+            }
+            else if (mode === "long-break") {
+                timerProgressCircle.setPercentage(currentTime / maxLongBreakTime);
+            }
         }
 
     };

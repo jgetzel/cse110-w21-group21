@@ -1,5 +1,7 @@
+import { getObject, storeObject } from ".";
+import { getLatestSessionID } from "./session";
 
-class Task {
+export class Task {
     constructor(sessionID, title, description, pomos) {
         this.sessionID = sessionID;
         this.id = -1;
@@ -21,8 +23,8 @@ class Task {
     }
 }
 
-const POMO_TASK_MAP = "pomo_task_map";
-const POMO_TASK_INDEX = "pomo_task_index";
+export const POMO_TASK_MAP = "pomo_task_map";
+export const POMO_TASK_INDEX = "pomo_task_index";
 
 /**
  * Will store a new or updated task into local storage
@@ -32,7 +34,7 @@ const POMO_TASK_INDEX = "pomo_task_index";
  * @param {Task} task
  * @returns {number} - the id of the task
  */
-function storeTask(task) {
+export function storeTask(task) {
     let task_map = getObject(POMO_TASK_MAP);
     if (!task_map[task.id]) {
         // if task map does not have this task, create a new index
@@ -52,7 +54,7 @@ function storeTask(task) {
  * @param {number} id 
  * @returns {Task}
  */
-function getTask(id) {
+export function getTask(id) {
     let task_map = getObject(POMO_TASK_MAP);
     let task_obj = task_map[id];
     let t = new Task();
@@ -65,7 +67,7 @@ function getTask(id) {
  * 
  * @returns {Map<number, Task>} - a map from task id to task
  */
-function getAllTasks() {
+export function getAllTasks() {
     let task_map = getObject(POMO_TASK_MAP);
     let parsed_task_map = {};
     for (let id in task_map) {
@@ -81,7 +83,7 @@ function getAllTasks() {
  * Get all tasks associated with a particular sessionID
  * @param {number} sessionID 
  */
-function getAllSessionTasks(sessionID) {
+export function getAllSessionTasks(sessionID) {
     if (sessionID !== null) {
         let tasks = getAllTasks();
         let allTasks = [];
@@ -101,7 +103,7 @@ function getAllSessionTasks(sessionID) {
  * 
  * @param {number} id 
  */
-function deleteTaskByTaskID(id) {
+export function deleteTaskByTaskID(id) {
     let task_map = getObject(POMO_TASK_MAP);
     delete task_map[id];
     storeObject(POMO_TASK_MAP, task_map);
@@ -112,7 +114,7 @@ function deleteTaskByTaskID(id) {
  * Checks if there are any unfinished tasks from the previous session
  * @returns {boolean} - true if unifinished tasks exist, false otherwise
  */
-function areThereUnfinishedTasksFromLastSession() {
+export function areThereUnfinishedTasksFromLastSession() {
     let oldSessionID = getLatestSessionID();
     let oldSessionTasks = getAllSessionTasks(oldSessionID);
     let oldTasksLeft = false;

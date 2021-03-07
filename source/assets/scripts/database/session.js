@@ -3,9 +3,9 @@
  */
 
 
-const POMO_SESSION_ID = "pomo_session_id";
-const LATEST_POMO_SESSION_STATUS = "latest_pomo_session_status";
-class PomoSession {
+export const POMO_SESSION_ID = "pomo_session_id";
+export const LATEST_POMO_SESSION_STATUS = "latest_pomo_session_status";
+export class PomoSession {
   constructor() {
     this.id = -1;
   }
@@ -15,7 +15,7 @@ class PomoSession {
 }
 
 
-function getNewSessionID() {
+export function getNewSessionID() {
   let prevID = parseInt(localStorage.getItem(POMO_SESSION_ID));
   localStorage.setItem(POMO_SESSION_ID, prevID + 1);
   return prevID;
@@ -25,7 +25,7 @@ function getNewSessionID() {
  * Set the current session's status
  * @param {string} status - can be "complete" or "in-progress"
  */
-function setCurrentSessionStatus(status) {
+export function setCurrentSessionStatus(status) {
   localStorage.setItem(LATEST_POMO_SESSION_STATUS, status);
 }
 
@@ -35,7 +35,7 @@ function setCurrentSessionStatus(status) {
  * 
  * @returns {number | null}
  */
-function getLatestSessionID() {
+export function getLatestSessionID() {
   let status = localStorage.getItem(LATEST_POMO_SESSION_STATUS);
   if (status === "complete") {
     return null;

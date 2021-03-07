@@ -1,3 +1,4 @@
+import { renderEfficiencyWeeklyData, renderEfficiencyData } from "./history-graph";
 window.addEventListener("DOMContentLoaded", () => {
     // TODO: load data from local storage
 

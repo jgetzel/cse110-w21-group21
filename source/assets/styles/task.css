@@ -1,9 +1,6 @@
 .task {
     display: flex;
-    /* justify-content: space-between; */
     background-color: white;
-    border: 1px #333844 solid;
-    font-family: 'Roboto';
     border-radius: 0.25rem;
     width: 25rem;
     height: 5rem;
@@ -19,6 +16,11 @@
 .task > .wrapperCheckMark {
     margin-left: 0rem;
     margin-right: 0rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.task > .wrapperCheckMark:hover {
+    transform: translateY(-4px);
 }
 .task > .wrapperDragAndDrop {
     padding-left: 0rem;
@@ -38,7 +40,7 @@
 }
 .textwrapper > .description {
     color: rgba(51, 56, 68, 0.5); 
-    font-size: 0.5rem;
+    font-size: 1rem;
     padding-left: 0.5rem;
     max-width: 13.5rem;
 }

@@ -4,7 +4,7 @@
  * @param {HTMLCanvasElement} chartelement - the element to render chart data on
  * @param {{complete: number, overtime: number, incomplete: number}} data
  */
-function renderEfficiencyData(chartelement, data) {
+export function renderEfficiencyData(chartelement, data) {
     let ctx = chartelement.getContext("2d");
     let labels = ["Tasks Completed on Time", "Tasks Completed over Time", "Tasks Incomplete"];
     let colors = ["#22DD9A", "#F9C644", "#FA7F7F"];
@@ -40,7 +40,7 @@ function renderEfficiencyData(chartelement, data) {
  * @param {{complete: number[], overtime: number[], incomplete: number[]}} weeklyData
  * @param {string[]} dates
  */
-function renderEfficiencyWeeklyData(chartelement, weeklyData, dates) {
+export function renderEfficiencyWeeklyData(chartelement, weeklyData, dates) {
     let ctx = chartelement.getContext("2d");
     let labels = ["Tasks Completed on Time", "Tasks Completed over Time", "Tasks Incomplete"];
     let colors = ["#22DD9A", "#F9C644", "#FA7F7F"];
