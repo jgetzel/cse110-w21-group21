@@ -1,7 +1,7 @@
 import { formatTime } from "./utils/format-time";
 import { initializeDatabase } from "./database";
 import { getLatestSessionID, getNewSessionID, setCurrentSessionStatus } from "./database/session";
-import { areThereUnfinishedTasksFromLastSession, getAllSessionTasks } from "./database/task";
+import { areThereUnfinishedTasksFromLastSession, getAllSessionTasks, getCurrentTask } from "./database/task";
 import { getAllTasks, storeTask, Task } from "./database/task";
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -65,7 +65,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     }
     let allInProgressTasks = allTasks.filter((task) => !task.completed);
-    currentTask = allInProgressTasks[0];
+    currentTask = getCurrentTask();
 
     function renderCurrentSetOfTasks() {
         allInProgressTasks = allInProgressTasks.filter((task) => task.completed);
@@ -121,6 +121,7 @@ window.addEventListener("DOMContentLoaded", () => {
             removeCompletedTasks();
             startNewTask();
         });
+        currentTask = getCurrentTask();
         currentTaskFirstChild.task = currentTask;
         console.log(currentTaskFirstChild)
         function timeChanger() {
@@ -210,8 +211,8 @@ window.addEventListener("DOMContentLoaded", () => {
     */
     function renderTaskIntoTaskList(task) {
         // console.log(task);
-        const currentTask = `<pomo-task description ="${task.description}" pomosUsed="${task.pomosUsed}", pomosRequired ="${task.pomosRequired}">${task.title}</pomo-task>`;
-        taskList.insertAdjacentHTML("beforeend", currentTask);
+        const currentTaskElement = `<pomo-task description ="${task.description}" pomosUsed="${task.pomosUsed}", pomosRequired ="${task.pomosRequired}">${task.title}</pomo-task>`;
+        taskList.insertAdjacentHTML("beforeend", currentTaskElement);
         taskList.childNodes[taskList.childNodes.length - 1].task = task;
     }
 

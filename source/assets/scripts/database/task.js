@@ -125,3 +125,17 @@ export function areThereUnfinishedTasksFromLastSession() {
     }
     return false;
 }
+
+
+/**
+ * @returns the current task for the current session. Otherwise returns null
+ */
+export function getCurrentTask() {
+    let sessionID = getLatestSessionID();
+    const tasks = getAllSessionTasks(sessionID);
+    let allInProgressTasks = tasks.filter((task) => !task.completed);
+    if (allInProgressTasks.length > 0) {
+        return allInProgressTasks[0];
+    }
+    return null;
+}
