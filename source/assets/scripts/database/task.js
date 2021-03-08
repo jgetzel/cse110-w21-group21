@@ -1,5 +1,5 @@
 import { getObject, storeObject } from ".";
-import { getLatestSessionID } from "./session";
+import { getLatestSessionID, getPomoSession } from "./session";
 
 export class Task {
     constructor(sessionID, title, description, pomosRequired) {
@@ -116,14 +116,13 @@ export function deleteTaskByTaskID(id) {
  */
 export function areThereUnfinishedTasksFromLastSession() {
     let oldSessionID = getLatestSessionID();
-    let oldSessionTasks = getAllSessionTasks(oldSessionID);
-    let oldTasksLeft = false;
-    for (let task of oldSessionTasks) {
-        if (!task.completed) {
-            return true;
-        }
+    if (oldSessionID === null) return false;
+    let session = getPomoSession(oldSessionID);
+    if (session === null) return false;
+    if (session.currentTask() === null) {
+        return false;
     }
-    return false;
+    return true;
 }
 
 
