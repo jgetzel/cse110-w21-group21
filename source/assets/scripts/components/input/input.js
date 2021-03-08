@@ -80,7 +80,8 @@ class InputField extends HTMLElement {
     */
     limitCharCount(e) {
         this.userTyped = this.textContent;
-        if(this.textContent.length >= this.max) {
+        //if the user hasn't highlighted any text and we are at max length
+        if(window.getSelection().toString().length == 0 && this.textContent.length >= this.max) {
             this.setAttribute("class", "pomo-input max");
             e.preventDefault();
             return false;
@@ -98,7 +99,8 @@ class InputField extends HTMLElement {
     */
     numericInputOnly(event) {
         this.userTyped = this.textContent;
-        if(this.textContent.length >= this.max) {
+        //if the user hasn't highlighted any text and we are at max length
+        if(window.getSelection().toString().length == 0 && this.textContent.length >= this.max) {
             this.setAttribute("class", "pomo-input max");
             event.preventDefault();
             return false;

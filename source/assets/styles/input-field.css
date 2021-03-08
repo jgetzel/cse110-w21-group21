@@ -11,7 +11,7 @@
     padding: 0rem 0rem 0.3rem 0rem;
     color: rgba(51, 56, 68, 0.75);
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .pomo-input.invalid {
