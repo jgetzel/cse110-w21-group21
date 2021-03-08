@@ -71,16 +71,7 @@ class InputField extends HTMLElement {
             }
         });
     }
-
-    /**
-     * Returns the user input in the field
-     * @function
-     * @returns {String} user input
-     */
-    getInput() {
-        return this.userTyped;
-    }
-
+    
     /** 
      * Checks input field if it's exceeded the maximum character limit on an event
      * @function
