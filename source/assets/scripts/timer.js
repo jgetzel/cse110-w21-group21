@@ -107,7 +107,7 @@ window.addEventListener("DOMContentLoaded", () => {
             removeCompletedTasks();
             startNewTask();
         });
-        console.log(currentPomoSession, "?")
+        console.log(currentPomoSession, "?");
         let currentTask = currentPomoSession.currentTask();
         currentTaskFirstChild.task = currentTask;
         function timeChanger() {
@@ -240,7 +240,6 @@ window.addEventListener("DOMContentLoaded", () => {
         let completedIds = [];
         for (let node of currentTaskHTML.childNodes) {
             if (node.completed) {
-                node.task.completed = true;
                 completedIds.push(node.task.id);
                 currentTaskHTML.removeChild(node);
             }
@@ -248,7 +247,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
         for (let node of taskListHTML.childNodes) {
             if (node.completed) {
-                node.task.completed = true;
                 completedIds.push(node.task.id);
                 taskListHTML.removeChild(node);
             }
@@ -256,7 +254,6 @@ window.addEventListener("DOMContentLoaded", () => {
         completedIds.forEach((id) => {
             currentPomoSession.completeTask(id);
         });
-        console.log(currentPomoSession);
         storePomoSession(currentPomoSession);
 
     }

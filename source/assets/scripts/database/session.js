@@ -101,7 +101,7 @@ export class PomoSession {
   serializeIntoObj() {
     return {
       id: this.id, allTasks: this.allTasks.map((task) => task.serializeIntoObj()),
-    }
+    };
   }
 }
 
@@ -114,7 +114,7 @@ export function getPomoSession(id) {
   const allSessions = getObject(POMO_SESSION_MAP);
   let p = new PomoSession();
   if (!allSessions[id]) return null;
-  return p.parseSessionFromObj(allSessions[id])
+  return p.parseSessionFromObj(allSessions[id]);
 }
 
 export function storePomoSession(session) {
