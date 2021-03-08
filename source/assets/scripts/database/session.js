@@ -2,7 +2,7 @@
  * This file is related to finding pomo sessions
  */
 import { getObject, storeObject } from "./index";
-import { getAllSessionTasks, storeTask, Task } from "./task";
+import { storeTask, Task } from "./task";
 
 
 export const POMO_SESSION_ID = "pomo_session_id";
@@ -12,7 +12,7 @@ export class PomoSession {
   constructor(id) {
     this.id = id;
     /** @type {Task[]} */
-    this.allTasks = getAllSessionTasks(this.id);
+    this.allTasks = [];
   }
   /**
    * 

@@ -1,8 +1,8 @@
 import { formatTime } from "./utils/format-time";
 import { initializeDatabase } from "./database";
 import { getLatestSessionID, getNewSessionID, getPomoSession, PomoSession, setCurrentSessionStatus, storePomoSession } from "./database/session";
-import { areThereUnfinishedTasksFromLastSession, getAllSessionTasks, getCurrentTask, deleteTaskByTaskID } from "./database/task";
-import { getAllTasks, Task } from "./database/task";
+import { areThereUnfinishedTasksFromLastSession} from "./database/task";
+import { Task } from "./database/task";
 window.addEventListener("DOMContentLoaded", () => {
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -52,15 +52,9 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     else if (loadSaved == "false") {
         // note, if you refresh for now, you will lose your session's changes...
-        let oldSessionID = getLatestSessionID();
         let sessionID = getNewSessionID();
         setCurrentSessionStatus("in-progress");
 
-        let oldSessionTasks = getAllSessionTasks(oldSessionID);
-        // remove all old session tasks from database that have not been completed (we are starting a new session)
-        oldSessionTasks.forEach((task) => {
-            deleteTaskByTaskID(task.id);
-        });
         currentPomoSession = new PomoSession(sessionID);
         // save our new pomo session
         storePomoSession(currentPomoSession);

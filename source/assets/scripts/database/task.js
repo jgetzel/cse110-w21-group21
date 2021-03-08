@@ -80,25 +80,6 @@ export function getAllTasks() {
 }
 
 /**
- * Get all tasks associated with a particular sessionID
- * @param {number} sessionID 
- */
-export function getAllSessionTasks(sessionID) {
-    if (sessionID !== null) {
-        let tasks = getAllTasks();
-        let allTasks = [];
-        Object.values(tasks).forEach((task) => {
-            if (task.sessionID === sessionID) {
-                allTasks.push(task);
-            }
-        });
-        return allTasks;
-    } else {
-        return [];
-    }
-}
-
-/**
  * Delete a specific task from database by the unique task ID
  * 
  * @param {number} id 
@@ -123,18 +104,4 @@ export function areThereUnfinishedTasksFromLastSession() {
         return false;
     }
     return true;
-}
-
-
-/**
- * @returns the current task for the current session. Otherwise returns null
- */
-export function getCurrentTask() {
-    let sessionID = getLatestSessionID();
-    const tasks = getAllSessionTasks(sessionID);
-    let allInProgressTasks = tasks.filter((task) => !task.completed);
-    if (allInProgressTasks.length > 0) {
-        return allInProgressTasks[0];
-    }
-    return null;
 }
