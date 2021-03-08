@@ -9,6 +9,10 @@ export const POMO_SESSION_ID = "pomo_session_id";
 export const LATEST_POMO_SESSION_STATUS = "latest_pomo_session_status";
 export const POMO_SESSION_MAP = "pomo_session_map";
 export class PomoSession {
+  /**
+   * 
+   * @param {number} id 
+   */
   constructor(id) {
     this.id = id;
     /** @type {Task[]} */
