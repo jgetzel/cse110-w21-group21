@@ -1,5 +1,5 @@
 import { getObject, storeObject } from ".";
-import { getLatestSessionID } from "./session";
+import { getLatestSessionID, getPomoSession } from "./session";
 
 export class Task {
     constructor(sessionID, title, description, pomosRequired) {
@@ -80,25 +80,6 @@ export function getAllTasks() {
 }
 
 /**
- * Get all tasks associated with a particular sessionID
- * @param {number} sessionID 
- */
-export function getAllSessionTasks(sessionID) {
-    if (sessionID !== null) {
-        let tasks = getAllTasks();
-        let allTasks = [];
-        Object.values(tasks).forEach((task) => {
-            if (task.sessionID === sessionID) {
-                allTasks.push(task);
-            }
-        });
-        return allTasks;
-    } else {
-        return [];
-    }
-}
-
-/**
  * Delete a specific task from database by the unique task ID
  * 
  * @param {number} id 
@@ -116,26 +97,11 @@ export function deleteTaskByTaskID(id) {
  */
 export function areThereUnfinishedTasksFromLastSession() {
     let oldSessionID = getLatestSessionID();
-    let oldSessionTasks = getAllSessionTasks(oldSessionID);
-    let oldTasksLeft = false;
-    for (let task of oldSessionTasks) {
-        if (!task.completed) {
-            return true;
-        }
+    if (oldSessionID === null) return false;
+    let session = getPomoSession(oldSessionID);
+    if (session === null) return false;
+    if (session.currentTask() === null) {
+        return false;
     }
-    return false;
-}
-
-
-/**
- * @returns the current task for the current session. Otherwise returns null
- */
-export function getCurrentTask() {
-    let sessionID = getLatestSessionID();
-    const tasks = getAllSessionTasks(sessionID);
-    let allInProgressTasks = tasks.filter((task) => !task.completed);
-    if (allInProgressTasks.length > 0) {
-        return allInProgressTasks[0];
-    }
-    return null;
+    return true;
 }

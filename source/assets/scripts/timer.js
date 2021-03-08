@@ -1,8 +1,8 @@
 import { formatTime } from "./utils/format-time";
 import { initializeDatabase } from "./database";
-import { getLatestSessionID, getNewSessionID, setCurrentSessionStatus } from "./database/session";
-import { areThereUnfinishedTasksFromLastSession, getAllSessionTasks, getCurrentTask } from "./database/task";
-import { getAllTasks, storeTask, Task } from "./database/task";
+import { getLatestSessionID, getNewSessionID, getPomoSession, PomoSession, setCurrentSessionStatus, storePomoSession } from "./database/session";
+import { areThereUnfinishedTasksFromLastSession} from "./database/task";
+import { Task } from "./database/task";
 window.addEventListener("DOMContentLoaded", () => {
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -11,7 +11,6 @@ window.addEventListener("DOMContentLoaded", () => {
     let addTaskButton = document.getElementById("taskCreator");
     let modal = document.getElementById("addTaskModal");
     let taskList = document.getElementById("taskList");
-    let timer = document.getElementById("timerNumber");
     let startTimerButton = document.getElementById("startTimer");
     let currentTaskHTML = document.getElementById("currentTask");
     let taskListHTML = document.getElementById("taskList");
@@ -31,13 +30,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     let pomosUsed = 0;                       // # of pomos completed for long break, stats, etc.
 
-    let currentTask = null;
-
     initializeDatabase();
-    let allTasks = [];
     if (loadSaved == "false") {
         let oldTasksLeft = areThereUnfinishedTasksFromLastSession();
-        allTasks = loadTasks();
         if (oldTasksLeft) {
             let confirmed = confirm("By starting a new timer, you will lose any unfinished tasks from your previous session");
             if (!confirmed) {
@@ -47,31 +42,26 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Use leftover tasks
+    /** @type {PomoSession} */
+    let currentPomoSession = null;
+
+    // Use leftover tasks and render them
     if (loadSaved == "true") {
-        allTasks = loadTasks();
+        let sessionID = getLatestSessionID();
+        currentPomoSession = getPomoSession(sessionID);
     }
     else if (loadSaved == "false") {
         // note, if you refresh for now, you will lose your session's changes...
-        let oldSessionID = getLatestSessionID();
         let sessionID = getNewSessionID();
         setCurrentSessionStatus("in-progress");
 
-        let oldSessionTasks = getAllSessionTasks(oldSessionID);
-        // remove all old session tasks from database that have not been completed (we are starting a new session)
-        oldSessionTasks.forEach((task) => {
-            deleteTaskByTaskID(task.id);
-        });
+        currentPomoSession = new PomoSession(sessionID);
+        // save our new pomo session
+        storePomoSession(currentPomoSession);
 
     }
-    let allInProgressTasks = allTasks.filter((task) => !task.completed);
-    currentTask = getCurrentTask();
-
-    function renderCurrentSetOfTasks() {
-        allInProgressTasks = allInProgressTasks.filter((task) => task.completed);
-    }
-
-
+    console.log({currentPomoSession});
+    loadTasks();
 
     /**
      * Implements the onClick functionality of the Start Timer button, which starts the pomo timer and cycles
@@ -81,7 +71,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // Update CSS to change to the ongoing timer frame without refreshing the page.
 
 
-        let totalPomosForTheSession = getTotalPomosLeft();
+        let totalPomosForTheSession = currentPomoSession.getPomosLeftInSession();
         console.log({ totalPomosForTheSession });
         currentTaskHTML.setAttribute("class", "currentTaskWorkTime");
         timerProgressCircle.setSize("1.5rem");
@@ -102,10 +92,6 @@ window.addEventListener("DOMContentLoaded", () => {
         let timerNumber = document.getElementById("timerNumber");
 
         document.getElementById("currentTaskWrapper").style.display = "block";
-        // **Set to 0 for testing**
-        let pomoMin = "00";
-        let breakMin = "00";
-        let longBreakMin = "00";
 
         let isBreak = false;
         // TODO: timerLoop no longer used since we use timeChanger() for break also, need to clearInterval when final pomo is completed
@@ -121,9 +107,9 @@ window.addEventListener("DOMContentLoaded", () => {
             removeCompletedTasks();
             startNewTask();
         });
-        currentTask = getCurrentTask();
+        console.log(currentPomoSession, "?");
+        let currentTask = currentPomoSession.currentTask();
         currentTaskFirstChild.task = currentTask;
-        console.log(currentTaskFirstChild)
         function timeChanger() {
             currentTime -= 1;
             // Extract minutes and seconds from the page
@@ -149,8 +135,8 @@ window.addEventListener("DOMContentLoaded", () => {
                     let currentTaskFirstChild = currentTaskHTML.childNodes[0];
                     currentTaskFirstChild.incrementPomosUsed();
                     currentTaskFirstChild.task.pomosUsed += 1;
-                    console.log(currentTaskFirstChild.task);
-                    storeTask(currentTaskFirstChild.task);
+
+                    storePomoSession(currentPomoSession);
 
                     currentTaskFirstChild.setAttribute("pomosused", 1 + parseInt(currentTaskFirstChild.getAttribute("pomosused")));
 
@@ -222,23 +208,21 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     function contentsSaved() {
         let taskValues = modal.elements.values;
-        // if ((taskValues.taskName != "Default Text" && taskValues.taskName != "") && (taskValues.pomosRequired != "Default Text" && taskValues.pomosRequired != "")) {
-        //     if (taskValues.description == "Default Text") taskValues.description = "";
-        //     const currentTask = `<pomo-task description = "` + taskValues.description + `" pomosUsed = "0", pomosRequired = "` + taskValues.pomosRequired + `">` + taskValues.taskName + `</pomo-task>`;
-        //     taskList.insertAdjacentHTML('beforeend', currentTask);
-        // }
         let sessionID = getLatestSessionID();
         // console.log(taskValues);
         let newTask = new Task(sessionID, taskValues.taskName, taskValues.description, parseInt(taskValues.pomosRequired));
         renderTaskIntoTaskList(newTask);
-        storeTask(newTask);
-        allTasks.push(newTask);
+        currentPomoSession.addTask(newTask);
+        storePomoSession(currentPomoSession);
     }
 
 
+    /**
+     * Shows a new task onto the display
+     */
     function startNewTask() {
         let taskListFirstChild = taskListHTML.childNodes[0];
-        let nextTask = allTasks.shift();
+        let nextTask = currentPomoSession.getNextTask();
         const currentTaskToBeAdded = "<pomo-task description = \"" + nextTask.description + "\" pomosUsed = \"" + nextTask.pomosUsed + "\", pomosRequired = \"" + nextTask.pomosRequired + "\">" + nextTask.title + "</pomo-task>";
         currentTaskHTML.insertAdjacentHTML("beforeend", currentTaskToBeAdded);
         taskListHTML.removeChild(taskListHTML.childNodes[0]);
@@ -249,45 +233,39 @@ window.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    /**
+     * remove completed tasks from display and update the current pomo session
+     */
     function removeCompletedTasks() {
+        let completedIds = [];
         for (let node of currentTaskHTML.childNodes) {
             if (node.completed) {
-                node.task.completed = true;
-                storeTask(node.task);
+                completedIds.push(node.task.id);
                 currentTaskHTML.removeChild(node);
             }
         }
 
         for (let node of taskListHTML.childNodes) {
             if (node.completed) {
-                node.task.completed = true;
-                storeTask(node.task);
+                completedIds.push(node.task.id);
                 taskListHTML.removeChild(node);
             }
         }
+        completedIds.forEach((id) => {
+            currentPomoSession.completeTask(id);
+        });
+        storePomoSession(currentPomoSession);
 
     }
-
-    function getTotalPomosLeft() {
-        let total = 0;
-        for (let node of currentTaskHTML.childNodes) {
-            total += parseInt(node.task.pomosRequired) - parseInt(node.task.pomosUsed);
-        }
-        for (let node of taskListHTML.childNodes) {
-            total += parseInt(node.task.pomosRequired) - parseInt(node.task.pomosUsed);
-        }
-        return total;
-    }
-
 
     /**
-     * Load all tasks from storage for the current session and return them
+     * Load all tasks from storage for the current session and render them
      */
     function loadTasks() {
         let id = getLatestSessionID();
         let allTasks = [];
         if (id !== null) {
-            let tasks = getAllTasks();
+            let tasks = currentPomoSession.allTasks;
             Object.values(tasks).forEach((task) => {
                 console.log(task);
                 if (task.sessionID === id && !task.completed) {
@@ -303,6 +281,5 @@ window.addEventListener("DOMContentLoaded", () => {
                 removeCompletedTasks();
             });
         }
-        return allTasks;
     }
 });
