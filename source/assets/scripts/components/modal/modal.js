@@ -16,14 +16,9 @@ export default class ModalComponent extends HTMLElement {
             <div class="modal">
                 <button id="modal-close" class="close-btn">x</button>
                 <p class="title">Add New Task</p>
-                <label>Title</label>
-                <div>
-                    <pomo-input placeholder="1" id="task-name"></pomo-input>
-                </div>
-                <label>Pomos Required</label>
-                <div><pomo-input id="pomos-required"></pomo-input></div>
-                <label>Description</label>
-                <div><pomo-input id="description"></pomo-input></div>
+                <div><pomo-input required="true" id="task-name">Enter a Task Name</pomo-input></div>
+                <div><pomo-input required="true" type="number" max="3" id="pomos-required">Pomos Required</pomo-input></div>
+                <div><pomo-input max ="250" id="description">Description</pomo-input></div>
                 <div class="button-wrapper">
                     <pomo-button id="save-btn">Save</pomo-button>
                 </div>
