@@ -130,7 +130,7 @@ class TaskComponent extends HTMLElement {
    incrementPomosUsed() {
       this.pomosUsed += 1;
       this.elements.pomoCircle.innerText = this.pomosUsed + "/" + this.getAttribute("pomosRequired");
-
+      
    }
 
    //   incrementPomosUsed() {

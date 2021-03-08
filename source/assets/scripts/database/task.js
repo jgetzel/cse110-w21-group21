@@ -2,24 +2,24 @@ import { getObject, storeObject } from ".";
 import { getLatestSessionID } from "./session";
 
 export class Task {
-    constructor(sessionID, title, description, pomos) {
+    constructor(sessionID, title, description, pomosRequired) {
         this.sessionID = sessionID;
         this.id = -1;
         this.title = title;
         this.description = description;
-        this.pomos = pomos;
+        this.pomosRequired = pomosRequired;
         this.completed = false;
-        this.pomosCompleted = 0;
+        this.pomosUsed = 0;
     }
     parseTaskFromObj(task_obj) {
-        let task = new Task(task_obj.sessionID, task_obj.title, task_obj.description, task_obj.pomos);
+        let task = new Task(task_obj.sessionID, task_obj.title, task_obj.description, task_obj.pomosRequired);
         task.completed = task_obj.completed;
         task.id = task_obj.id;
-        task.pomosCompleted = task_obj.pomosCompleted;
+        task.pomosUsed = task_obj.pomosUsed;
         return task;
     }
     serializeIntoObj() {
-        return { title: this.title, description: this.description, pomos: this.pomos, completed: this.completed, pomosCompleted: this.pomosCompleted, id: this.id, sessionID: this.sessionID };
+        return { title: this.title, description: this.description, pomosRequired: this.pomosRequired, completed: this.completed, pomosUsed: this.pomosUsed, id: this.id, sessionID: this.sessionID };
     }
 }
 

@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", () => {
     timerProgressCircle.setPercentage(1);
 
 
-    let pomosCompleted = 0;                       // # of pomos completed for long break, stats, etc.
+    let pomosUsed = 0;                       // # of pomos completed for long break, stats, etc.
 
     let currentTask = null;
 
@@ -64,7 +64,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
     }
-    let allInProgressTasks = allTasks.filter((task) => task.completed);
+    let allInProgressTasks = allTasks.filter((task) => !task.completed);
     currentTask = allInProgressTasks[0];
 
     function renderCurrentSetOfTasks() {
@@ -116,11 +116,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
         let timerLoop = setInterval(timeChanger, 1000);
 
-        let currentTask = currentTaskHTML.childNodes[0];
-        currentTask.setFinishTaskCallback(function () {
+        let currentTaskFirstChild = currentTaskHTML.childNodes[0];
+        currentTaskFirstChild.setFinishTaskCallback(function () {
             removeCompletedTasks();
             startNewTask();
         });
+        currentTaskFirstChild.task = currentTask;
+        console.log(currentTaskFirstChild)
         function timeChanger() {
             currentTime -= 1;
             // Extract minutes and seconds from the page
@@ -141,16 +143,19 @@ window.addEventListener("DOMContentLoaded", () => {
                     completeSessionWrapper.setAttribute("class", "completeSessionWrapperBreakTime");
                     // TODO: Change css, etc to indicate we swapped to break timer
                     //timerWrapper.setAttribute('class', 'timerWrapper');
-                    ++pomosCompleted;
+                    ++pomosUsed;
 
                     let currentTaskFirstChild = currentTaskHTML.childNodes[0];
                     currentTaskFirstChild.incrementPomosUsed();
+                    currentTaskFirstChild.task.pomosUsed += 1;
+                    console.log(currentTaskFirstChild.task);
+                    storeTask(currentTaskFirstChild.task);
 
                     currentTaskFirstChild.setAttribute("pomosused", 1 + parseInt(currentTaskFirstChild.getAttribute("pomosused")));
 
                     //increment in display only TODO -> increment in local storage
                     // Long break, currently hardcoded after every 4 pomos
-                    if (pomosCompleted % 4 == 0) {
+                    if (pomosUsed % 4 == 0) {
                         // minutes = longBreakMin;
                         // seconds = "10"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                         currentTime = maxLongBreakTime;
@@ -205,7 +210,7 @@ window.addEventListener("DOMContentLoaded", () => {
     */
     function renderTaskIntoTaskList(task) {
         // console.log(task);
-        const currentTask = "<pomo-task description = \"" + task.description + "\" pomosUsed = \"0\", pomosRequired = \"" + task.pomos + "\">" + task.title + "</pomo-task>";
+        const currentTask = `<pomo-task description ="${task.description}" pomosUsed="${task.pomosUsed}", pomosRequired ="${task.pomosRequired}">${task.title}</pomo-task>`;
         taskList.insertAdjacentHTML("beforeend", currentTask);
         taskList.childNodes[taskList.childNodes.length - 1].task = task;
     }
@@ -233,7 +238,7 @@ window.addEventListener("DOMContentLoaded", () => {
     function startNewTask() {
         let taskListFirstChild = taskListHTML.childNodes[0];
         let nextTask = allTasks.shift();
-        const currentTaskToBeAdded = "<pomo-task description = \"" + nextTask.description + "\" pomosUsed = \"" + nextTask.pomosCompleted + "\", pomosRequired = \"" + nextTask.pomos + "\">" + nextTask.title + "</pomo-task>";
+        const currentTaskToBeAdded = "<pomo-task description = \"" + nextTask.description + "\" pomosUsed = \"" + nextTask.pomosUsed + "\", pomosRequired = \"" + nextTask.pomosRequired + "\">" + nextTask.title + "</pomo-task>";
         currentTaskHTML.insertAdjacentHTML("beforeend", currentTaskToBeAdded);
         taskListHTML.removeChild(taskListHTML.childNodes[0]);
         currentTaskHTML.childNodes[0].setFinishTaskCallback(() => {
@@ -265,10 +270,10 @@ window.addEventListener("DOMContentLoaded", () => {
     function getTotalPomosLeft() {
         let total = 0;
         for (let node of currentTaskHTML.childNodes) {
-            total += parseInt(node.task.pomos) - parseInt(node.task.pomosCompleted);
+            total += parseInt(node.task.pomosRequired) - parseInt(node.task.pomosUsed);
         }
         for (let node of taskListHTML.childNodes) {
-            total += parseInt(node.task.pomos) - parseInt(node.task.pomosCompleted);
+            total += parseInt(node.task.pomosRequired) - parseInt(node.task.pomosUsed);
         }
         return total;
     }
