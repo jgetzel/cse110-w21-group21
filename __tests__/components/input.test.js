@@ -4,7 +4,8 @@ const fs = require('fs');
 test('test main.js', () => {
     // we create a fake testing document here:
     document.body.innerHTML = `<div>
-        <pomo-input id="input" required="true">Testing</pomo-input>
+        <pomo-input id="input" required="true" max="123">Testing</pomo-input>
+        <pomo-input id="input2" max="789">blah</pomo-input>
     </div>`;
 
     // we use require here to load the component javascript
@@ -12,22 +13,20 @@ test('test main.js', () => {
 
     // find our component element
     const input = document.getElementById("input");
+    const input2 = document.getElementById("input2");
 
-    // test that when we make the component there is nothing for user typed
-    expect(input.getInput()).toBe("");
+    expect(input.elements.wrapper.userTyped).toBe(undefined);
+    expect(input2.elements.wrapper.userTyped).toBe(undefined);
 
-    // verify the correct placeholder is there
+    // verify the correct text placeholder is shown
     expect(input.elements.wrapper.textContent).toBe("Testing*");
+    expect(input2.elements.wrapper.textContent).toBe("blah");
 
-    input.elements.wrapper.focus();
-    //simulate the user typing
-    var userInput = "User is Typing".split("");
-    for (let i = 0; i < userInput.length; i++) {
-        const event = new KeyboardEvent('keypress', { 'keyCode': userInput[i].charCodeAt(0) });
-        document.dispatchEvent(event);
-    }
+    // verify the correct placeholder is saved
+    expect(input.elements.wrapper.placeholder).toBe("Testing*");
+    expect(input2.elements.wrapper.placeholder).toBe("blah");
 
-    //test if the user types something, it shows up
-    // expect(input.elements.wrapper.textContent).toBe("User is Typing");
-    // expect(input.getInput()).toBe("User is Typing");
+    // verify the correct max char is being set
+    expect(input.elements.wrapper.max).toBe(123);
+    expect(input2.elements.wrapper.max).toBe(789);
 });
