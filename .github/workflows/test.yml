@@ -7,7 +7,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install modules
-    - name: Run Jest and Coverage
-      env: # Or as an environment variable
-        super_secret: ${{ secrets.CODE_COV }}
-      run: npm run coverage
+      run: npm i
+    - name: Test and upload coverage report
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODE_COV }}
+      run: npm run test
+      run: bash <(curl -s https://codecov.io/bash)
