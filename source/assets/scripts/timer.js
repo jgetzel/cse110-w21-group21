@@ -196,10 +196,13 @@ window.addEventListener("DOMContentLoaded", () => {
     * @param {Task} task 
     */
     function renderTaskIntoTaskList(task) {
-        // console.log(task);
         const currentTaskElement = `<pomo-task description ="${task.description}" pomosUsed="${task.pomosUsed}", pomosRequired ="${task.pomosRequired}">${task.title}</pomo-task>`;
         taskList.insertAdjacentHTML("beforeend", currentTaskElement);
-        taskList.childNodes[taskList.childNodes.length - 1].task = task;
+        const element = taskList.childNodes[taskList.childNodes.length - 1];
+        element.setFinishTaskCallback(() => {
+            removeCompletedTasks();
+        });
+        element.task = task;
     }
 
     /**
@@ -223,7 +226,12 @@ window.addEventListener("DOMContentLoaded", () => {
     function startNewTask() {
         let taskListFirstChild = taskListHTML.childNodes[0];
         let nextTask = currentPomoSession.getNextTask();
-        const currentTaskToBeAdded = "<pomo-task description = \"" + nextTask.description + "\" pomosUsed = \"" + nextTask.pomosUsed + "\", pomosRequired = \"" + nextTask.pomosRequired + "\">" + nextTask.title + "</pomo-task>";
+        if (nextTask === null) {
+            // complete the session
+            window.location ="./history.html";
+            return;
+        }
+        const currentTaskToBeAdded = `<pomo-task description="${nextTask.description}" pomosUsed="${nextTask.pomosUsed}" pomosRequired=${nextTask.pomosRequired}>${nextTask.title}</pomo-task>`;
         currentTaskHTML.insertAdjacentHTML("beforeend", currentTaskToBeAdded);
         taskListHTML.removeChild(taskListHTML.childNodes[0]);
         currentTaskHTML.childNodes[0].setFinishTaskCallback(() => {
@@ -241,14 +249,22 @@ window.addEventListener("DOMContentLoaded", () => {
         for (let node of currentTaskHTML.childNodes) {
             if (node.completed) {
                 completedIds.push(node.task.id);
-                currentTaskHTML.removeChild(node);
+                node.hide();
+                setTimeout(() => {
+                    currentTaskHTML.removeChild(node);
+                }, 200);
+                
             }
         }
 
         for (let node of taskListHTML.childNodes) {
             if (node.completed) {
                 completedIds.push(node.task.id);
-                taskListHTML.removeChild(node);
+                node.hide();
+                setTimeout(() => {
+                    taskListHTML.removeChild(node);
+                }, 200);
+                
             }
         }
         completedIds.forEach((id) => {

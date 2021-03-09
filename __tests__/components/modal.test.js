@@ -20,11 +20,16 @@ test('test main.js', () => {
 
     // test that clicking close button closes the modal
     modal.elements.closeBtn.click();
-    expect(modal.elements.wrapper.style.display).toEqual("none");
+    // note we use timeout since there is a transition in the css
+    setTimeout(() => {
+        expect(modal.elements.wrapper.style.display).toEqual("none");
+    }, 500);
 
     // test that clicking save button closes modal
     modal.elements.wrapper.style.display = "block";
     modal.elements.saveBtn.click();
-    expect(modal.elements.wrapper.style.display).toEqual("none");
+    setTimeout(() => {
+        expect(modal.elements.wrapper.style.display).toEqual("none");
+    }, 500);
 
 });

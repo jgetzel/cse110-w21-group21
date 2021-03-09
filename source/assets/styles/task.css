@@ -1,121 +1,123 @@
 .task {
-    display: flex;
-    background-color: white;
-    border-radius: 0.25rem;
-    width: 25rem;
-    height: 5rem;
-    margin-bottom: 1rem;
+  display: flex;
+  background-color: white;
+  border-radius: 0.25rem;
+  width: 25rem;
+  height: 5rem;
+  margin-bottom: 1rem;
+  opacity: 1;
+  transition: opacity 0.2s;
 }
 .task > div {
-    /* border: 1px green solid; */
-    padding-right: 0.5rem;
+  /* border: 1px green solid; */
+  padding-right: 0.5rem;
 }
-.task > .textwrapper{
-   width: 15.5rem;
+.task > .textwrapper {
+  width: 15.5rem;
 }
 .task > .wrapperCheckMark {
-    margin-left: 0rem;
-    margin-right: 0rem;
-    cursor: pointer;
-    transition: transform 0.2s;
+  margin-left: 0rem;
+  margin-right: 0rem;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 .task > .wrapperCheckMark:hover {
-    transform: translateY(-4px);
+  transform: translateY(-4px);
 }
 .task > .wrapperDragAndDrop {
-    padding-left: 0rem;
+  padding-left: 0rem;
 }
 .textwrapper > .title {
-    position: relative;
-    top: 0.01rem;
-    color: #333844;
-    font-size: 1.3rem;
-    padding-left: 0.5rem;
-    font-weight: 500;
-    height: 0.5rem;
-    width: 13.5rem;
-    margin-top: 0.5rem;
-    word-wrap: break-word;
-    padding-bottom: 0rem;
+  position: relative;
+  top: 0.01rem;
+  color: #333844;
+  font-size: 1.3rem;
+  padding-left: 0.5rem;
+  font-weight: 500;
+  height: 0.5rem;
+  width: 13.5rem;
+  margin-top: 0.5rem;
+  word-wrap: break-word;
+  padding-bottom: 0rem;
 }
 .textwrapper > .description {
-    color: rgba(51, 56, 68, 0.5); 
-    font-size: 1rem;
-    padding-left: 0.5rem;
-    max-width: 13.5rem;
+  color: rgba(51, 56, 68, 0.5);
+  font-size: 1rem;
+  padding-left: 0.5rem;
+  max-width: 13.5rem;
 }
 
 .wrapperDragAndDrop > .dragAndDrop {
-    position: relative;
-    top: 1.5rem;
-    cursor: grab;
+  position: relative;
+  top: 1.5rem;
+  cursor: grab;
 }
 .wrapperCheckMark > .completeCheckMark {
-    position: relative;
-    height: 3rem;
-    top: 1rem;
+  position: relative;
+  height: 3rem;
+  top: 1rem;
 }
 .wrapperCheckMark > .incompleteCheckMark {
-    position: relative;
-    height: 3rem;
-    top: 1rem;
+  position: relative;
+  height: 3rem;
+  top: 1rem;
 }
 
 .wrapperCircle > .pomoCircle {
-    position: relative;
-    top: 1.22rem;
-    background-color: #333844;
-    color: white;
-    text-align: center;
-    border-radius: 50%;
-    height: 2.5rem;
-    width: 2.5rem;
-    line-height: 2.5rem;
+  position: relative;
+  top: 1.22rem;
+  background-color: #333844;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  line-height: 2.5rem;
 }
 .wrapperCircle > .incompleteTask {
-    position: relative;
-    top: 1.22rem;
-    background-color:#FA7F7F;
-    color: white;
-    text-align: center;
-    border-radius: 50%;
-    height: 2.5rem;
-    width: 2.5rem;
-    line-height: 2.5rem;
+  position: relative;
+  top: 1.22rem;
+  background-color: #fa7f7f;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  line-height: 2.5rem;
 }
 
 .wrapperCircle > .goodTimingTask {
-    position: relative;
-    top: 1.22rem;
-    background-color:#22DD9A;
-    color: white;
-    text-align: center;
-    border-radius: 50%;
-    height: 2.5rem;
-    width: 2.5rem;
-    line-height: 2.5rem;
+  position: relative;
+  top: 1.22rem;
+  background-color: #22dd9a;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  line-height: 2.5rem;
 }
 
 .wrapperCircle > .badTimingTask {
-    position: relative;
-    top: 1.22rem;
-    background-color:#F9C644;
-    color: white;
-    text-align: center;
-    border-radius: 50%;
-    height: 2.5rem;
-    width: 2.5rem;
-    line-height: 2.5rem;
+  position: relative;
+  top: 1.22rem;
+  background-color: #f9c644;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  line-height: 2.5rem;
 }
 
 .wrapperCircle > .currentTask {
-    position: relative;
-    top: 1.22rem;
-    background-color:#333844;
-    color: white;
-    text-align: center;
-    border-radius: 50%;
-    height: 2.5rem;
-    width: 2.5rem;
-    line-height: 2.5rem;
+  position: relative;
+  top: 1.22rem;
+  background-color: #333844;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  line-height: 2.5rem;
 }
