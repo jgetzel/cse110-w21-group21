@@ -94,6 +94,72 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="POMO_SESSION_MODES"><span class="type-signature">(constant) </span>POMO_SESSION_MODES<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    the different pomo session modes as constants
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -669,7 +735,7 @@ or was ended already, this function returns null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line150">line 150</a>
+        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line182">line 182</a>
     </li></ul></dd>
     
 
@@ -827,7 +893,7 @@ or was ended already, this function returns null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line117">line 117</a>
+        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line149">line 149</a>
     </li></ul></dd>
     
 
@@ -1487,7 +1553,7 @@ or was ended already, this function returns null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line140">line 140</a>
+        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line172">line 172</a>
     </li></ul></dd>
     
 
@@ -1679,6 +1745,112 @@ Has a side effect of adding the id of the new task if it wasnt stored in storage
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="thereIsUnfinishedSession"><span class="type-signature"></span>thereIsUnfinishedSession<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line194">line 194</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - true if there is a unfinished session that was not completed or quitted. false otherwise
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -1694,13 +1866,13 @@ Has a side effect of adding the id of the new task if it wasnt stored in storage
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Header.html">Header</a></li><li><a href="InputField.html">InputField</a></li><li><a href="PomoSession_PomoSession.html">PomoSession</a></li><li><a href="ProgressCircleComponent.html">ProgressCircleComponent</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getPomoSession">getPomoSession</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Header.html">Header</a></li><li><a href="InputField.html">InputField</a></li><li><a href="PomoSession_PomoSession.html">PomoSession</a></li><li><a href="ProgressCircleComponent.html">ProgressCircleComponent</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getPomoSession">getPomoSession</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#POMO_SESSION_MODES">POMO_SESSION_MODES</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li><li><a href="global.html#thereIsUnfinishedSession">thereIsUnfinishedSession</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Mar 09 2021 21:19:39 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Mar 09 2021 21:25:25 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
