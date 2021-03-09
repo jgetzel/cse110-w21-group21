@@ -13,4 +13,4 @@ jobs:
         CODE_COV_TOKEN: ${{ secrets.CODE_COV }}
       run: |
         npm run test
-        bash <(curl -s https://codecov.io/bash)
+        bash <(curl -s https://codecov.io/bash) -f coverage/lcov.info
