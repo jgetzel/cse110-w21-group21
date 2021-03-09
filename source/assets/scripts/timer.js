@@ -1,6 +1,6 @@
 import { formatTime } from "./utils/format-time";
 import { initializeDatabase } from "./database";
-import { getLatestSessionID, getNewSessionID, getPomoSession, PomoSession, setCurrentSessionStatus, storePomoSession } from "./database/session";
+import { getLatestSessionID, getNewSessionID, getPomoSession, PomoSession, POMO_SESSION_MODES, setCurrentSessionStatus, storePomoSession, thereIsUnfinishedSession } from "./database/session";
 import { areThereUnfinishedTasksFromLastSession} from "./database/task";
 import { Task } from "./database/task";
 window.addEventListener("DOMContentLoaded", () => {
@@ -19,16 +19,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     // TODO: move this time variable into the pomo session object class using localstorage
-    let maxPomoTime = 1;
-    let maxBreakTime = 5000;
+    let maxPomoTime = 5;
+    let maxBreakTime = 5;
     let maxLongBreakTime = 10;
-    let currentTime = maxPomoTime;
-    let mode = "pomo";
-    timerProgressCircle.setDisplayText(formatTime(currentTime));
-    timerProgressCircle.setPercentage(1);
 
-
-    let pomosUsed = 0;                       // # of pomos completed for long break, stats, etc.
 
     initializeDatabase();
     if (loadSaved == "false") {
@@ -49,6 +43,11 @@ window.addEventListener("DOMContentLoaded", () => {
     if (loadSaved == "true") {
         let sessionID = getLatestSessionID();
         currentPomoSession = getPomoSession(sessionID);
+        loadTasks();
+        if (thereIsUnfinishedSession()) {
+            initiateTimer();
+        }
+        
     }
     else if (loadSaved == "false") {
         // note, if you refresh for now, you will lose your session's changes...
@@ -56,23 +55,35 @@ window.addEventListener("DOMContentLoaded", () => {
         setCurrentSessionStatus("in-progress");
 
         currentPomoSession = new PomoSession(sessionID);
+        currentPomoSession.time = maxPomoTime;
         // save our new pomo session
         storePomoSession(currentPomoSession);
+        loadTasks();
 
     }
-    console.log({currentPomoSession});
-    loadTasks();
+    timerProgressCircle.setDisplayText(formatTime(currentPomoSession.time));
+    timerProgressCircle.setPercentage(currentPomoSession.time / maxPomoTime);
+    if (currentPomoSession.mode === POMO_SESSION_MODES.BREAK) {
+        renderBreakMode();
+        timerProgressCircle.setPercentage(currentPomoSession.time / maxBreakTime);
+    } else if (currentPomoSession.mode === POMO_SESSION_MODES.LONG_BREAK) {
+        renderBreakMode();
+        timerProgressCircle.setPercentage(currentPomoSession.time / SVGFEColorMatrixElement);
+    }
+    
 
     /**
      * Implements the onClick functionality of the Start Timer button, which starts the pomo timer and cycles
      * pomo and break timers until all pomos are completed.
      */
-    startTimerButton.onclick = function () {
-        // Update CSS to change to the ongoing timer frame without refreshing the page.
+    startTimerButton.onclick = initiateTimer;
 
+    modal.elements.saveBtn.addEventListener("click", contentsSaved);
+    addTaskButton.onclick = function () {
+        modal.displayModal();
+    };
 
-        let totalPomosForTheSession = currentPomoSession.getPomosLeftInSession();
-        console.log({ totalPomosForTheSession });
+    function initiateTimer() {
         currentTaskHTML.setAttribute("class", "currentTaskWorkTime");
         timerProgressCircle.setSize("1.5rem");
 
@@ -88,15 +99,14 @@ window.addEventListener("DOMContentLoaded", () => {
         completeSessionWrapper.setAttribute("class", "completeSessionWrapperWorkTime");
         let taskCreatorWrapper = document.getElementById("taskCreatorWrapper");
         taskCreatorWrapper.style.display = "none";
-        // Sets up local variables for timer functionality. Currently, the pomo work time is hardcoded in the HTML
-        let timerNumber = document.getElementById("timerNumber");
 
         document.getElementById("currentTaskWrapper").style.display = "block";
 
-        let isBreak = false;
-        // TODO: timerLoop no longer used since we use timeChanger() for break also, need to clearInterval when final pomo is completed
-
         startNewTask();
+
+        if (currentPomoSession.mode === POMO_SESSION_MODES.INACTIVE) {
+            currentPomoSession.mode = POMO_SESSION_MODES.ACTIVE;
+        }
 
         //removes first child from task list and adds to current task
 
@@ -107,90 +117,81 @@ window.addEventListener("DOMContentLoaded", () => {
             removeCompletedTasks();
             startNewTask();
         });
-        console.log(currentPomoSession, "?");
         let currentTask = currentPomoSession.currentTask();
         currentTaskFirstChild.task = currentTask;
         function timeChanger() {
-            currentTime -= 1;
-            // Extract minutes and seconds from the page
+            
+            currentPomoSession.time -= 1;
+            if (currentPomoSession.time < 0) {
+                currentPomoSession.time = 0;
+            }
 
             // If timer hits 0, toggle to next break or pomo timer
-            if (currentTime == 0) {
-                // console.log("Timer hit 0");
-                isBreak = !isBreak;
-                // Next timer should be break timer
-                if (isBreak) {
+            if (currentPomoSession.time == 0) {
+                if (currentPomoSession.mode === POMO_SESSION_MODES.ACTIVE) {
                     //break 
-                    currentTaskHTML.setAttribute("class", "currentTaskBreakTime");
-                    taskListHTML.setAttribute("class", "taskListBreakTime");
-                    document.getElementById("timer-status").innerText = "Break Time";
-                    distractedButton.style.display = "none";
-
-                    timerWrapper.setAttribute("class", "timerWrapperBreakTime");
-                    completeSessionWrapper.setAttribute("class", "completeSessionWrapperBreakTime");
-                    // TODO: Change css, etc to indicate we swapped to break timer
-                    //timerWrapper.setAttribute('class', 'timerWrapper');
-                    ++pomosUsed;
+                    renderBreakMode();
 
                     let currentTaskFirstChild = currentTaskHTML.childNodes[0];
                     currentTaskFirstChild.incrementPomosUsed();
                     currentTaskFirstChild.task.pomosUsed += 1;
 
-                    storePomoSession(currentPomoSession);
-
                     currentTaskFirstChild.setAttribute("pomosused", 1 + parseInt(currentTaskFirstChild.getAttribute("pomosused")));
 
                     //increment in display only TODO -> increment in local storage
                     // Long break, currently hardcoded after every 4 pomos
-                    if (pomosUsed % 4 == 0) {
-                        // minutes = longBreakMin;
-                        // seconds = "10"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
-                        currentTime = maxLongBreakTime;
-                        mode = "long-break";
+                    if (currentPomoSession.pomosElapsed % 4 == 0) {
+                        currentPomoSession.time = maxLongBreakTime;
+                        currentPomoSession.mode = POMO_SESSION_MODES.LONG_BREAK;
                     }
                     // Short break
                     else {
-                        // minutes = breakMin;
-                        // seconds = "5"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
-                        currentTime = maxBreakTime;
-                        mode = "break";
+                        currentPomoSession.time = maxBreakTime;
+                        currentPomoSession.mode = POMO_SESSION_MODES.BREAK;
                     }
                 }
                 // Next timer should be a pomo timer
                 else {
-                    document.getElementById("timer-status").innerText = "Pomo Time";
-                    currentTaskHTML.setAttribute("class", "currentTaskWorkTime");
-                    taskListHTML.setAttribute("class", "taskListWorkTime");
-
-                    timerWrapper.setAttribute("class", "timerWrapperWorkTime");
-                    completeSessionWrapper.setAttribute("class", "completeSessionWrapperWorkTime");
-                    currentTime = maxPomoTime;
-                    mode = "pomo";
-                    // minutes = pomoMin;
-                    // seconds = "01"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                    renderActiveMode();
+                    currentPomoSession.time = maxPomoTime;
+                    currentPomoSession.mode = POMO_SESSION_MODES.ACTIVE;
                     // TODO: Add functionality for moving onto next task, updating pomos used on current task, etc.
                 }
             }
             // Push updated time to the page
-            // timerNumber.textContent = minutes + ":" + seconds;
-            timerProgressCircle.setDisplayText(formatTime(currentTime));
-            if (mode === "pomo") {
-                timerProgressCircle.setPercentage(currentTime / maxPomoTime);
+            timerProgressCircle.setDisplayText(formatTime(currentPomoSession.time));
+            if (currentPomoSession.mode === POMO_SESSION_MODES.ACTIVE) {
+                timerProgressCircle.setPercentage(currentPomoSession.time / maxPomoTime);
             }
-            else if (mode === "break") {
-                timerProgressCircle.setPercentage(currentTime / maxBreakTime);
+            else if (currentPomoSession.mode === POMO_SESSION_MODES.BREAK) {
+                timerProgressCircle.setPercentage(currentPomoSession.time / maxBreakTime);
             }
-            else if (mode === "long-break") {
-                timerProgressCircle.setPercentage(currentTime / maxLongBreakTime);
+            else if (currentPomoSession.mode === POMO_SESSION_MODES.LONG_BREAK) {
+                timerProgressCircle.setPercentage(currentPomoSession.time / maxLongBreakTime);
             }
+            storePomoSession(currentPomoSession);
         }
+    }
 
-    };
+    function renderActiveMode() {
+        document.getElementById("timer-status").innerText = "Pomo Time";
+        currentTaskHTML.setAttribute("class", "currentTaskWorkTime");
+        taskListHTML.setAttribute("class", "taskListWorkTime");
 
-    modal.elements.saveBtn.addEventListener("click", contentsSaved);
-    addTaskButton.onclick = function () {
-        modal.displayModal();
-    };
+        timerWrapper.setAttribute("class", "timerWrapperWorkTime");
+        completeSessionWrapper.setAttribute("class", "completeSessionWrapperWorkTime");
+    }
+
+    function renderBreakMode() {
+        currentTaskHTML.setAttribute("class", "currentTaskBreakTime");
+        taskListHTML.setAttribute("class", "taskListBreakTime");
+        document.getElementById("timer-status").innerText = "Break Time";
+        distractedButton.style.display = "none";
+
+        timerWrapper.setAttribute("class", "timerWrapperBreakTime");
+        completeSessionWrapper.setAttribute("class", "completeSessionWrapperBreakTime");
+    }
+
     /**
     * Render a task onto the 
     * @param {Task} task 

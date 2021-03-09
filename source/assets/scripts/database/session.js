@@ -8,20 +8,41 @@ import { storeTask, Task } from "./task";
 export const POMO_SESSION_ID = "pomo_session_id";
 export const LATEST_POMO_SESSION_STATUS = "latest_pomo_session_status";
 export const POMO_SESSION_MAP = "pomo_session_map";
+
+/** the different pomo session modes as constants */
+export const POMO_SESSION_MODES = {
+  /** when the user is in the interface of creating a new timer and has not started their new session yet */
+  INACTIVE: "inactive",
+  /** when running the break timer */
+  BREAK: "break",
+  /** when running the longer break timer */
+  LONG_BREAK: "longbreak",
+  /** when running the active pomo work time */
+  ACTIVE: "active",
+  /** when the user marks this pomo session as complete, regardless of whether tasks are completed or not */
+  COMPLETE: "complete",
+};
+
 export class PomoSession {
   /**
-   * 
-   * @param {number} id 
+   * Create a new Pomo Session object
+   * @param {number} id - id of this session
    */
   constructor(id) {
     this.id = id;
-    /** @type {Task[]} */
+    /** @type {Task[]} - a list of all tasks associated with this session */
     this.allTasks = [];
+    /** @type {string} - the current mode of the pomo session */
+    this.mode = POMO_SESSION_MODES.INACTIVE;
+    /** @type {Number} - the current time of the pomo session */
+    this.time = 0;
+
+    /** @type {Number} - number of pomos elapsed succesfully for this pomo session */
+    this.pomosElapsed = 0;
   }
   /**
    * 
    * @returns {Task | null } - the current task for this pomo session or null if there are no tasks left
-   * 
    */
   currentTask() {
     let allInProgressTasks = this.allTasks.filter((task) => !task.completed);
@@ -65,16 +86,25 @@ export class PomoSession {
     return null;
   }
   /**
-   * Increment the pomos used for a task
+   * Increment the pomos used for a task and increment pomosElapsed
    * @param {number} id 
    */
   incrementTaskPomosUsed(id) {
     for (const task of this.allTasks) {
       if (task.id === id) {
         task.pomosUsed += 1;
+        this.pomosElapsed += 1;
         return;
       }
     }
+  }
+
+  /**
+   * 
+   * @returns true if session is in break mode right now, false otherwise
+   */
+  isBreak() {
+    return this.mode === POMO_SESSION_MODES.LONG_BREAK || this.mode === POMO_SESSION_MODES.BREAK;
   }
 
   /**
@@ -95,6 +125,8 @@ export class PomoSession {
   }
   parseSessionFromObj(session_obj) {
     this.id = session_obj.id;
+    this.mode = session_obj.mode;
+    this.time = session_obj.time;
     this.allTasks = session_obj.allTasks.map((taskObj) => {
       let t = new Task();
       t = t.parseTaskFromObj(taskObj);
@@ -104,7 +136,7 @@ export class PomoSession {
   }
   serializeIntoObj() {
     return {
-      id: this.id, allTasks: this.allTasks.map((task) => task.serializeIntoObj()),
+      id: this.id, allTasks: this.allTasks.map((task) => task.serializeIntoObj()), mode: this.mode, time: this.time
     };
   }
 }
@@ -154,4 +186,17 @@ export function getLatestSessionID() {
   } else {
     return parseInt(localStorage.getItem(POMO_SESSION_ID)) - 1;
   }
+}
+
+/**
+ * @returns {boolean} - true if there is a unfinished session that was not completed or quitted. false otherwise
+ */
+export function thereIsUnfinishedSession() {
+  let sessionID = getLatestSessionID();
+  if (sessionID === null) return false;
+  let currentPomoSession = getPomoSession(sessionID);
+  if (currentPomoSession.mode !== POMO_SESSION_MODES.COMPLETE) {
+    return true;
+  }
+  return false;
 }
