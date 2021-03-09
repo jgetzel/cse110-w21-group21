@@ -1,28 +1,30 @@
+import { getObject, storeObject } from ".";
+import { getLatestSessionID, getPomoSession } from "./session";
 
-class Task {
-    constructor(sessionID, title, description, pomos) {
+export class Task {
+    constructor(sessionID, title, description, pomosRequired) {
         this.sessionID = sessionID;
         this.id = -1;
         this.title = title;
         this.description = description;
-        this.pomos = pomos;
+        this.pomosRequired = pomosRequired;
         this.completed = false;
-        this.pomosCompleted = 0;
+        this.pomosUsed = 0;
     }
     parseTaskFromObj(task_obj) {
-        let task = new Task(task_obj.sessionID, task_obj.title, task_obj.description, task_obj.pomos);
+        let task = new Task(task_obj.sessionID, task_obj.title, task_obj.description, task_obj.pomosRequired);
         task.completed = task_obj.completed;
         task.id = task_obj.id;
-        task.pomosCompleted = task_obj.pomosCompleted;
+        task.pomosUsed = task_obj.pomosUsed;
         return task;
     }
     serializeIntoObj() {
-        return { title: this.title, description: this.description, pomos: this.pomos, completed: this.completed, pomosCompleted: this.pomosCompleted, id: this.id, sessionID: this.sessionID };
+        return { title: this.title, description: this.description, pomosRequired: this.pomosRequired, completed: this.completed, pomosUsed: this.pomosUsed, id: this.id, sessionID: this.sessionID };
     }
 }
 
-const POMO_TASK_MAP = "pomo_task_map";
-const POMO_TASK_INDEX = "pomo_task_index";
+export const POMO_TASK_MAP = "pomo_task_map";
+export const POMO_TASK_INDEX = "pomo_task_index";
 
 /**
  * Will store a new or updated task into local storage
@@ -32,7 +34,7 @@ const POMO_TASK_INDEX = "pomo_task_index";
  * @param {Task} task
  * @returns {number} - the id of the task
  */
-function storeTask(task) {
+export function storeTask(task) {
     let task_map = getObject(POMO_TASK_MAP);
     if (!task_map[task.id]) {
         // if task map does not have this task, create a new index
@@ -52,7 +54,7 @@ function storeTask(task) {
  * @param {number} id 
  * @returns {Task}
  */
-function getTask(id) {
+export function getTask(id) {
     let task_map = getObject(POMO_TASK_MAP);
     let task_obj = task_map[id];
     let t = new Task();
@@ -65,7 +67,7 @@ function getTask(id) {
  * 
  * @returns {Map<number, Task>} - a map from task id to task
  */
-function getAllTasks() {
+export function getAllTasks() {
     let task_map = getObject(POMO_TASK_MAP);
     let parsed_task_map = {};
     for (let id in task_map) {
@@ -78,30 +80,11 @@ function getAllTasks() {
 }
 
 /**
- * Get all tasks associated with a particular sessionID
- * @param {number} sessionID 
- */
-function getAllSessionTasks(sessionID) {
-    if (sessionID !== null) {
-        let tasks = getAllTasks();
-        let allTasks = [];
-        Object.values(tasks).forEach((task) => {
-            if (task.sessionID === sessionID) {
-                allTasks.push(task);
-            }
-        });
-        return allTasks;
-    } else {
-        return [];
-    }
-}
-
-/**
  * Delete a specific task from database by the unique task ID
  * 
  * @param {number} id 
  */
-function deleteTaskByTaskID(id) {
+export function deleteTaskByTaskID(id) {
     let task_map = getObject(POMO_TASK_MAP);
     delete task_map[id];
     storeObject(POMO_TASK_MAP, task_map);
@@ -112,14 +95,13 @@ function deleteTaskByTaskID(id) {
  * Checks if there are any unfinished tasks from the previous session
  * @returns {boolean} - true if unifinished tasks exist, false otherwise
  */
-function areThereUnfinishedTasksFromLastSession() {
+export function areThereUnfinishedTasksFromLastSession() {
     let oldSessionID = getLatestSessionID();
-    let oldSessionTasks = getAllSessionTasks(oldSessionID);
-    let oldTasksLeft = false;
-    for (let task of oldSessionTasks) {
-        if (!task.completed) {
-            return true;
-        }
+    if (oldSessionID === null) return false;
+    let session = getPomoSession(oldSessionID);
+    if (session === null) return false;
+    if (session.currentTask() === null) {
+        return false;
     }
-    return false;
+    return true;
 }

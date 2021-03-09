@@ -98,13 +98,13 @@
 
         
             
-<h4 class="name" id="POMO_SESSION_ID"><span class="type-signature">(constant) </span>POMO_SESSION_ID<span class="type-signature"></span></h4>
+<h4 class="name" id="POMO_SESSION_MODES"><span class="type-signature">(constant) </span>POMO_SESSION_MODES<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    This file is related to finding pomo sessions
+    the different pomo session modes as constants
 </div>
 
 
@@ -142,7 +142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_database_session.js.html">assets/scripts/database/session.js</a>, <a href="assets_scripts_database_session.js.html#line6">line 6</a>
+        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -222,7 +222,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_database_task.js.html">assets/scripts/database/task.js</a>, <a href="assets_scripts_database_task.js.html#line115">line 115</a>
+        <a href="database_task.js.html">database/task.js</a>, <a href="database_task.js.html#line98">line 98</a>
     </li></ul></dd>
     
 
@@ -381,7 +381,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_database_task.js.html">assets/scripts/database/task.js</a>, <a href="assets_scripts_database_task.js.html#line104">line 104</a>
+        <a href="database_task.js.html">database/task.js</a>, <a href="database_task.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -417,7 +417,7 @@
     
 
     
-    <h4 class="name" id="getAllSessionTasks"><span class="type-signature"></span>getAllSessionTasks<span class="signature">(sessionID)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="formatTime"><span class="type-signature"></span>formatTime<span class="signature">(seconds)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -425,7 +425,7 @@
 
 
 <div class="description">
-    Get all tasks associated with a particular sessionID
+    Takes a number of seconds and formats it into a MM:SS format
 </div>
 
 
@@ -461,7 +461,7 @@
 
         <tr>
             
-                <td class="name"><code>sessionID</code></td>
+                <td class="name"><code>seconds</code></td>
             
 
             <td class="type">
@@ -518,7 +518,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_database_task.js.html">assets/scripts/database/task.js</a>, <a href="assets_scripts_database_task.js.html#line84">line 84</a>
+        <a href="utils_format-time.js.html">utils/format-time.js</a>, <a href="utils_format-time.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -543,6 +543,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -606,7 +624,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_database_task.js.html">assets/scripts/database/task.js</a>, <a href="assets_scripts_database_task.js.html#line68">line 68</a>
+        <a href="database_task.js.html">database/task.js</a>, <a href="database_task.js.html#line70">line 70</a>
     </li></ul></dd>
     
 
@@ -717,7 +735,7 @@ or was ended already, this function returns null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_database_session.js.html">assets/scripts/database/session.js</a>, <a href="assets_scripts_database_session.js.html#line38">line 38</a>
+        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line182">line 182</a>
     </li></ul></dd>
     
 
@@ -754,6 +772,168 @@ or was ended already, this function returns null
     <dd>
         
 <span class="param-type">number</span>
+|
+
+<span class="param-type">null</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getPomoSession"><span class="type-signature"></span>getPomoSession<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="PomoSession.html">PomoSession</a>|null}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get a pomo session object
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line149">line 149</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the session for this id or null if there is no session associated with this id
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="PomoSession.html">PomoSession</a></span>
 |
 
 <span class="param-type">null</span>
@@ -875,7 +1055,7 @@ or was ended already, this function returns null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_database_task.js.html">assets/scripts/database/task.js</a>, <a href="assets_scripts_database_task.js.html#line55">line 55</a>
+        <a href="database_task.js.html">database/task.js</a>, <a href="database_task.js.html#line57">line 57</a>
     </li></ul></dd>
     
 
@@ -1053,7 +1233,7 @@ or was ended already, this function returns null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_history-graph.js.html">assets/scripts/history-graph.js</a>, <a href="assets_scripts_history-graph.js.html#line7">line 7</a>
+        <a href="history-graph.js.html">history-graph.js</a>, <a href="history-graph.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
@@ -1236,7 +1416,7 @@ or was ended already, this function returns null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_history-graph.js.html">assets/scripts/history-graph.js</a>, <a href="assets_scripts_history-graph.js.html#line43">line 43</a>
+        <a href="history-graph.js.html">history-graph.js</a>, <a href="history-graph.js.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -1373,7 +1553,7 @@ or was ended already, this function returns null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_database_session.js.html">assets/scripts/database/session.js</a>, <a href="assets_scripts_database_session.js.html#line28">line 28</a>
+        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line172">line 172</a>
     </li></ul></dd>
     
 
@@ -1512,7 +1692,7 @@ Has a side effect of adding the id of the new task if it wasnt stored in storage
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="assets_scripts_database_task.js.html">assets/scripts/database/task.js</a>, <a href="assets_scripts_database_task.js.html#line35">line 35</a>
+        <a href="database_task.js.html">database/task.js</a>, <a href="database_task.js.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -1565,6 +1745,112 @@ Has a side effect of adding the id of the new task if it wasnt stored in storage
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="thereIsUnfinishedSession"><span class="type-signature"></span>thereIsUnfinishedSession<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="database_session.js.html">database/session.js</a>, <a href="database_session.js.html#line194">line 194</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - true if there is a unfinished session that was not completed or quitted. false otherwise
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -1580,13 +1866,13 @@ Has a side effect of adding the id of the new task if it wasnt stored in storage
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Header.html">Header</a></li><li><a href="InputField.html">InputField</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#getAllSessionTasks">getAllSessionTasks</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#POMO_SESSION_ID">POMO_SESSION_ID</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Header.html">Header</a></li><li><a href="InputField.html">InputField</a></li><li><a href="PomoSession_PomoSession.html">PomoSession</a></li><li><a href="ProgressCircleComponent.html">ProgressCircleComponent</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getPomoSession">getPomoSession</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#POMO_SESSION_MODES">POMO_SESSION_MODES</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li><li><a href="global.html#thereIsUnfinishedSession">thereIsUnfinishedSession</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Feb 25 2021 07:18:46 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Mar 09 2021 21:25:25 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

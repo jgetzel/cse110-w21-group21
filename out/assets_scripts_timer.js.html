@@ -38,6 +38,20 @@
     let startTimerButton = document.getElementById("startTimer");
     let currentTaskHTML = document.getElementById("currentTask");
     let taskListHTML = document.getElementById("taskList");
+    let timerProgressCircle = document.getElementById("timer-progress");
+    let distractedButton = document.getElementById("distractedWrapper");
+
+
+    // TODO: move this time variable into the pomo session object class using localstorage
+    let maxPomoTime = 1;
+    let maxBreakTime = 5000;
+    let maxLongBreakTime = 10;
+    let currentTime = maxPomoTime;
+    let mode = "pomo";
+    timerProgressCircle.setDisplayText(formatTime(currentTime));
+    timerProgressCircle.setPercentage(1);
+
+
     let pomosCompleted = 0;                       // # of pomos completed for long break, stats, etc.
 
     let currentTask = null;
@@ -93,11 +107,15 @@
         let totalPomosForTheSession = getTotalPomosLeft();
         console.log({ totalPomosForTheSession });
         currentTaskHTML.setAttribute("class", "currentTaskWorkTime");
+        timerProgressCircle.setSize("1.5rem");
 
         taskList.setAttribute("class", "taskListWorkTime");
 
         let timerWrapper = document.getElementById("timerWrapper");
         timerWrapper.setAttribute("class", "timerWrapperWorkTime");
+
+        distractedButton.style.display = "block";
+
 
         let completeSessionWrapper = document.getElementById("completeSessionWrapper");
         completeSessionWrapper.setAttribute("class", "completeSessionWrapperWorkTime");
@@ -127,12 +145,11 @@
             startNewTask();
         });
         function timeChanger() {
+            currentTime -= 1;
             // Extract minutes and seconds from the page
-            let minutes = timerNumber.textContent.split(":")[0].replace(/\s+/g, "");
-            let seconds = timerNumber.textContent.split(":")[1].replace(/\s+/g, "");
 
             // If timer hits 0, toggle to next break or pomo timer
-            if (minutes == "00" &amp;&amp; seconds == "00") {
+            if (currentTime == 0) {
                 // console.log("Timer hit 0");
                 isBreak = !isBreak;
                 // Next timer should be break timer
@@ -141,6 +158,7 @@
                     currentTaskHTML.setAttribute("class", "currentTaskBreakTime");
                     taskListHTML.setAttribute("class", "taskListBreakTime");
                     document.getElementById("timer-status").innerText = "Break Time";
+                    distractedButton.style.display = "none";
 
                     timerWrapper.setAttribute("class", "timerWrapperBreakTime");
                     completeSessionWrapper.setAttribute("class", "completeSessionWrapperBreakTime");
@@ -156,13 +174,17 @@
                     //increment in display only TODO -> increment in local storage
                     // Long break, currently hardcoded after every 4 pomos
                     if (pomosCompleted % 4 == 0) {
-                        minutes = longBreakMin;
-                        seconds = "10"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                        // minutes = longBreakMin;
+                        // seconds = "10"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                        currentTime = maxLongBreakTime;
+                        mode = "long-break";
                     }
                     // Short break
                     else {
-                        minutes = breakMin;
-                        seconds = "5"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                        // minutes = breakMin;
+                        // seconds = "5"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                        currentTime = maxBreakTime;
+                        mode = "break";
                     }
                 }
                 // Next timer should be a pomo timer
@@ -173,29 +195,25 @@
 
                     timerWrapper.setAttribute("class", "timerWrapperWorkTime");
                     completeSessionWrapper.setAttribute("class", "completeSessionWrapperWorkTime");
-
-                    minutes = pomoMin;
-                    seconds = "01"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
+                    currentTime = maxPomoTime;
+                    mode = "pomo";
+                    // minutes = pomoMin;
+                    // seconds = "01"; // **Set for testing. Remove line for deployment (seconds already 0, no need to set to 0)
                     // TODO: Add functionality for moving onto next task, updating pomos used on current task, etc.
                 }
             }
-            // Case for timer not hitting 0
-            else if (seconds == "00") {
-                minutes = (parseInt(minutes) - 1).toString();
-                if (minutes.length == 1) {
-                    minutes = "0" + minutes;
-                }
-                seconds = "59";
-            }
-            // Case for timer not hitting 0
-            else {
-                seconds = (parseInt(seconds) - 1).toString();
-                if (seconds.length == 1) {
-                    seconds = "0" + seconds;
-                }
-            }
             // Push updated time to the page
-            timerNumber.textContent = minutes + ":" + seconds;
+            // timerNumber.textContent = minutes + ":" + seconds;
+            timerProgressCircle.setDisplayText(formatTime(currentTime));
+            if (mode === "pomo") {
+                timerProgressCircle.setPercentage(currentTime / maxPomoTime);
+            }
+            else if (mode === "break") {
+                timerProgressCircle.setPercentage(currentTime / maxBreakTime);
+            }
+            else if (mode === "long-break") {
+                timerProgressCircle.setPercentage(currentTime / maxLongBreakTime);
+            }
         }
 
     };
@@ -314,13 +332,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Header.html">Header</a></li><li><a href="InputField.html">InputField</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#getAllSessionTasks">getAllSessionTasks</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#POMO_SESSION_ID">POMO_SESSION_ID</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Header.html">Header</a></li><li><a href="InputField.html">InputField</a></li><li><a href="ProgressCircleComponent.html">ProgressCircleComponent</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#getAllSessionTasks">getAllSessionTasks</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#POMO_SESSION_ID">POMO_SESSION_ID</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Feb 25 2021 07:18:46 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Mar 03 2021 18:07:38 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
