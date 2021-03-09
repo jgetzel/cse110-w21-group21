@@ -228,7 +228,7 @@ window.addEventListener("DOMContentLoaded", () => {
         let nextTask = currentPomoSession.getNextTask();
         if (nextTask === null) {
             // complete the session
-            window.location ="./history.html"
+            window.location ="./history.html";
             return;
         }
         const currentTaskToBeAdded = `<pomo-task description="${nextTask.description}" pomosUsed="${nextTask.pomosUsed}" pomosRequired=${nextTask.pomosRequired}>${nextTask.title}</pomo-task>`;
