@@ -226,7 +226,12 @@ window.addEventListener("DOMContentLoaded", () => {
     function startNewTask() {
         let taskListFirstChild = taskListHTML.childNodes[0];
         let nextTask = currentPomoSession.getNextTask();
-        const currentTaskToBeAdded = "<pomo-task description = \"" + nextTask.description + "\" pomosUsed = \"" + nextTask.pomosUsed + "\", pomosRequired = \"" + nextTask.pomosRequired + "\">" + nextTask.title + "</pomo-task>";
+        if (nextTask === null) {
+            // complete the session
+            window.location ="./history.html"
+            return;
+        }
+        const currentTaskToBeAdded = `<pomo-task description="${nextTask.description}" pomosUsed="${nextTask.pomosUsed}" pomosRequired=${nextTask.pomosRequired}>${nextTask.title}</pomo-task>`;
         currentTaskHTML.insertAdjacentHTML("beforeend", currentTaskToBeAdded);
         taskListHTML.removeChild(taskListHTML.childNodes[0]);
         currentTaskHTML.childNodes[0].setFinishTaskCallback(() => {
