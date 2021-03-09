@@ -9,7 +9,4 @@ jobs:
     - name: Install modules
       run: npm i
     - name: Test and upload coverage report
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODE_COV }}
       run: npm run test
-      run: bash <(curl -s https://codecov.io/bash)
