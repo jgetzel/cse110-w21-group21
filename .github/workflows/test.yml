@@ -9,4 +9,6 @@ jobs:
     - name: Install modules
       run: npm i
     - name: Test and upload coverage report
+      env: # Or as an environment variable
+        CODE_COV_TOKEN: ${{ secrets.CODE_COV }}
       run: npm run test
