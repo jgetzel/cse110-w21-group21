@@ -12,3 +12,4 @@ jobs:
       env: # Or as an environment variable
         CODE_COV_TOKEN: ${{ secrets.CODE_COV }}
       run: npm run test
+      run: bash <(curl -s https://codecov.io/bash)
