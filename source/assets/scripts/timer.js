@@ -70,12 +70,8 @@ window.addEventListener("DOMContentLoaded", () => {
         renderBreakMode();
         timerProgressCircle.setPercentage(currentPomoSession.time / SVGFEColorMatrixElement);
     }
-    
 
-    /**
-     * Implements the onClick functionality of the Start Timer button, which starts the pomo timer and cycles
-     * pomo and break timers until all pomos are completed.
-     */
+
     startTimerButton.onclick = initiateTimer;
 
     modal.elements.saveBtn.addEventListener("click", contentsSaved);
@@ -83,6 +79,10 @@ window.addEventListener("DOMContentLoaded", () => {
         modal.displayModal();
     };
 
+    /**
+     * Implements the onClick functionality of the Start Timer button, which starts the pomo timer and cycles
+     * pomo and break timers until all pomos are completed.
+     */
     function initiateTimer() {
         currentTaskHTML.setAttribute("class", "currentTaskWorkTime");
         timerProgressCircle.setSize("1.5rem");
@@ -138,7 +138,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
                     currentTaskFirstChild.setAttribute("pomosused", 1 + parseInt(currentTaskFirstChild.getAttribute("pomosused")));
 
-                    //increment in display only TODO -> increment in local storage
                     // Long break, currently hardcoded after every 4 pomos
                     if (currentPomoSession.pomosElapsed % 4 == 0) {
                         currentPomoSession.time = maxLongBreakTime;
