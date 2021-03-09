@@ -196,10 +196,13 @@ window.addEventListener("DOMContentLoaded", () => {
     * @param {Task} task 
     */
     function renderTaskIntoTaskList(task) {
-        // console.log(task);
         const currentTaskElement = `<pomo-task description ="${task.description}" pomosUsed="${task.pomosUsed}", pomosRequired ="${task.pomosRequired}">${task.title}</pomo-task>`;
         taskList.insertAdjacentHTML("beforeend", currentTaskElement);
-        taskList.childNodes[taskList.childNodes.length - 1].task = task;
+        const element = taskList.childNodes[taskList.childNodes.length - 1];
+        element.setFinishTaskCallback(() => {
+            removeCompletedTasks();
+        });
+        element.task = task;
     }
 
     /**
@@ -241,14 +244,22 @@ window.addEventListener("DOMContentLoaded", () => {
         for (let node of currentTaskHTML.childNodes) {
             if (node.completed) {
                 completedIds.push(node.task.id);
-                currentTaskHTML.removeChild(node);
+                node.hide();
+                setTimeout(() => {
+                    currentTaskHTML.removeChild(node);
+                }, 200);
+                
             }
         }
 
         for (let node of taskListHTML.childNodes) {
             if (node.completed) {
                 completedIds.push(node.task.id);
-                taskListHTML.removeChild(node);
+                node.hide();
+                setTimeout(() => {
+                    taskListHTML.removeChild(node);
+                }, 200);
+                
             }
         }
         completedIds.forEach((id) => {
