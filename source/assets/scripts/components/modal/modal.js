@@ -11,7 +11,7 @@ export default class ModalComponent extends HTMLElement {
     const wrapper = document.createElement("div");
     this.elements.wrapper = wrapper;
     this.elements.wrapper.setAttribute("class", "modal-wrapper");
-    this.elements.wrapper.innerHTML = `<div class="shadow"></div><div class="modal"></div>`;
+    this.elements.wrapper.innerHTML = "<div class=\"shadow\"></div><div class=\"modal\"></div>";
 
     // Add Styles
     const linkElem = document.createElement("link");
@@ -46,7 +46,7 @@ export default class ModalComponent extends HTMLElement {
     child1.forEach(element => htmlString += element.outerHTML);
     
     //copy html elements to shadow dom
-    this.elements.wrapper.innerHTML = `<div class="shadow"></div><div class="modal">${htmlString}</div>`
+    this.elements.wrapper.innerHTML = `<div class="shadow"></div><div class="modal">${htmlString}</div>`;
     
     //remove extra html elements left
     let n = child1.length;

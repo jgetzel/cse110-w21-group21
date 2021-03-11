@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const pomosRequired = taskModal.shadowRoot.getElementById("pomos-required").elements.wrapper;
         taskName.setAttribute("class", "pomo-input placeholder");
         pomosRequired.setAttribute("class", "pomo-input placeholder");
-    }
+    };
 
     taskModal.elements.saveBtn = taskModal.shadowRoot.getElementById("save-btn");
     taskModal.elements.saveBtn.onclick = function () {
