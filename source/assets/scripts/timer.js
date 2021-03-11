@@ -4,7 +4,7 @@ import { getLatestSessionID, getNewSessionID, getPomoSession, PomoSession, POMO_
 import { areThereUnfinishedTasksFromLastSession} from "./database/task";
 import { Task } from "./database/task";
 window.addEventListener("DOMContentLoaded", () => {
-
+    
     const urlParams = new URLSearchParams(window.location.search);
     const loadSaved = urlParams.get("loadSaved");
 
@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     startTimerButton.onclick = initiateTimer;
 
-    //modal.elements.saveBtn.addEventListener("click", contentsSaved);
+    modal.shadowRoot.getElementById("save-btn").addEventListener("click", contentsSaved);
     addTaskButton.onclick = function () {
         modal.displayModal();
     };
