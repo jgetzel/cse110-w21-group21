@@ -124,7 +124,7 @@ class InputField extends HTMLElement {
     }
 
     get value() {
-        return this.elements.wrapper.textContent;
+        return this.userTyped;
     }
 
     connectedCallback() {

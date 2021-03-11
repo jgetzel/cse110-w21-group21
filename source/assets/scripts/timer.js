@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     startTimerButton.onclick = initiateTimer;
 
-    modal.elements.saveBtn.addEventListener("click", contentsSaved);
+    //modal.elements.saveBtn.addEventListener("click", contentsSaved);
     addTaskButton.onclick = function () {
         modal.displayModal();
     };
