@@ -41,9 +41,12 @@ export default class ModalComponent extends HTMLElement {
   connectedCallback() {
     this.type = this.getAttribute("type");
 
-    var child1 = this.childNodes;
-    var htmlString = "";
-    child1.forEach(element => htmlString += element.outerHTML);
+    let child1 = this.childNodes;
+    let htmlString = "";
+    child1.forEach(element => {
+      if(element.nodeType != Node.TEXT_NODE)
+        htmlString += element.outerHTML;
+    });
     
     //copy html elements to shadow dom
     this.elements.wrapper.innerHTML = `<div class="shadow"></div><div class="modal">${htmlString}</div>`;

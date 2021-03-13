@@ -1,3 +1,4 @@
+//TODO: TURN THIS INTO A COMPONENT
 window.addEventListener("DOMContentLoaded", () => {
     let taskModal = document.getElementById("addTaskModal");
     let closeBtn = taskModal.shadowRoot.getElementById("modal-close");
