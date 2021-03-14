@@ -55,7 +55,7 @@ class ModalInput extends HTMLElement {
             const taskName = taskModal.shadowRoot.getElementById("task-name").elements.wrapper;
             const pomosRequired = taskModal.shadowRoot.getElementById("pomos-required").elements.wrapper;
             const description = taskModal.shadowRoot.getElementById("description").elements.wrapper;
-            var returnVal = {
+            const returnVal = {
                 taskName: taskName.userTyped,
                 pomosRequired: pomosRequired.userTyped,
                 description: ""

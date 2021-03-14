@@ -128,7 +128,7 @@ class InputField extends HTMLElement {
     }
 
     connectedCallback() {
-        var maxChar = this.getAttribute("max");
+        let maxChar = this.getAttribute("max");
 
         //set attribute-specified max char
         if (maxChar != null)
