@@ -234,10 +234,11 @@ window.addEventListener("DOMContentLoaded", () => {
         const currentTaskToBeAdded = `<pomo-task description="${nextTask.description}" pomosUsed="${nextTask.pomosUsed}" pomosRequired=${nextTask.pomosRequired}>${nextTask.title}</pomo-task>`;
         currentTaskHTML.insertAdjacentHTML("beforeend", currentTaskToBeAdded);
         taskListHTML.removeChild(taskListHTML.childNodes[0]);
-        currentTaskHTML.childNodes[0].setFinishTaskCallback(() => {
+        currentTaskHTML.childNodes[currentTaskHTML.childNodes.length - 1].setFinishTaskCallback(() => {
             removeCompletedTasks();
+            startNewTask();
         });
-        currentTaskHTML.childNodes[0].task = nextTask;
+        currentTaskHTML.childNodes[currentTaskHTML.childNodes.length - 1].task = nextTask;
 
     }
 
