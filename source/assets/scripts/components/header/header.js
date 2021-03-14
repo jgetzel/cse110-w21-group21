@@ -60,6 +60,7 @@ class Header extends HTMLElement {
         this.shadowRoot.append(linkElem, wrapper);
 
         let modal = wrapper.childNodes[3];
+        modal.style.display = "none";
         let helpBtn = wrapper.childNodes[2];
         let closeBtn = modal.shadowRoot.getElementById("modal-close");
         helpBtn.onclick = function() {
@@ -68,7 +69,7 @@ class Header extends HTMLElement {
 
         closeBtn.onclick = function() {
             modal.hideModal();
-        }
+        };
     }
 }
 
