@@ -53,6 +53,12 @@
     margin-bottom: 0.5rem;
 }
 
+#EndBreakEarlyWrapper {
+    width: 25rem;
+    display: none;
+    margin: auto;
+}
+
 #distractedWrapper {
     width: 12rem;
     display: none;

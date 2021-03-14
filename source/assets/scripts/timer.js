@@ -16,7 +16,12 @@ window.addEventListener("DOMContentLoaded", () => {
     let taskListHTML = document.getElementById("taskList");
     let timerProgressCircle = document.getElementById("timer-progress");
     let distractedButton = document.getElementById("distractedWrapper");
+    let completeSessionButton = document.getElementById("completeSession");
+    let EndBreakEarlyButton = document.getElementById("EndBreakEarlyWrapper");
 
+    completeSessionButton.onclick = function () {
+        currentPomoSession.mode = POMO_SESSION_MODES.COMPLETE;
+    }
 
     // TODO: move this time variable into the pomo session object class using localstorage
     let maxPomoTime = 5;
@@ -71,6 +76,13 @@ window.addEventListener("DOMContentLoaded", () => {
         timerProgressCircle.setPercentage(currentPomoSession.time / SVGFEColorMatrixElement);
     }
 
+    // Implements the onclick functionality of End Break Early Button, which immediately stop the break 
+    // and go to the work time
+    EndBreakEarlyButton.onclick = function () {
+        renderActiveMode();
+        currentPomoSession.time = maxPomoTime;
+        currentPomoSession.mode = POMO_SESSION_MODES.ACTIVE;
+    };
 
     startTimerButton.onclick = initiateTimer;
 
@@ -176,6 +188,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("timer-status").innerText = "Pomo Time";
         currentTaskHTML.setAttribute("class", "currentTaskWorkTime");
         taskListHTML.setAttribute("class", "taskListWorkTime");
+        EndBreakEarlyButton.style.display = "none";
 
         timerWrapper.setAttribute("class", "timerWrapperWorkTime");
         completeSessionWrapper.setAttribute("class", "completeSessionWrapperWorkTime");
@@ -185,6 +198,7 @@ window.addEventListener("DOMContentLoaded", () => {
         currentTaskHTML.setAttribute("class", "currentTaskBreakTime");
         taskListHTML.setAttribute("class", "taskListBreakTime");
         document.getElementById("timer-status").innerText = "Break Time";
+        EndBreakEarlyButton.style.display = "block";
         distractedButton.style.display = "none";
 
         timerWrapper.setAttribute("class", "timerWrapperBreakTime");
