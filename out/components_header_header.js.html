@@ -33,6 +33,7 @@
  * @todo Refactor buttons to onClick events instead of simply appending to a link element,
  *       Implement help button when Modal component is merged
  */
+const HELP_TEXT = "The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks. Each interval is known as a pomodoro, from the Italian word for 'tomato', after the tomato-shaped kitchen timer that Cirillo used as a university student."; 
 class Header extends HTMLElement {
     constructor() {
         super();
@@ -47,11 +48,11 @@ class Header extends HTMLElement {
         // set class as an example, this can be later used for css!
         wrapper.setAttribute("class", "pomo-header");
 
-        var logo = document.createElement("img");
+        let logo = document.createElement("img");
         logo.src = "./assets/images/logo.svg";
         logo.setAttribute("class", "pomo-header logo");
 
-        var homeLink = document.createElement("a");
+        let homeLink = document.createElement("a");
         homeLink.href="index.html";
 
         homeLink.appendChild(logo);
@@ -66,6 +67,12 @@ class Header extends HTMLElement {
         wrapper.innerHTML += "&lt;a href=\"history.html\">&lt;pomo-button type=\"nav\" id=\"hist\">History&lt;/pomo-button>&lt;/a>";
         //TODO: LINK HELP BUTTON TO FUTURE HELP MODAL/HTML
         wrapper.innerHTML += "&lt;pomo-button type=\"nav\" id=\"help\">Help&lt;/pomo-button>";
+        wrapper.innerHTML += `&lt;pomo-modal id="modal-help">  
+            &lt;button id="modal-close" class="close-btn">x&lt;/button>
+            &lt;p class="title">What's a Pomo Timer?&lt;/p>
+            &lt;p>${HELP_TEXT}&lt;/p>
+            &lt;a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Wikipedia&lt;/a>
+        &lt;/pomo-modal>`;
 
         // store it for easy access
         this.elements.wrapper = wrapper;
@@ -79,6 +86,18 @@ class Header extends HTMLElement {
 
         // attach the created elements to the shadow DOM
         this.shadowRoot.append(linkElem, wrapper);
+
+        let modal = wrapper.childNodes[3];
+        modal.elements.wrapper.style.display = "none";
+        let helpBtn = wrapper.childNodes[2];
+        let closeBtn = modal.shadowRoot.getElementById("modal-close");
+        helpBtn.onclick = function() {
+            modal.displayModal();
+        };
+
+        closeBtn.onclick = function() {
+            modal.hideModal();
+        };
     }
 }
 
@@ -92,13 +111,13 @@ customElements.define("pomo-header", Header);</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Header.html">Header</a></li><li><a href="InputField.html">InputField</a></li><li><a href="PomoSession_PomoSession.html">PomoSession</a></li><li><a href="ProgressCircleComponent.html">ProgressCircleComponent</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getPomoSession">getPomoSession</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#POMO_SESSION_MODES">POMO_SESSION_MODES</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li><li><a href="global.html#thereIsUnfinishedSession">thereIsUnfinishedSession</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="InputField.html">InputField</a></li><li><a href="ModalInput.html">ModalInput</a></li><li><a href="PomoSession_PomoSession.html">PomoSession</a></li><li><a href="ProgressCircleComponent.html">ProgressCircleComponent</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getPomoSession">getPomoSession</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#HELP_TEXT">HELP_TEXT</a></li><li><a href="global.html#POMO_SESSION_MODES">POMO_SESSION_MODES</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li><li><a href="global.html#thereIsUnfinishedSession">thereIsUnfinishedSession</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sun Mar 14 2021 05:06:20 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sun Mar 14 2021 05:43:58 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
