@@ -63,8 +63,6 @@ class ModalInput extends HTMLElement {
             if(description.userTyped != undefined)
                 returnVal["description"] = description.userTyped;
 
-            resetInputs();
-
             return returnVal;
         }
 
@@ -77,16 +75,18 @@ class ModalInput extends HTMLElement {
             const description = taskModal.shadowRoot.getElementById("description").elements.wrapper;
 
             taskName.innerText = taskName.placeholder;
-            taskName.userTyped = "";
+            taskName.userTyped = undefined;
             taskName.setAttribute("class", "pomo-input placeholder");
 
             pomosRequired.innerText = pomosRequired.placeholder;
-            pomosRequired.userTyped = "";
+            pomosRequired.userTyped = undefined;
             pomosRequired.setAttribute("class", "pomo-input placeholder");
 
             description.innerText = description.placeholder;
-            description.userTyped = "";
+            description.userTyped = undefined;
             description.setAttribute("class", "pomo-input placeholder");
+
+            taskModal.elements.values = undefined;
         }
     }
 }

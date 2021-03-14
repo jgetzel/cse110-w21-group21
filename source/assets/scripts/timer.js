@@ -211,12 +211,39 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     function contentsSaved() {
         let taskValues = modal.elements.values;
-        let sessionID = getLatestSessionID();
-        // console.log(taskValues);
-        let newTask = new Task(sessionID, taskValues.taskName, taskValues.description, parseInt(taskValues.pomosRequired));
-        renderTaskIntoTaskList(newTask);
-        currentPomoSession.addTask(newTask);
-        storePomoSession(currentPomoSession);
+        if(taskValues != undefined) {
+            let sessionID = getLatestSessionID();
+            // console.log(taskValues);
+            let newTask = new Task(sessionID, taskValues.taskName, taskValues.description, parseInt(taskValues.pomosRequired));
+            renderTaskIntoTaskList(newTask);
+            currentPomoSession.addTask(newTask);
+            storePomoSession(currentPomoSession);
+
+            resetInputs();
+        }
+    }
+
+    /**
+     * Clears inputs and resets style
+     */
+    function resetInputs() {
+        const taskName = modal.shadowRoot.getElementById("task-name").elements.wrapper;
+        const pomosRequired = modal.shadowRoot.getElementById("pomos-required").elements.wrapper;
+        const description = modal.shadowRoot.getElementById("description").elements.wrapper;
+
+        taskName.innerText = taskName.placeholder;
+        taskName.userTyped = undefined;
+        taskName.setAttribute("class", "pomo-input placeholder");
+
+        pomosRequired.innerText = pomosRequired.placeholder;
+        pomosRequired.userTyped = undefined;
+        pomosRequired.setAttribute("class", "pomo-input placeholder");
+
+        description.innerText = description.placeholder;
+        description.userTyped = undefined;
+        description.setAttribute("class", "pomo-input placeholder");
+
+        modal.elements.values = undefined;
     }
 
 
