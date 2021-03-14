@@ -31,18 +31,18 @@ test('test header.js', () => {
     expect(histLink.href).toBe(new URL("history.html", document.baseURI).href);
 
     // Check if help modal is not displayed
-    expect(modal.style.display).toEqual("none");
+    expect(modal.elements.wrapper.style.display).toEqual("none");
     
     //show modal
     helpBtn.click();
     // note we use timeout since there is a transition in the css
     setTimeout(() => {
-        expect(modal.style.display).toEqual("block");
+        expect(modal.elements.wrapper.style.display).toEqual("block");
     }, 500);
 
     // test that clicking close button closes the modal
     modal.shadowRoot.getElementById("modal-close").click();
     setTimeout(() => {
-        expect(modal.style.display).toEqual("none");
+        expect(modal.elements.wrapper.style.display).toEqual("none");
     }, 500);
 });
