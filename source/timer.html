@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="assets/images/logo.svg">
+        <title>Pomo Timer</title>
         <link rel="stylesheet" href="assets/styles/base.css">
         <link rel="stylesheet" href="assets/styles/timer.css">
         <link rel="stylesheet" href="assets/styles/progress-circle.css">
@@ -12,6 +14,7 @@
 
     <body>
         <pomo-header page="timer"></pomo-header>
+        <modal-input></modal-input>
         <div class="backdrop"></div>
         <main>
             <h2 id="timer-status"></h2>
@@ -42,6 +45,14 @@
                 <ul class = "taskList" id = "taskList" style = "list-style-type: none;"></ul>
             </div>
             <pomo-modal id = "addTaskModal">
+                    <button id="modal-close" class="close-btn">x</button>
+                    <p class="title">Add New Task</p>
+                    <div><pomo-input required="true" id="task-name">Enter a Task Name</pomo-input></div>
+                    <div><pomo-input required="true" type="number" max="3" id="pomos-required">Pomos Required</pomo-input></div>
+                    <div><pomo-input max ="250" id="description">Description</pomo-input></div>
+                    <div class="button-wrapper">
+                        <pomo-button id="save-btn">Save</pomo-button>
+                    </div>
             </pomo-modal>
         </main>
     </body>

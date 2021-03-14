@@ -4,7 +4,7 @@ import { getLatestSessionID, getNewSessionID, getPomoSession, PomoSession, POMO_
 import { areThereUnfinishedTasksFromLastSession} from "./database/task";
 import { Task } from "./database/task";
 window.addEventListener("DOMContentLoaded", () => {
-
+    
     const urlParams = new URLSearchParams(window.location.search);
     const loadSaved = urlParams.get("loadSaved");
 
@@ -86,7 +86,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     startTimerButton.onclick = initiateTimer;
 
-    modal.elements.saveBtn.addEventListener("click", contentsSaved);
+    modal.shadowRoot.getElementById("save-btn").addEventListener("click", contentsSaved);
     addTaskButton.onclick = function () {
         modal.displayModal();
     };
@@ -225,12 +225,39 @@ window.addEventListener("DOMContentLoaded", () => {
      */
     function contentsSaved() {
         let taskValues = modal.elements.values;
-        let sessionID = getLatestSessionID();
-        // console.log(taskValues);
-        let newTask = new Task(sessionID, taskValues.taskName, taskValues.description, parseInt(taskValues.pomosRequired));
-        renderTaskIntoTaskList(newTask);
-        currentPomoSession.addTask(newTask);
-        storePomoSession(currentPomoSession);
+        if(taskValues != undefined) {
+            let sessionID = getLatestSessionID();
+            // console.log(taskValues);
+            let newTask = new Task(sessionID, taskValues.taskName, taskValues.description, parseInt(taskValues.pomosRequired));
+            renderTaskIntoTaskList(newTask);
+            currentPomoSession.addTask(newTask);
+            storePomoSession(currentPomoSession);
+
+            resetInputs();
+        }
+    }
+
+    /**
+     * Clears inputs and resets style
+     */
+    function resetInputs() {
+        const taskName = modal.shadowRoot.getElementById("task-name").elements.wrapper;
+        const pomosRequired = modal.shadowRoot.getElementById("pomos-required").elements.wrapper;
+        const description = modal.shadowRoot.getElementById("description").elements.wrapper;
+
+        taskName.innerText = taskName.placeholder;
+        taskName.userTyped = undefined;
+        taskName.setAttribute("class", "pomo-input placeholder");
+
+        pomosRequired.innerText = pomosRequired.placeholder;
+        pomosRequired.userTyped = undefined;
+        pomosRequired.setAttribute("class", "pomo-input placeholder");
+
+        description.innerText = description.placeholder;
+        description.userTyped = undefined;
+        description.setAttribute("class", "pomo-input placeholder");
+
+        modal.elements.values = undefined;
     }
 
 
@@ -248,10 +275,11 @@ window.addEventListener("DOMContentLoaded", () => {
         const currentTaskToBeAdded = `<pomo-task description="${nextTask.description}" pomosUsed="${nextTask.pomosUsed}" pomosRequired=${nextTask.pomosRequired}>${nextTask.title}</pomo-task>`;
         currentTaskHTML.insertAdjacentHTML("beforeend", currentTaskToBeAdded);
         taskListHTML.removeChild(taskListHTML.childNodes[0]);
-        currentTaskHTML.childNodes[0].setFinishTaskCallback(() => {
+        currentTaskHTML.childNodes[currentTaskHTML.childNodes.length - 1].setFinishTaskCallback(() => {
             removeCompletedTasks();
+            startNewTask();
         });
-        currentTaskHTML.childNodes[0].task = nextTask;
+        currentTaskHTML.childNodes[currentTaskHTML.childNodes.length - 1].task = nextTask;
 
     }
 
