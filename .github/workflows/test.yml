@@ -14,3 +14,16 @@ jobs:
       run: |
         npm run test
         bash <(curl -s https://codecov.io/bash) -f coverage/lcov.info
+  cypress-tests:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Install modules
+        run: npm i
+      - name: run server
+        run: npm run build && npm run start
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
