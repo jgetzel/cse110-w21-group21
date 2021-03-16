@@ -4,9 +4,9 @@
 test('test main.js', () => {
     // we create a fake testing document here:
     document.body.innerHTML = `<div>
-        <pomo-button id='btn1'>normal</pomo-button>
-        <pomo-button id='btn2' type="nav">nav</pomo-button>
-        <pomo-button id='btn3' type="outline">outlined</pomo-button>
+        <pomo-button id='btn1' nodark=true>normal</pomo-button>
+        <pomo-button id='btn2' type="nav" nodark=true>nav</pomo-button>
+        <pomo-button id='btn3' type="outline" nodark=true>outlined</pomo-button>
     </div>`
     // jest.mock('../../source/assets/scripts/components/button/button.js');
 
