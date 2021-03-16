@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     completeSessionButton.onclick = function () {
         currentPomoSession.mode = POMO_SESSION_MODES.COMPLETE;
-    }
+    };
 
     // TODO: move this time variable into the pomo session object class using localstorage
     let maxPomoTime = 5;
@@ -48,7 +48,6 @@ window.addEventListener("DOMContentLoaded", () => {
     if (loadSaved == "true") {
         let sessionID = getLatestSessionID();
         currentPomoSession = getPomoSession(sessionID);
-        console.log(currentPomoSession)
         loadTasks();
         if (thereIsUnfinishedSession()) {
             initiateTimer();
