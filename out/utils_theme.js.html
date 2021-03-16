@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: utils/theme.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,56 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: utils/theme.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Will randomly pick a theme and unique background depending on what day it is and what time it is and set it on the page
+ */
+export function selectAndSetTheme(today = new Date()) {
+  let id = 0;
+  let numBGs = 6;
 
+  let d = today.getDay();
 
-    <h3> </h3>
+  let seed = localStorage.getItem("bg-seed");
 
+  if (seed === null || seed[0] != d) {
+    seed = d + "-" + Math.floor(Math.random() * numBGs);
+    localStorage.setItem("bg-seed", seed);
+  }
+  let timePeriod = getThemeMode(today);
+  id = parseInt(seed[2]);
 
+  let element = document.getElementById("backdrop");
+  element.style.backgroundImage = `url("../assets/images/backgrounds/${timePeriod}/bg${id}.jpg")`;
+};
 
+export const THEME_MODES = {
+  DAY: "day",
+  NIGHT: "night",
+};
 
-
-
-
-
-
-
-    
-
-
-
-
-
+export function getThemeMode(today = new Date()) {
+  let timePeriod = THEME_MODES.DAY;
+  if (today.getHours() &lt; 4) {
+    timePeriod = THEME_MODES.NIGHT;
+  }
+  else if (today.getHours() &lt; 18) {
+    timePeriod = THEME_MODES.DAY;
+  } else if (today.getHours() &lt; 24) {
+    timePeriod = THEME_MODES.NIGHT;
+  }
+  return timePeriod;
+}</code></pre>
+        </article>
+    </section>
 
 
 
