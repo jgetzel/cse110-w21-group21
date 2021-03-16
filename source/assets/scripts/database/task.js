@@ -2,6 +2,13 @@ import { getObject, storeObject } from ".";
 import { getLatestSessionID, getPomoSession } from "./session";
 
 export class Task {
+    /**
+     * 
+     * @param {number} sessionID 
+     * @param {string} title 
+     * @param {string} description 
+     * @param {number} pomosRequired 
+     */
     constructor(sessionID, title, description, pomosRequired) {
         this.sessionID = sessionID;
         this.id = -1;

@@ -2,7 +2,7 @@
  * This file is related to finding pomo sessions
  */
 import { getObject, storeObject } from "./index";
-import { storeTask, Task } from "./task";
+import { deleteTaskByTaskID, storeTask, Task } from "./task";
 
 
 export const POMO_SESSION_ID = "pomo_session_id";
@@ -39,6 +39,8 @@ export class PomoSession {
 
     /** @type {Number} - number of pomos elapsed succesfully for this pomo session */
     this.pomosElapsed = 0;
+
+    this.startDate = new Date();
   }
   /**
    * 
@@ -59,6 +61,21 @@ export class PomoSession {
     storeTask(task);
     this.allTasks.push(task);
   }
+  /**
+   * Delete a task
+   * @param {Task} task 
+   */
+  deleteTask(task) {
+    deleteTaskByTaskID(task.id);
+    for (let i = 0; i < this.allTasks.length; i++){
+      const storedTask = this.allTasks[i];
+      if (task.id === storedTask.id) {
+        this.allTasks.splice(i, 1);
+        return;
+      }
+    }
+  }
+
   /**
    * Completes the given task associated to the id
    * @param {number} id 
@@ -127,6 +144,9 @@ export class PomoSession {
     this.id = session_obj.id;
     this.mode = session_obj.mode;
     this.time = session_obj.time;
+    this.pomosElapsed = session_obj.pomosElapsed;
+    console.log(session_obj);
+    this.startDate = new Date(session_obj.startDate);
     this.allTasks = session_obj.allTasks.map((taskObj) => {
       let t = new Task();
       t = t.parseTaskFromObj(taskObj);
@@ -136,7 +156,7 @@ export class PomoSession {
   }
   serializeIntoObj() {
     return {
-      id: this.id, allTasks: this.allTasks.map((task) => task.serializeIntoObj()), mode: this.mode, time: this.time
+      id: this.id, allTasks: this.allTasks.map((task) => task.serializeIntoObj()), mode: this.mode, time: this.time, pomosElapsed: this.pomosElapsed, startDate: this.startDate.getTime()
     };
   }
 }
