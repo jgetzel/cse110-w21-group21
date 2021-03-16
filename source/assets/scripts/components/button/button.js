@@ -1,5 +1,7 @@
 // product-item.js
 
+import { getThemeMode, THEME_MODES } from "../../utils/theme";
+
 /**
  * @class Button
  * 
@@ -50,6 +52,11 @@ class Button extends HTMLElement {
             this.elements.button.setAttribute("class", this.elements.button.getAttribute("class") + " small");
         } else if (this.size === "tiny") {
             this.elements.button.setAttribute("class", this.elements.button.getAttribute("class") + " tiny");
+        }
+
+        let themeMode = getThemeMode();
+        if (themeMode === THEME_MODES.NIGHT && this.getAttribute("nodark") !== "true") {
+            this.elements.button.setAttribute("class", this.elements.button.getAttribute("class") + " dark");
         }
     }
 }

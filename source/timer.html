@@ -15,7 +15,7 @@
     <body>
         <pomo-header page="timer"></pomo-header>
         <modal-input></modal-input>
-        <div class="backdrop"></div>
+        <div class="backdrop" id="backdrop"></div>
         <main>
             <h2 id="timer-status"></h2>
             <div class = "timerWrapper" id = "timerWrapper">
@@ -51,7 +51,7 @@
                     <div><pomo-input required="true" type="number" max="3" id="pomos-required">Pomos Required</pomo-input></div>
                     <div><pomo-input max ="250" id="description">Description</pomo-input></div>
                     <div class="button-wrapper">
-                        <pomo-button id="save-btn">Save</pomo-button>
+                        <pomo-button id="save-btn" nodark=true>Save</pomo-button>
                     </div>
             </pomo-modal>
         </main>

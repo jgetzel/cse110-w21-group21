@@ -10,7 +10,9 @@ import { initializeDatabase } from "./database";
 import { getLatestSessionID, getNewSessionID, getPomoSession, PomoSession, POMO_SESSION_MODES, setCurrentSessionStatus, storePomoSession, thereIsUnfinishedSession } from "./database/session";
 import { areThereUnfinishedTasksFromLastSession, storeTask} from "./database/task";
 import { Task } from "./database/task";
+import { selectAndSetTheme } from "./utils/theme";
 window.addEventListener("DOMContentLoaded", () => {
+    selectAndSetTheme();
     
     const urlParams = new URLSearchParams(window.location.search);
     const loadSaved = urlParams.get("loadSaved");
@@ -36,7 +38,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let maxBreakTime = 5 * 60;
     let maxLongBreakTime = 15 * 60;
 
-
+    
     initializeDatabase();
     if (loadSaved == "false") {
         let oldTasksLeft = areThereUnfinishedTasksFromLastSession();
