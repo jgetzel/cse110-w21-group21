@@ -12,6 +12,14 @@ describe("Testing Adding Tasks", () => {
       pomos: 5,
     },
   ];
+  const verifyTaskObject = (task, groundTruthTask) => {
+    expect(task.sessionID).to.equal(0);
+    expect(task.description).to.equal(groundTruthTask.description);
+    expect(task.pomosRequired).to.equal(groundTruthTask.pomos);
+    expect(task.pomosUsed).to.equal(0);
+    expect(task.title).to.equal(groundTruthTask.title);
+    expect(task.completed).to.equal(false);
+  };
   beforeEach(() => {
     cy.visit("timer.html?loadSaved=false");
     for (const task of testTasks) {
@@ -78,12 +86,7 @@ describe("Testing Adding Tasks", () => {
       .find("pomo-task")
       .then(($el) => {
         for (let i = 0; i < testTasks.length; i++) {
-          expect($el[i].task.sessionID).to.equal(0);
-          expect($el[i].task.description).to.equal(testTasks[i].description);
-          expect($el[i].task.pomosRequired).to.equal(testTasks[i].pomos);
-          expect($el[i].task.pomosUsed).to.equal(0);
-          expect($el[i].task.title).to.equal(testTasks[i].title);
-          expect($el[i].task.completed).to.equal(false);
+          verifyTaskObject($el[i].task, testTasks[i]);
         }
       });
   });
@@ -94,5 +97,14 @@ describe("Testing Adding Tasks", () => {
     expect(pomoSession.id).to.equal(0);
     expect(pomoSession.allTasks.length).to.equal(2);
     expect(pomoSession.mode).to.equal("inactive");
+  });
+  it("should start timer and set a current task", () => {
+    cy.get(".startTimerWrapper .startTimer").shadow().find("button").then(($el) => {
+      console.log($el);
+      cy.get($el[0]).click({force: true});
+    });
+    cy.get(".currentTaskWorkTime").find("pomo-task").then(($el) => {
+      verifyTaskObject($el[0].task, testTasks[0]);
+    });
   });
 });
