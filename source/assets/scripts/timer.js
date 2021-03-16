@@ -30,7 +30,6 @@ window.addEventListener("DOMContentLoaded", () => {
         currentPomoSession.mode = POMO_SESSION_MODES.COMPLETE;
     };
 
-
     // TODO: move this time variable into the pomo session object class using localstorage
     let maxPomoTime = 5;
     let maxBreakTime = 5;
