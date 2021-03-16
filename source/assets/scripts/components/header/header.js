@@ -28,7 +28,7 @@ class Header extends HTMLElement {
 
         let homeLink = document.createElement("a");
         homeLink.href="index.html";
-        homeLink.id = "home-btn"
+        homeLink.id = "home-btn";
 
         homeLink.appendChild(logo);
         wrapper.appendChild(homeLink);
@@ -39,7 +39,7 @@ class Header extends HTMLElement {
          *  or window.location.replace if we don't want to add to history
          */
 
-        wrapper.innerHTML += `<a id="hist-btn" href="history.html"><pomo-button type="nav" id="hist">History</pomo-button></a>`;
+        wrapper.innerHTML += "<a id=\"hist-btn\" href=\"history.html\"><pomo-button type=\"nav\" id=\"hist\">History</pomo-button></a>";
 
         wrapper.innerHTML += "<pomo-button type=\"nav\" id=\"help\">Help</pomo-button>";
         wrapper.innerHTML += `<pomo-modal id="modal-help">  
