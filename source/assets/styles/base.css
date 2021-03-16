@@ -9,12 +9,13 @@ a {
   text-decoration: none;
 }
 .backdrop {
-  background: url("../images/backgrounds/bg0.jpg");
+  background-image: url("../images/backgrounds/bg0.jpg");
   height: 100vh;
   width: 100vw;
   z-index: -1;
   position: fixed;
   top: 0;
+  background-size: cover;
   /* filter: brightness(0.85); */
 }
 button {

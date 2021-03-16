@@ -2,7 +2,9 @@ import { initializeDatabase } from "./database";
 import { getLatestSessionID } from "./database/session";
 import { PomoStats } from "./database/stats";
 import { renderEfficiencyWeeklyData, renderEfficiencyData } from "./history-graph";
+import { selectAndSetTheme } from "./utils/theme";
 window.addEventListener("DOMContentLoaded", () => {
+    selectAndSetTheme();
     // TODO: load data from local storage
     initializeDatabase();
     let stats = new PomoStats(getLatestSessionID());
