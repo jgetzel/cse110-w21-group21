@@ -84,8 +84,10 @@ class Header extends HTMLElement {
                         e.preventDefault();
                     } else {
                         // if they do leave, make sure to update the session
+                        console.log("CHANGE");
                         pomoSession.mode = POMO_SESSION_MODES.COMPLETE;
                         storePomoSession(pomoSession);
+                        console.log(getPomoSession(pomoSession.id));
                     }
                 }
             }
