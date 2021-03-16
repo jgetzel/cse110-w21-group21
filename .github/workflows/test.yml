@@ -24,6 +24,6 @@ jobs:
       - name: Install modules
         run: npm i
       - name: run server
-        run: npm run build && npm run start
+        run: npm run build && npm run start &
       - name: Cypress run
         uses: cypress-io/github-action@v2
