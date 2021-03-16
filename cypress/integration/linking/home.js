@@ -1,17 +1,22 @@
 
 describe('Testing Home Page Links', () => {
-  it('should go to timer page when clicking create timer and have loadSaved=false', () => {
+  beforeEach(() => {
     cy.visit('/');
+  })
+  it('should go to timer page when clicking create timer and have loadSaved=false', () => {
     cy.get("#btn-create").parent().then(async ($el) => {
-      console.log($el[0]);
       expect($el[0].href).to.equal(`http://localhost:8080/timer.html?loadSaved=false`)
     });
   });
   it('should go to timer page when clicking create timer and have loadSaved=true', () => {
-    cy.visit('/');
     cy.get("#btn-check-leftover").parent().then(async ($el) => {
-      console.log($el[0]);
       expect($el[0].href).to.equal(`http://localhost:8080/timer.html?loadSaved=true`)
+    });
+  });
+  it('should have correct links on the header', () => {
+    cy.get("pomo-header").shadow().find("a").then(async ($el) => {
+      expect($el[0].href).to.equal(`http://localhost:8080/index.html`)
+      expect($el[1].href).to.equal(`http://localhost:8080/history.html`)
     });
   });
 })
