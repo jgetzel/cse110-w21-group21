@@ -1,3 +1,10 @@
+/**
+ * TODO:
+ * - ADD DELETE TASKS BUTTON
+ * - DISABLE COMPLETING TASKS BUTTON BEFORE STARTING TIMER
+ * - DISABLE START TIMER BUTTON WHEN THERE ARE NO TASKS
+ */
+
 import { formatTime } from "./utils/format-time";
 import { initializeDatabase } from "./database";
 import { getLatestSessionID, getNewSessionID, getPomoSession, PomoSession, POMO_SESSION_MODES, setCurrentSessionStatus, storePomoSession, thereIsUnfinishedSession } from "./database/session";
@@ -21,7 +28,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
     completeSessionButton.onclick = function () {
         currentPomoSession.mode = POMO_SESSION_MODES.COMPLETE;
-    }
+    };
+
 
     // TODO: move this time variable into the pomo session object class using localstorage
     let maxPomoTime = 5;
@@ -40,6 +48,8 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         }
     }
+
+    
 
     /** @type {PomoSession} */
     let currentPomoSession = null;
@@ -188,6 +198,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("timer-status").innerText = "Pomo Time";
         currentTaskHTML.setAttribute("class", "currentTaskWorkTime");
         taskListHTML.setAttribute("class", "taskListWorkTime");
+        distractedButton.style.display = "block";
         EndBreakEarlyButton.style.display = "none";
 
         timerWrapper.setAttribute("class", "timerWrapperWorkTime");

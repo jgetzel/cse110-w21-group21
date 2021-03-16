@@ -13,7 +13,7 @@ export function renderEfficiencyData(chartelement, data) {
         data: {
             labels: labels,
             datasets: [{
-                label: "# of Pomos",
+                label: "# of Tasks",
                 data: [data.complete, data.overtime, data.incomplete],
                 backgroundColor: colors,
                 borderColor: colors,

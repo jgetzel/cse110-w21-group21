@@ -1,13 +1,16 @@
 import { initializeDatabase } from "./database";
+import { getLatestSessionID } from "./database/session";
+import { PomoStats } from "./database/stats";
 import { renderEfficiencyWeeklyData, renderEfficiencyData } from "./history-graph";
 window.addEventListener("DOMContentLoaded", () => {
     // TODO: load data from local storage
     initializeDatabase();
+    let stats = new PomoStats(getLatestSessionID());
 
     let data = {
-        complete: 10,
-        overtime: 4,
-        incomplete: 2,
+        complete: stats.greenTasks,
+        overtime: stats.yellowTasks,
+        incomplete: stats.redTasks,
     };
     let canvas = document.getElementById("efficiency-chart");
     renderEfficiencyData(canvas, data);
