@@ -151,6 +151,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         if (currentPomoSession.mode === POMO_SESSION_MODES.INACTIVE) {
             currentPomoSession.mode = POMO_SESSION_MODES.ACTIVE;
+            storePomoSession(currentPomoSession);
         }
 
         //removes first child from task list and adds to current task
@@ -165,7 +166,7 @@ window.addEventListener("DOMContentLoaded", () => {
         let currentTask = currentPomoSession.currentTask();
         currentTaskFirstChild.task = currentTask;
         function timeChanger() {
-            
+            currentPomoSession = getPomoSession(currentPomoSession.id);
             currentPomoSession.time -= 1;
             if (currentPomoSession.time < 0) {
                 currentPomoSession.time = 0;
@@ -198,10 +199,11 @@ window.addEventListener("DOMContentLoaded", () => {
                     }
                 }
                 // Next timer should be a pomo timer
-                else {
+                else if (currentPomoSession.mode !== POMO_SESSION_MODES.COMPLETE) {
                     renderActiveMode();
                     currentPomoSession.time = maxPomoTime;
                     currentPomoSession.mode = POMO_SESSION_MODES.ACTIVE;
+
                     // TODO: Add functionality for moving onto next task, updating pomos used on current task, etc.
                 }
             }

@@ -130,9 +130,7 @@ export class PomoSession {
   reorderTasks() {
 
   }
-  serializeIntoObj() {
-    return { id: this.id };
-  }
+
   getPomosLeftInSession() {
     let left = 0;
     this.allTasks.forEach((task) => {
