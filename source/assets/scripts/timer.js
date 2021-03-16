@@ -8,7 +8,7 @@
 import { formatTime } from "./utils/format-time";
 import { initializeDatabase } from "./database";
 import { getLatestSessionID, getNewSessionID, getPomoSession, PomoSession, POMO_SESSION_MODES, setCurrentSessionStatus, storePomoSession, thereIsUnfinishedSession } from "./database/session";
-import { areThereUnfinishedTasksFromLastSession} from "./database/task";
+import { areThereUnfinishedTasksFromLastSession, storeTask} from "./database/task";
 import { Task } from "./database/task";
 window.addEventListener("DOMContentLoaded", () => {
     
@@ -28,12 +28,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
     completeSessionButton.onclick = function () {
         currentPomoSession.mode = POMO_SESSION_MODES.COMPLETE;
+        storePomoSession(currentPomoSession);
     };
 
     // TODO: move this time variable into the pomo session object class using localstorage
-    let maxPomoTime = 5;
-    let maxBreakTime = 5;
-    let maxLongBreakTime = 10;
+    let maxPomoTime = 25 * 60;
+    let maxBreakTime = 5 * 60;
+    let maxLongBreakTime = 15 * 60;
 
 
     initializeDatabase();
@@ -57,11 +58,31 @@ window.addEventListener("DOMContentLoaded", () => {
     if (loadSaved == "true") {
         let sessionID = getLatestSessionID();
         currentPomoSession = getPomoSession(sessionID);
-        loadTasks();
-        if (thereIsUnfinishedSession()) {
+
+        if (thereIsUnfinishedSession() && currentPomoSession.mode != POMO_SESSION_MODES.INACTIVE) {
+            loadTasks();
             initiateTimer();
+        } else {
+            // create new session and use old tasks from last time
+            let sessionID = getNewSessionID();
+            setCurrentSessionStatus("in-progress");
+
+            // take the old tasks and update the session ids to the new one
+            let oldTasks = currentPomoSession.allTasks;
+            oldTasks.forEach((task) => {
+                task.sessionID = sessionID;
+                storeTask(task);
+            });
+
+            currentPomoSession = new PomoSession(sessionID);
+
+            currentPomoSession.time = maxPomoTime;
+            currentPomoSession.allTasks = oldTasks;
+            // save our new pomo session
+            storePomoSession(currentPomoSession);
+            loadTasks();
         }
-        
+    
     }
     else if (loadSaved == "false") {
         // note, if you refresh for now, you will lose your session's changes...
@@ -75,6 +96,9 @@ window.addEventListener("DOMContentLoaded", () => {
         loadTasks();
 
     }
+
+    urlParams.set("loadSaved", true);
+
     timerProgressCircle.setDisplayText(formatTime(currentPomoSession.time));
     timerProgressCircle.setPercentage(currentPomoSession.time / maxPomoTime);
     if (currentPomoSession.mode === POMO_SESSION_MODES.BREAK) {
@@ -146,6 +170,9 @@ window.addEventListener("DOMContentLoaded", () => {
             if (currentPomoSession.time < 0) {
                 currentPomoSession.time = 0;
             }
+            
+            // check if session is incomplete. if incomplete, 
+            
 
             // If timer hits 0, toggle to next break or pomo timer
             if (currentPomoSession.time == 0) {

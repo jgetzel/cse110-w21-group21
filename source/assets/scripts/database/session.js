@@ -145,7 +145,6 @@ export class PomoSession {
     this.mode = session_obj.mode;
     this.time = session_obj.time;
     this.pomosElapsed = session_obj.pomosElapsed;
-    console.log(session_obj);
     this.startDate = new Date(session_obj.startDate);
     this.allTasks = session_obj.allTasks.map((taskObj) => {
       let t = new Task();

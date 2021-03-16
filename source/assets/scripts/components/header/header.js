@@ -1,3 +1,5 @@
+import { getLatestSessionID, getPomoSession, POMO_SESSION_MODES } from "../../database/session";
+
 /**
  * Header class to create a web component implementing the functionality of our header bar.
  * 
@@ -26,6 +28,7 @@ class Header extends HTMLElement {
 
         let homeLink = document.createElement("a");
         homeLink.href="index.html";
+        homeLink.id = "home-btn"
 
         homeLink.appendChild(logo);
         wrapper.appendChild(homeLink);
@@ -36,8 +39,8 @@ class Header extends HTMLElement {
          *  or window.location.replace if we don't want to add to history
          */
 
-        wrapper.innerHTML += "<a href=\"history.html\"><pomo-button type=\"nav\" id=\"hist\">History</pomo-button></a>";
-        //TODO: LINK HELP BUTTON TO FUTURE HELP MODAL/HTML
+        wrapper.innerHTML += `<a id="hist-btn" href="history.html"><pomo-button type="nav" id="hist">History</pomo-button></a>`;
+
         wrapper.innerHTML += "<pomo-button type=\"nav\" id=\"help\">Help</pomo-button>";
         wrapper.innerHTML += `<pomo-modal id="modal-help">  
             <button id="modal-close" class="close-btn">x</button>
@@ -70,6 +73,24 @@ class Header extends HTMLElement {
         closeBtn.onclick = function() {
             modal.hideModal();
         };
+
+        const checkPomoSessionModeBeforeLeaving = (e) => {
+            // prevent moving to new page if current pomo session is still active
+            let id = getLatestSessionID();
+            // e.preventDefault();
+            if (id !== null) {
+                let pomoSession = getPomoSession(id);
+                if (pomoSession.mode === POMO_SESSION_MODES.ACTIVE || pomoSession.mode === POMO_SESSION_MODES.LONG_BREAK || pomoSession.mode === POMO_SESSION_MODES.BREAK) {
+                    if (!confirm("Are you sure want to leave? This will automatically complete your session")) {
+                        e.preventDefault();
+                    }
+                }
+            }
+            
+        };
+
+        this.shadowRoot.getElementById("hist-btn").onclick = checkPomoSessionModeBeforeLeaving;
+        this.shadowRoot.getElementById("home-btn").onclick = checkPomoSessionModeBeforeLeaving;
     }
 }
 
