@@ -74,7 +74,7 @@ class ProgressCircleComponent extends HTMLElement {
      */
     setPercentage(percent) {
         let element = this.shadowRoot.getElementById("loader-path");
-        element.style.strokeDashoffset = - (1 - percent) * 150;
+        element.style.strokeDashoffset = - (1 - percent) * 127.5;
     }
 }
 

@@ -181,6 +181,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 if (currentPomoSession.mode === POMO_SESSION_MODES.ACTIVE) {
                     //break 
                     renderBreakMode();
+                    currentPomoSession.pomosElapsed += 1;
 
                     let currentTaskFirstChild = currentTaskHTML.childNodes[0];
                     currentTaskFirstChild.incrementPomosUsed();
@@ -208,15 +209,19 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
             }
             // Push updated time to the page
+            document.title = formatTime(currentPomoSession.time);
             timerProgressCircle.setDisplayText(formatTime(currentPomoSession.time));
             if (currentPomoSession.mode === POMO_SESSION_MODES.ACTIVE) {
                 timerProgressCircle.setPercentage(currentPomoSession.time / maxPomoTime);
+                document.title += " - Work";
             }
             else if (currentPomoSession.mode === POMO_SESSION_MODES.BREAK) {
                 timerProgressCircle.setPercentage(currentPomoSession.time / maxBreakTime);
+                document.title += " - Break";
             }
             else if (currentPomoSession.mode === POMO_SESSION_MODES.LONG_BREAK) {
                 timerProgressCircle.setPercentage(currentPomoSession.time / maxLongBreakTime);
+                document.title += " - Long Break";
             }
             storePomoSession(currentPomoSession);
         }
