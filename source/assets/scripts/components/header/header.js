@@ -23,7 +23,7 @@ class Header extends HTMLElement {
         wrapper.setAttribute("class", "pomo-header");
 
         let logo = document.createElement("img");
-        logo.src = "./assets/images/logo.svg";
+        logo.src = "./assets/svgImages/logo.svg";
         logo.setAttribute("class", "pomo-header logo");
 
         let homeLink = document.createElement("a");
