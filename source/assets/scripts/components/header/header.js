@@ -1,4 +1,4 @@
-import { getLatestSessionID, getPomoSession, POMO_SESSION_MODES } from "../../database/session";
+import { getLatestSessionID, getPomoSession, POMO_SESSION_MODES, storePomoSession } from "../../database/session";
 
 /**
  * Header class to create a web component implementing the functionality of our header bar.
@@ -77,12 +77,17 @@ class Header extends HTMLElement {
         const checkPomoSessionModeBeforeLeaving = (e) => {
             // prevent moving to new page if current pomo session is still active
             let id = getLatestSessionID();
-            // e.preventDefault();
             if (id !== null) {
                 let pomoSession = getPomoSession(id);
                 if (pomoSession.mode === POMO_SESSION_MODES.ACTIVE || pomoSession.mode === POMO_SESSION_MODES.LONG_BREAK || pomoSession.mode === POMO_SESSION_MODES.BREAK) {
                     if (!confirm("Are you sure want to leave? This will automatically complete your session")) {
                         e.preventDefault();
+                    } else {
+                        // if they do leave, make sure to update the session
+                        console.log("CHANGE");
+                        pomoSession.mode = POMO_SESSION_MODES.COMPLETE;
+                        storePomoSession(pomoSession);
+                        console.log(getPomoSession(pomoSession.id));
                     }
                 }
             }

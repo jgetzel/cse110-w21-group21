@@ -130,9 +130,7 @@ export class PomoSession {
   reorderTasks() {
 
   }
-  serializeIntoObj() {
-    return { id: this.id };
-  }
+
   getPomosLeftInSession() {
     let left = 0;
     this.allTasks.forEach((task) => {
@@ -214,8 +212,14 @@ export function thereIsUnfinishedSession() {
   let sessionID = getLatestSessionID();
   if (sessionID === null) return false;
   let currentPomoSession = getPomoSession(sessionID);
-  if (currentPomoSession.mode !== POMO_SESSION_MODES.COMPLETE) {
+  if (currentPomoSession.mode !== POMO_SESSION_MODES.COMPLETE && currentPomoSession.mode !== POMO_SESSION_MODES.INACTIVE) {
     return true;
   }
   return false;
+}
+
+export function continueActiveSession() {
+  if (thereIsUnfinishedSession()) {
+    window.location = "/timer.html?loadSaved=true";
+  }
 }
