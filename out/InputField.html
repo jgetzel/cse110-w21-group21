@@ -166,7 +166,7 @@ a default max character limit of 50
     
 
     
-    <h4 class="name" id="getInput"><span class="type-signature"></span>getInput<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id="limitCharCount"><span class="type-signature"></span>limitCharCount<span class="signature">(e)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
     
 
     
@@ -174,7 +174,7 @@ a default max character limit of 50
 
 
 <div class="description">
-    Returns the user input in the field
+    Checks input field if it's exceeded the maximum character limit on an event
 </div>
 
 
@@ -183,6 +183,55 @@ a default max character limit of 50
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>e</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Event</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Checks on keydown,paste, and input events</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -218,7 +267,7 @@ a default max character limit of 50
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_input_input.js.html">components/input/input.js</a>, <a href="components_input_input.js.html#line122">line 122</a>
+        <a href="components_input_input.js.html">components/input/input.js</a>, <a href="components_input_input.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -247,7 +296,7 @@ a default max character limit of 50
 
         
 <div class="param-desc">
-    user input
+    false If the max character limit has been reached
 </div>
 
 
@@ -258,13 +307,150 @@ a default max character limit of 50
     </dt>
     <dd>
         
-<span class="param-type">String</span>
+<span class="param-type">Boolean</span>
 
 
     </dd>
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="numericInputOnly"><span class="type-signature"></span>numericInputOnly<span class="signature">(event)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Stop the user from inputting anything but numbers
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Event</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Checks on keydown,paste, and input events</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_input_input.js.html">components/input/input.js</a>, <a href="components_input_input.js.html#line100">line 100</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -286,13 +472,13 @@ a default max character limit of 50
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Header.html">Header</a></li><li><a href="InputField.html">InputField</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#getAllSessionTasks">getAllSessionTasks</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#POMO_SESSION_ID">POMO_SESSION_ID</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="InputField.html">InputField</a></li><li><a href="ModalInput.html">ModalInput</a></li><li><a href="PomoSession_PomoSession.html">PomoSession</a></li><li><a href="ProgressCircleComponent.html">ProgressCircleComponent</a></li><li><a href="Task_Task.html">Task</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getPomoSession">getPomoSession</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#HELP_TEXT">HELP_TEXT</a></li><li><a href="global.html#POMO_SESSION_MODES">POMO_SESSION_MODES</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#selectAndSetTheme">selectAndSetTheme</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li><li><a href="global.html#thereIsUnfinishedSession">thereIsUnfinishedSession</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Feb 25 2021 07:18:46 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Mar 18 2021 06:30:24 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

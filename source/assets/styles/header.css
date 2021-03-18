@@ -4,7 +4,9 @@
     align-items: center;  
 }
 
-
+a { 
+    text-decoration: none;
+}
 #help {
     padding-left: 1rem;
 }

@@ -75,28 +75,6 @@ class InputField extends HTMLElement {
         //add default style
         this.elements.wrapper.setAttribute("class", this.elements.wrapper.getAttribute("class") + " placeholder");
 
-        /** 
-         * Checks input field if it's exceeded the maximum character limit on an event
-         * @function
-         * @param {Event} e Checks on keydown,paste, and input events
-         * @returns {Boolean} false If the max character limit has been reached
-        */
-        function limitCharCount(e) {
-            this.userTyped = wrapper.textContent;
-            if(wrapper.textContent.length >= wrapper.max) {
-                wrapper.setAttribute("class", wrapper.getAttribute("class") + " max");
-                e.preventDefault();
-                return false;
-            }
-            else {
-                wrapper.setAttribute("class", "pomo-input");
-            }
-        }
-        //listen for max characters on these events
-        wrapper.addEventListener("keypress", limitCharCount, false);
-        wrapper.addEventListener("paste", limitCharCount, false);
-        wrapper.addEventListener("input", limitCharCount, false); //this is mainly for changing the backspace/del key
-
         /**
          * Anonymous function to replace placeholder text with empty string when user clicks on component
          * @function
@@ -116,18 +94,69 @@ class InputField extends HTMLElement {
         wrapper.addEventListener("blur", function () {
             //if not focused and there is no input, return back to placeholder string
             if(!this.userTyped) {
-                wrapper.setAttribute("class", wrapper.getAttribute("class") + " placeholder");
+                wrapper.setAttribute("class", "pomo-input placeholder");
                 wrapper.textContent = wrapper.placeholder;
             }
         });
     }
+    
+    /** 
+     * Checks input field if it's exceeded the maximum character limit on an event
+     * @function
+     * @param {Event} e Checks on keydown,paste, and input events
+     * @returns {Boolean} false If the max character limit has been reached
+    */
+    limitCharCount(e) {
+        this.userTyped = this.textContent;
+        //if the user hasn't highlighted any text and we are at max length
+        if(window.getSelection().toString().length == 0 &amp;&amp; this.textContent.length >= this.max) {
+            this.setAttribute("class", "pomo-input max");
+            e.preventDefault();
+            return false;
+        }
+        else {
+            this.setAttribute("class", "pomo-input");
+            return true;
+        }
+    }
+
+    /** 
+     * Stop the user from inputting anything but numbers
+     * @function
+     * @param {Event} event Checks on keydown,paste, and input events
+    */
+    numericInputOnly(event) {
+        this.userTyped = this.textContent;
+        //if the user hasn't highlighted any text and we are at max length
+        if(window.getSelection().toString().length == 0 &amp;&amp; this.textContent.length >= this.max) {
+            this.setAttribute("class", "pomo-input max");
+            event.preventDefault();
+            return false;
+        }
+        else
+            this.setAttribute("class", "pomo-input");
+            
+        //different events store the text in different ways so we need these ifs
+        if(event.type == "keypress" &amp;&amp; isNaN(event.key)) {
+            this.classList.add("invalid");
+            event.preventDefault();
+        }
+        else if(event.type == "input" &amp;&amp; isNaN(event.data)) {
+            this.setAttribute("class", "pomo-input invalid");
+            event.preventDefault();
+        }
+        else if(event.type == "paste" &amp;&amp; isNaN(event.clipboardData.getData("Text"))) {
+            this.setAttribute("class", "pomo-input invalid");
+            event.preventDefault();
+        }
+    }
 
     get value() {
-        return this.elements.wrapper.textContent;
+        return this.userTyped;
     }
 
     connectedCallback() {
-        var maxChar = this.getAttribute("max");
+        let maxChar = this.getAttribute("max");
 
         //set attribute-specified max char
         if (maxChar != null)
@@ -139,16 +168,19 @@ class InputField extends HTMLElement {
             this.elements.wrapper.textContent += "*";
         }
 
-        this.elements.wrapper.placeholder = this.elements.wrapper.textContent;
-    }
+        if(this.getAttribute("type") == "number") {
+            this.elements.wrapper.addEventListener("keypress", this.numericInputOnly, false);
+            this.elements.wrapper.addEventListener("paste", this.numericInputOnly, false);
+            this.elements.wrapper.addEventListener("input", this.numericInputOnly, false); //this is mainly for changing the backspace/del key
+        }
+        else {
+            //listen for max characters on these events
+            this.elements.wrapper.addEventListener("keypress", this.limitCharCount, false);
+            this.elements.wrapper.addEventListener("paste", this.limitCharCount, false);
+            this.elements.wrapper.addEventListener("input", this.limitCharCount, false); //this is mainly for changing the backspace/del key
+        }
 
-    /**
-     * Returns the user input in the field
-     * @function
-     * @returns {String} user input
-     */
-    getInput() {
-        return this.userTyped;
+        this.elements.wrapper.placeholder = this.elements.wrapper.textContent;
     }
 }
 
@@ -162,13 +194,13 @@ customElements.define("pomo-input", InputField);</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="Header.html">Header</a></li><li><a href="InputField.html">InputField</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#getAllSessionTasks">getAllSessionTasks</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#POMO_SESSION_ID">POMO_SESSION_ID</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="InputField.html">InputField</a></li><li><a href="ModalInput.html">ModalInput</a></li><li><a href="PomoSession_PomoSession.html">PomoSession</a></li><li><a href="ProgressCircleComponent.html">ProgressCircleComponent</a></li><li><a href="Task_Task.html">Task</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getPomoSession">getPomoSession</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#HELP_TEXT">HELP_TEXT</a></li><li><a href="global.html#POMO_SESSION_MODES">POMO_SESSION_MODES</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#selectAndSetTheme">selectAndSetTheme</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li><li><a href="global.html#thereIsUnfinishedSession">thereIsUnfinishedSession</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Feb 25 2021 07:18:46 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Mar 18 2021 06:30:24 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
