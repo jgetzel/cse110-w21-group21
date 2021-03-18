@@ -1,0 +1,53 @@
+.pomo-input {
+    /*Styling the input box*/
+    cursor: text;
+    border: none;
+    outline: none;
+    border-bottom: 0.2rem solid #C4C4C4;
+    transition: border-bottom 0.2s;
+    
+    /*Styling the font of the input box*/
+    font-family: 'Roboto', sans-serif; /*BUG: For some reason the Roboto font is not loading by default so I put it in the style*/
+    padding: 0rem 0rem 0.3rem 0rem;
+    color: rgba(51, 56, 68, 0.75);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.pomo-input.invalid {
+    animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+}
+  
+@keyframes shake {
+    5%, 95% {
+        border-bottom: 0.2rem solid #C4C4C4;
+    }
+    10%, 90% {
+        transform: translate3d(-0.05rem, 0, 0);
+        border-bottom: 0.2rem solid #FA7F7F;
+    }
+
+    20%, 80% {
+        transform: translate3d(0.1rem, 0, 0);
+        border-bottom: 0.2rem solid #FA7F7F;
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-0.2rem, 0, 0);
+        border-bottom: 0.2rem solid #FA7F7F;
+    }
+
+    40%, 60% {
+        transform: translate3d(0.2rem, 0, 0);
+        border-bottom: 0.2rem solid #FA7F7F;
+    }
+}
+
+.pomo-input.max {
+    border-bottom: 0.2rem solid #FA7F7F;
+}
+
+.pomo-input.placeholder {
+    color: rgba(51, 56, 68, 0.5);
+}

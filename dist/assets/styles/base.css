@@ -1,0 +1,23 @@
+html {
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  margin: 0px;
+  color: white;
+}
+a { 
+  text-decoration: none;
+}
+.backdrop {
+  background-image: url("../images/backgrounds/day/bg0.jpg");
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  background-size: cover;
+  /* filter: brightness(0.85); */
+}
+button {
+  background-color: rgba(51,56, 68, 0.75);
+}

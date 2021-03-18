@@ -1,0 +1,107 @@
+#timer-status {
+    text-align: center;
+}
+.taskCreatorWrapper {
+    width: 25rem;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+.currentTask {
+    display: none;
+
+}
+
+
+.taskList, .taskListWorkTime, .currentTaskWorkTime, .taskListBreakTime, .currentTaskBreakTime {
+    margin: auto;
+    width: 25rem;
+    padding-left: 0px;
+    position: relative;
+}
+
+.timerWrapper, .timerWrapperBreakTime {
+    position: relative;
+    width: 25rem;
+    margin: auto;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    flex-flow: wrap;
+}
+.timerWrapperBreakTime {
+    margin-top: 0;
+}
+.timerWrapperBreakTime #timer-progress {
+    margin: auto;
+}
+
+.timerWrapperWorkTime {
+    position: absolute;
+    top: 4rem;
+    right: 4rem;
+}
+.completeSessionWrapperBreakTime {
+    width: 25rem;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+.completeSessionWrapperWorkTime {
+    width: 12rem;
+    margin: auto;
+    margin-bottom: 0.5rem;
+}
+
+#EndBreakEarlyWrapper {
+    width: 25rem;
+    display: none;
+    margin: auto;
+}
+
+#distractedWrapper {
+    width: 12rem;
+    display: none;
+    margin: auto;
+}
+
+.timerWrapperWorkTime > .startTimerWrapper {
+    display: none;
+}
+
+.timerWrapperBreakTime > .startTimerWrapper {
+    display: none;
+}
+
+.startTimerWrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    width: 13.5rem;
+    display: inline-block;
+}
+#startTimer {
+    width: 100%;
+}
+
+.completeSessionWrapper {
+    display: none;
+}
+#currentTaskWrapper {
+    display: none;
+}
+#currentTaskWrapper, #taskListWrapper {
+    margin: auto;
+    width: 25rem;
+    padding-left: 0px;
+    position: relative;
+}
+
+#taskList-title, #currentTask-title {
+    font-size: 1.2rem;
+    color: white;
+    background-color: rgba(51,56,68, 0.75);
+    border-radius: 0.25rem;
+    width: fit-content;
+    padding: 0.5rem;
+}

@@ -1,0 +1,27 @@
+.pomo-header {
+    display: flex;
+    padding: 0.6rem 1rem;
+    align-items: center;  
+}
+
+a { 
+    text-decoration: none;
+}
+#help {
+    padding-left: 1rem;
+}
+
+.pomo-header.logo {
+    position: relative;
+    top: 0.25rem;
+    margin-right: 4rem;
+    padding: 0rem;
+    transition: transform 0.2s;
+}
+
+.pomo-header.logo:hover {
+    transform: translateY(-3px);
+}
+.pomo-header.logo:active {
+    transform: translateY(-2px);
+}
