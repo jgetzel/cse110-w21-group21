@@ -19,6 +19,7 @@ export function initializeDatabase() {
     if (getObject(POMO_SESSION_MAP) === null) {
         needToInitialize = true;
         console.log("hello world");
+        console.log("bad change")
     }
 
     // then initialize
