@@ -34,9 +34,9 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     // TODO: move this time variable into the pomo session object class using localstorage
-    let maxPomoTime = 25 * 60;
-    let maxBreakTime = 5 * 60;
-    let maxLongBreakTime = 15 * 60;
+    let maxPomoTime = 10;
+    let maxBreakTime = 10;
+    let maxLongBreakTime = 10;
 
     
     initializeDatabase();
