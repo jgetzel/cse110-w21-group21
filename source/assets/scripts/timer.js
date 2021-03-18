@@ -10,7 +10,9 @@ import { initializeDatabase } from "./database";
 import { getLatestSessionID, getNewSessionID, getPomoSession, PomoSession, POMO_SESSION_MODES, setCurrentSessionStatus, storePomoSession, thereIsUnfinishedSession } from "./database/session";
 import { areThereUnfinishedTasksFromLastSession, storeTask} from "./database/task";
 import { Task } from "./database/task";
+import { selectAndSetTheme } from "./utils/theme";
 window.addEventListener("DOMContentLoaded", () => {
+    selectAndSetTheme();
     
     const urlParams = new URLSearchParams(window.location.search);
     const loadSaved = urlParams.get("loadSaved");
@@ -36,7 +38,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let maxBreakTime = 5 * 60;
     let maxLongBreakTime = 15 * 60;
 
-
+    
     initializeDatabase();
     if (loadSaved == "false") {
         let oldTasksLeft = areThereUnfinishedTasksFromLastSession();
@@ -180,6 +182,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 if (currentPomoSession.mode === POMO_SESSION_MODES.ACTIVE) {
                     //break 
                     renderBreakMode();
+                    currentPomoSession.pomosElapsed += 1;
 
                     let currentTaskFirstChild = currentTaskHTML.childNodes[0];
                     currentTaskFirstChild.incrementPomosUsed();
@@ -208,15 +211,19 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
             }
             // Push updated time to the page
+            document.title = formatTime(currentPomoSession.time);
             timerProgressCircle.setDisplayText(formatTime(currentPomoSession.time));
             if (currentPomoSession.mode === POMO_SESSION_MODES.ACTIVE) {
                 timerProgressCircle.setPercentage(currentPomoSession.time / maxPomoTime);
+                document.title += " - Work";
             }
             else if (currentPomoSession.mode === POMO_SESSION_MODES.BREAK) {
                 timerProgressCircle.setPercentage(currentPomoSession.time / maxBreakTime);
+                document.title += " - Break";
             }
             else if (currentPomoSession.mode === POMO_SESSION_MODES.LONG_BREAK) {
                 timerProgressCircle.setPercentage(currentPomoSession.time / maxLongBreakTime);
+                document.title += " - Long Break";
             }
             storePomoSession(currentPomoSession);
         }

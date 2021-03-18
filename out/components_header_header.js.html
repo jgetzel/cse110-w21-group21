@@ -26,7 +26,9 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
+            <pre class="prettyprint source linenums"><code>import { getLatestSessionID, getPomoSession, POMO_SESSION_MODES } from "../../database/session";
+
+/**
  * Header class to create a web component implementing the functionality of our header bar.
  * 
  * @authors Ethan Huynh, Kevin Klimek
@@ -49,11 +51,12 @@ class Header extends HTMLElement {
         wrapper.setAttribute("class", "pomo-header");
 
         let logo = document.createElement("img");
-        logo.src = "./assets/images/logo.svg";
+        logo.src = "./assets/svgImages/logo.svg";
         logo.setAttribute("class", "pomo-header logo");
 
         let homeLink = document.createElement("a");
         homeLink.href="index.html";
+        homeLink.id = "home-btn";
 
         homeLink.appendChild(logo);
         wrapper.appendChild(homeLink);
@@ -64,8 +67,8 @@ class Header extends HTMLElement {
          *  or window.location.replace if we don't want to add to history
          */
 
-        wrapper.innerHTML += "&lt;a href=\"history.html\">&lt;pomo-button type=\"nav\" id=\"hist\">History&lt;/pomo-button>&lt;/a>";
-        //TODO: LINK HELP BUTTON TO FUTURE HELP MODAL/HTML
+        wrapper.innerHTML += "&lt;a id=\"hist-btn\" href=\"history.html\">&lt;pomo-button type=\"nav\" id=\"hist\">History&lt;/pomo-button>&lt;/a>";
+
         wrapper.innerHTML += "&lt;pomo-button type=\"nav\" id=\"help\">Help&lt;/pomo-button>";
         wrapper.innerHTML += `&lt;pomo-modal id="modal-help">  
             &lt;button id="modal-close" class="close-btn">x&lt;/button>
@@ -98,6 +101,24 @@ class Header extends HTMLElement {
         closeBtn.onclick = function() {
             modal.hideModal();
         };
+
+        const checkPomoSessionModeBeforeLeaving = (e) => {
+            // prevent moving to new page if current pomo session is still active
+            let id = getLatestSessionID();
+            // e.preventDefault();
+            if (id !== null) {
+                let pomoSession = getPomoSession(id);
+                if (pomoSession.mode === POMO_SESSION_MODES.ACTIVE || pomoSession.mode === POMO_SESSION_MODES.LONG_BREAK || pomoSession.mode === POMO_SESSION_MODES.BREAK) {
+                    if (!confirm("Are you sure want to leave? This will automatically complete your session")) {
+                        e.preventDefault();
+                    }
+                }
+            }
+            
+        };
+
+        this.shadowRoot.getElementById("hist-btn").onclick = checkPomoSessionModeBeforeLeaving;
+        this.shadowRoot.getElementById("home-btn").onclick = checkPomoSessionModeBeforeLeaving;
     }
 }
 
@@ -111,13 +132,13 @@ customElements.define("pomo-header", Header);</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="InputField.html">InputField</a></li><li><a href="ModalInput.html">ModalInput</a></li><li><a href="PomoSession_PomoSession.html">PomoSession</a></li><li><a href="ProgressCircleComponent.html">ProgressCircleComponent</a></li><li><a href="Task_Task.html">Task</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getPomoSession">getPomoSession</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#HELP_TEXT">HELP_TEXT</a></li><li><a href="global.html#POMO_SESSION_MODES">POMO_SESSION_MODES</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li><li><a href="global.html#thereIsUnfinishedSession">thereIsUnfinishedSession</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="InputField.html">InputField</a></li><li><a href="ModalInput.html">ModalInput</a></li><li><a href="PomoSession_PomoSession.html">PomoSession</a></li><li><a href="ProgressCircleComponent.html">ProgressCircleComponent</a></li><li><a href="Task_Task.html">Task</a></li><li><a href="TaskComponent.html">TaskComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#areThereUnfinishedTasksFromLastSession">areThereUnfinishedTasksFromLastSession</a></li><li><a href="global.html#deleteTaskByTaskID">deleteTaskByTaskID</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#getAllTasks">getAllTasks</a></li><li><a href="global.html#getLatestSessionID">getLatestSessionID</a></li><li><a href="global.html#getPomoSession">getPomoSession</a></li><li><a href="global.html#getTask">getTask</a></li><li><a href="global.html#HELP_TEXT">HELP_TEXT</a></li><li><a href="global.html#POMO_SESSION_MODES">POMO_SESSION_MODES</a></li><li><a href="global.html#renderEfficiencyData">renderEfficiencyData</a></li><li><a href="global.html#renderEfficiencyWeeklyData">renderEfficiencyWeeklyData</a></li><li><a href="global.html#selectAndSetTheme">selectAndSetTheme</a></li><li><a href="global.html#setCurrentSessionStatus">setCurrentSessionStatus</a></li><li><a href="global.html#storeTask">storeTask</a></li><li><a href="global.html#thereIsUnfinishedSession">thereIsUnfinishedSession</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Mar 16 2021 04:44:04 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Mar 17 2021 20:32:45 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
