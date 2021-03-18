@@ -136,35 +136,6 @@ class TaskComponent extends HTMLElement {
       this.elements.wrapper.style.opacity = 0;
    }
 
-   //   incrementPomosUsed() {
-   //       this.pomosUsed += 1;
-   //       colorDecider();
-   //   }
-
-   //    colorDecider () {
-
-   //      if(this.isCurrentTask === true) {
-   //          this.wrapper.pomoCircle.setAttribute("class", "currentTask");
-   //      }
-   //      else if(this.completed === true){
-   //          if(this.pomosUsed < this.pomosRequired) {
-   //              this.wrapper.pomoCircle.setAttribute("class", "goodTimingTask");
-   //          }
-   //          else {
-   //              this.wrapper.pomoCircle.setAttribute("class", "badTimingTask");
-   //          }
-   //      }
-   //      else {
-   //          this.wrapper.pomoCircle.setAttribute("class", "incompleteTask");
-   //      }
-
-   //   }
-
-   //   completeTask() {
-   //       this.completed = true;
-   //       this.wrapper.wrapperImage.checkMark.setAttribute("src", "./assets/svgImages/check_Complete.svg");
-   //      //  this.colorDecider();
-   //   }
 }
 
 function colorDecider(pomoCircle, pomotask) {
