@@ -27,9 +27,9 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     // TODO: move this time variable into the pomo session object class using localstorage
-    let maxPomoTime = 10;
-    let maxBreakTime = 10;
-    let maxLongBreakTime = 10;
+    let maxPomoTime = 25 * 60;
+    let maxBreakTime = 5 * 60;
+    let maxLongBreakTime = 10 * 60;
 
     
     initializeDatabase();
@@ -308,6 +308,8 @@ window.addEventListener("DOMContentLoaded", () => {
         let nextTask = currentPomoSession.getNextTask();
         if (nextTask === null) {
             // complete the session
+            currentPomoSession.mode = POMO_SESSION_MODES.COMPLETE;
+            storePomoSession(currentPomoSession);
             window.location ="./history.html";
             return;
         }
