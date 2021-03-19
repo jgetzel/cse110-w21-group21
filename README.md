@@ -1,4 +1,4 @@
-# [Website Link](https://jgetzel.github.io/cse110-w21-group21/source/index.html)
+# [Website Link](https://jgetzel.github.io/cse110-w21-group21/dist/index.html)
 
 
 ## Development

@@ -37,6 +37,7 @@ module.exports = {
         { from: "source/assets/images", to: "./assets/images", },
         { from: "source/assets/styles", to: "./assets/styles", },
         { from: "source/assets/svgImages", to: "./assets/svgImages", },
+        { from: "source/assets/audio", to: "./assets/audio", },
       ],
     }),
   ],

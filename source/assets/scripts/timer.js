@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     // TODO: move this time variable into the pomo session object class using localstorage
-    let maxPomoTime = 25 * 60;
+    let maxPomoTime = 5;
     let maxBreakTime = 5 * 60;
     let maxLongBreakTime = 10 * 60;
 
@@ -107,9 +107,14 @@ window.addEventListener("DOMContentLoaded", () => {
     // Implements the onclick functionality of End Break Early Button, which immediately stop the break 
     // and go to the work time
     EndBreakEarlyButton.onclick = function () {
+        let breakAlarm = new Audio("assets/audio/breakAlarm.mp3");
+        breakAlarm.play();
         renderActiveMode();
         currentPomoSession.time = maxPomoTime;
         currentPomoSession.mode = POMO_SESSION_MODES.ACTIVE;
+        timerProgressCircle.setDisplayText(formatTime(currentPomoSession.time));
+        timerProgressCircle.setPercentage(currentPomoSession.time / maxPomoTime);
+        storePomoSession(currentPomoSession);
     };
 
     startTimerButton.onclick = initiateTimer;
@@ -173,6 +178,9 @@ window.addEventListener("DOMContentLoaded", () => {
             // If timer hits 0, toggle to next break or pomo timer
             if (currentPomoSession.time == 0) {
                 if (currentPomoSession.mode === POMO_SESSION_MODES.ACTIVE) {
+                    let workAlarm = new Audio("assets/audio/workAlarm.mp3");
+                    workAlarm.play();
+
                     //break 
                     renderBreakMode();
                     currentPomoSession.pomosElapsed += 1;
@@ -180,6 +188,8 @@ window.addEventListener("DOMContentLoaded", () => {
                     let currentTaskFirstChild = currentTaskHTML.childNodes[0];
                     currentTaskFirstChild.incrementPomosUsed();
                     currentTaskFirstChild.task.pomosUsed += 1;
+                    currentPomoSession.incrementTaskPomosUsed(currentTaskFirstChild.task.id);
+                    storePomoSession(currentPomoSession);
 
                     currentTaskFirstChild.setAttribute("pomosused", 1 + parseInt(currentTaskFirstChild.getAttribute("pomosused")));
 
@@ -196,6 +206,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
                 // Next timer should be a pomo timer
                 else if (currentPomoSession.mode !== POMO_SESSION_MODES.COMPLETE) {
+                    let breakAlarm = new Audio("assets/audio/breakAlarm.mp3");
+                    breakAlarm.play();
+
                     renderActiveMode();
                     currentPomoSession.time = maxPomoTime;
                     currentPomoSession.mode = POMO_SESSION_MODES.ACTIVE;
@@ -254,6 +267,9 @@ window.addEventListener("DOMContentLoaded", () => {
         const element = taskList.childNodes[taskList.childNodes.length - 1];
         element.setFinishTaskCallback(() => {
             removeCompletedTasks();
+        });
+        element.setDeleteTaskCallback(() => {
+            deleteTaskById(task.id);
         });
         element.task = task;
     }
@@ -316,11 +332,15 @@ window.addEventListener("DOMContentLoaded", () => {
         const currentTaskToBeAdded = `<pomo-task description="${nextTask.description}" pomosUsed="${nextTask.pomosUsed}" pomosRequired=${nextTask.pomosRequired}>${nextTask.title}</pomo-task>`;
         currentTaskHTML.insertAdjacentHTML("beforeend", currentTaskToBeAdded);
         taskListHTML.removeChild(taskListHTML.childNodes[0]);
-        currentTaskHTML.childNodes[currentTaskHTML.childNodes.length - 1].setFinishTaskCallback(() => {
+        let element = currentTaskHTML.childNodes[currentTaskHTML.childNodes.length - 1];
+        element.setFinishTaskCallback(() => {
             removeCompletedTasks();
             startNewTask();
         });
-        currentTaskHTML.childNodes[currentTaskHTML.childNodes.length - 1].task = nextTask;
+        element.setDeleteTaskCallback(() => {
+            deleteTaskById(nextTask.id);
+        });
+        element.task = nextTask;
 
     }
 
@@ -355,6 +375,39 @@ window.addEventListener("DOMContentLoaded", () => {
         });
         storePomoSession(currentPomoSession);
 
+    }
+
+    function deleteTaskById(id) {
+        // search current task list and task lists for this id and remove it from display and the pomo session
+        let currentTaskElementList = currentTaskHTML.childNodes;
+        if (currentTaskElementList.length) {
+            let task = currentTaskElementList[currentTaskElementList.length - 1].task;
+            if (task.id === id) {
+                if (confirm("Are you sure you want to delete this task?")) {
+                    currentPomoSession.deleteTask(task);
+                    currentTaskHTML.removeChild(currentTaskHTML.childNodes[currentTaskElementList.length - 1]);
+                    startNewTask();     
+                    storePomoSession(currentPomoSession);
+                    return;
+                }
+            }
+        }
+        if (taskListHTML.childNodes.length) {
+            let i = 0;
+            for (const node of taskListHTML.childNodes) {
+                let task = node.task;
+                if (task.id === id) {
+                    if (confirm("Are you sure you want to delete this task?")) {
+                        currentPomoSession.deleteTask(task);
+                        taskListHTML.removeChild(taskListHTML.childNodes[i]);
+                        storePomoSession(currentPomoSession);
+                        return;
+                    }
+                }
+                i++;
+            }
+        }
+        // 
     }
 
     /**
