@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     // TODO: move this time variable into the pomo session object class using localstorage
-    let maxPomoTime = 25 * 60;
+    let maxPomoTime = 5;
     let maxBreakTime = 5 * 60;
     let maxLongBreakTime = 10 * 60;
 
@@ -188,6 +188,8 @@ window.addEventListener("DOMContentLoaded", () => {
                     let currentTaskFirstChild = currentTaskHTML.childNodes[0];
                     currentTaskFirstChild.incrementPomosUsed();
                     currentTaskFirstChild.task.pomosUsed += 1;
+                    currentPomoSession.incrementTaskPomosUsed(currentTaskFirstChild.task.id);
+                    storePomoSession(currentPomoSession);
 
                     currentTaskFirstChild.setAttribute("pomosused", 1 + parseInt(currentTaskFirstChild.getAttribute("pomosused")));
 
