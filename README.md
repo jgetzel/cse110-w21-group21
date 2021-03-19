@@ -25,3 +25,7 @@ npm run build
 ```
 
 and the production build can be located in the newly created `dist` folder.
+
+# [Public Video] (https://www.youtube.com/watch?v=N_pr8YZHi8E)
+
+# [Private Video] (https://www.youtube.com/watch?v=Bhp2QZaLtSI)
