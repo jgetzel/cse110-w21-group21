@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let datesForGraph = [];
     let weekStats = [];
     for(let dateID in sevenDates) {
-        datesForGraph.push(new Date((sevenDates[dateID]).getMonth() + 1) + "/" + new Date(sevenDates[dateID]).getDate());
+        datesForGraph.push((sevenDates[dateID].getMonth() + 1) + "/" + new Date(sevenDates[dateID]).getDate());
         weekStats.push(new PomoStats(new Date(sevenDates[dateID])));
     }
     let completeWeek = [];
