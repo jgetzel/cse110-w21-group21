@@ -10,11 +10,11 @@ describe('test theme.js', () => {
     window.localStorage.setItem("bg-seed", "1-2");
     selectAndSetTheme(today);
     let backdrop = document.getElementById("backdrop");
-    expect(backdrop.style.backgroundImage).toEqual(`url(../assets/images/backgrounds/day/bg2.jpg)`);
+    expect(backdrop.style.backgroundImage).toEqual(`url(./assets/images/backgrounds/day/bg2.jpg)`);
     
     today.setHours(2);
     selectAndSetTheme(today);
-    expect(backdrop.style.backgroundImage).toEqual(`url(../assets/images/backgrounds/night/bg2.jpg)`);
+    expect(backdrop.style.backgroundImage).toEqual(`url(./assets/images/backgrounds/night/bg2.jpg)`);
   });
   test("give correct time", () => {
     let today = new Date("2021-01-04T03:00:00");

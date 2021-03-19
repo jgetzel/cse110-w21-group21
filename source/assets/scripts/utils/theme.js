@@ -17,7 +17,7 @@ export function selectAndSetTheme(today = new Date()) {
   id = parseInt(seed[2]);
 
   let element = document.getElementById("backdrop");
-  element.style.backgroundImage = `url("../assets/images/backgrounds/${timePeriod}/bg${id}.jpg")`;
+  element.style.backgroundImage = `url("./assets/images/backgrounds/${timePeriod}/bg${id}.jpg")`;
 };
 
 export const THEME_MODES = {
