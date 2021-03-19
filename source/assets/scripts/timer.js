@@ -173,6 +173,9 @@ window.addEventListener("DOMContentLoaded", () => {
             // If timer hits 0, toggle to next break or pomo timer
             if (currentPomoSession.time == 0) {
                 if (currentPomoSession.mode === POMO_SESSION_MODES.ACTIVE) {
+                    let alarm = new Audio("assets/audio/alarm.mp3");
+                    alarm.play();
+
                     //break 
                     renderBreakMode();
                     currentPomoSession.pomosElapsed += 1;
