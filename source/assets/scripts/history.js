@@ -63,7 +63,7 @@ function datesForSevenDays() {
     for (let i=0; i<7; i++) {
         let d = new Date();
         d.setDate(d.getDate() - i);
-        dates.push(d)
+        dates.push(d);
     }
     return dates;
 }
