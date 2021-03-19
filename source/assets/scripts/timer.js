@@ -107,6 +107,8 @@ window.addEventListener("DOMContentLoaded", () => {
     // Implements the onclick functionality of End Break Early Button, which immediately stop the break 
     // and go to the work time
     EndBreakEarlyButton.onclick = function () {
+        let breakAlarm = new Audio("assets/audio/breakAlarm.mp3");
+        breakAlarm.play();
         renderActiveMode();
         currentPomoSession.time = maxPomoTime;
         currentPomoSession.mode = POMO_SESSION_MODES.ACTIVE;
@@ -176,8 +178,8 @@ window.addEventListener("DOMContentLoaded", () => {
             // If timer hits 0, toggle to next break or pomo timer
             if (currentPomoSession.time == 0) {
                 if (currentPomoSession.mode === POMO_SESSION_MODES.ACTIVE) {
-                    let alarm = new Audio("assets/audio/alarm.mp3");
-                    alarm.play();
+                    let workAlarm = new Audio("assets/audio/workAlarm.mp3");
+                    workAlarm.play();
 
                     //break 
                     renderBreakMode();
@@ -202,6 +204,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
                 // Next timer should be a pomo timer
                 else if (currentPomoSession.mode !== POMO_SESSION_MODES.COMPLETE) {
+                    let breakAlarm = new Audio("assets/audio/breakAlarm.mp3");
+                    breakAlarm.play();
+
                     renderActiveMode();
                     currentPomoSession.time = maxPomoTime;
                     currentPomoSession.mode = POMO_SESSION_MODES.ACTIVE;
