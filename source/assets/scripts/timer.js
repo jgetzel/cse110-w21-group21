@@ -110,6 +110,9 @@ window.addEventListener("DOMContentLoaded", () => {
         renderActiveMode();
         currentPomoSession.time = maxPomoTime;
         currentPomoSession.mode = POMO_SESSION_MODES.ACTIVE;
+        timerProgressCircle.setDisplayText(formatTime(currentPomoSession.time));
+        timerProgressCircle.setPercentage(currentPomoSession.time / maxPomoTime);
+        storePomoSession(currentPomoSession);
     };
 
     startTimerButton.onclick = initiateTimer;
