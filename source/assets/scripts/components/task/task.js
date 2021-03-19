@@ -82,15 +82,24 @@ class TaskComponent extends HTMLElement {
       this.elements.checkMark = checkMark;
 
       // A div wrapper for the check mark
-      const wrapperDragAndDrop = document.createElement("div");
-      wrapperDragAndDrop.setAttribute("class", "wrapperDragAndDrop");
-      wrapper.appendChild(wrapperDragAndDrop);
+      // const wrapperDragAndDrop = document.createElement("div");
+      // wrapperDragAndDrop.setAttribute("class", "wrapperDragAndDrop");
+      // wrapper.appendChild(wrapperDragAndDrop);
       // The Drag and Drop SVG
-      const imgDragAndDrop = document.createElement("img");
-      imgDragAndDrop.setAttribute("class", "dragAndDrop");
-      imgDragAndDrop.setAttribute("src", "./assets/svgImages/drag-dots.svg");
-      wrapperDragAndDrop.appendChild(imgDragAndDrop);
-      this.elements.dragAndDrop = imgDragAndDrop;
+      // const imgDragAndDrop = document.createElement("img");
+      // imgDragAndDrop.setAttribute("class", "dragAndDrop");
+      // imgDragAndDrop.setAttribute("src", "./assets/svgImages/drag-dots.svg");
+      // wrapperDragAndDrop.appendChild(imgDragAndDrop);
+      // this.elements.dragAndDrop = imgDragAndDrop;
+
+      const wrapperDelete = document.createElement("div");
+      wrapperDelete.setAttribute("class", "wrapperDelete");
+      wrapper.appendChild(wrapperDelete);
+      const deleteTaskBtn = document.createElement("img");
+      deleteTaskBtn.setAttribute("class", "delete-task-btn");
+      deleteTaskBtn.setAttribute("src", "./assets/svgImages/delete.svg");
+      wrapperDelete.appendChild(deleteTaskBtn);
+      this.elements.deleteTaskBtn = deleteTaskBtn;
 
       this.elements.wrapper = wrapper;
 
@@ -125,6 +134,10 @@ class TaskComponent extends HTMLElement {
          colorDecider(pomotask.elements.pomoCircle, pomotask);
          cb();
       };
+   }
+
+   setDeleteTaskCallback(cb) {
+      this.elements.deleteTaskBtn.onclick = cb;
    }
 
    incrementPomosUsed() {

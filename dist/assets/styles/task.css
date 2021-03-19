@@ -24,8 +24,10 @@
 .task > .wrapperCheckMark:hover {
   transform: translateY(-4px);
 }
-.task > .wrapperDragAndDrop {
+.task > .wrapperDelete {
   padding-left: 0rem;
+  display: flex;
+  align-items: center;
 }
 .textwrapper > .title {
   position: relative;
@@ -47,10 +49,13 @@
   max-width: 13.5rem;
 }
 
-.wrapperDragAndDrop > .dragAndDrop {
+.wrapperDelete > .delete-task-btn {
   position: relative;
-  top: 1.5rem;
-  cursor: grab;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.wrapperDelete > .delete-task-btn:hover {
+  transform: translateY(-4px);
 }
 .wrapperCheckMark > .completeCheckMark {
   position: relative;
