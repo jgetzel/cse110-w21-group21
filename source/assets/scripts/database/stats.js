@@ -12,7 +12,7 @@ export class PomoStats {
 
         let id = getLatestSessionID();
         let counter = 0;
-        while(id != 0) {
+        while(id >= 0) {
             let session = getPomoSession(id);
             if (session.mode !== POMO_SESSION_MODES.COMPLETE) {
                 id -= 1;
