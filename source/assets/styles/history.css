@@ -5,13 +5,17 @@
 }
 .container > div {
   width: 100%;
+  padding: 2rem;
 }
 .efficency-graph-wrapper {
   background-color: white;
   max-width: 48rem;
+  border-radius: 0.25rem;
+  padding: 2rem;
   width: 100%;
 }
 #efficiency-weekly-chart {
   background-color: white;
+  padding: 2rem;
   margin-top: 2rem;
 }

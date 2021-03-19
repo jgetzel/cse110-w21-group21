@@ -1,1 +1,36 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pomo Timer</title><link rel="icon" href="assets/svgImages/logo.svg"><link rel="stylesheet" href="assets/styles/base.css"><link rel="stylesheet" href="assets/styles/home_style.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"><script defer="defer" src="./components.bundle.js"></script><script defer="defer" src="./database.bundle.js"></script><script defer="defer" src="./main.bundle.js"></script></head><body><pomo-header page="home"></pomo-header><div class="backdrop" id="backdrop"></div><main class="content"><div class="flex-container" style="vertical-align: middle; flex-direction: column;"><div><a href="timer.html?loadSaved=false"><pomo-button id="btn-create">Create New Timer</pomo-button></a></div><div id="leftover-tasks-wrapper"><div><p>or</p></div><div><a href="timer.html?loadSaved=true"><pomo-button id="btn-check-leftover" type="outline">Use leftover tasks from last time</pomo-button></a></div></div></div></main></body></html>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pomo Timer</title>
+        <link rel="icon" href="assets/svgImages/logo.svg">
+        <link rel="stylesheet" href="assets/styles/base.css">
+        <link rel="stylesheet" href="assets/styles/home_style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <script defer src="./components.bundle.js"></script><script defer src="./database.bundle.js"></script><script defer src="./main.bundle.js"></script></head>
+
+    <body>
+        <pomo-header page="home"></pomo-header>
+        <div class="backdrop" id="backdrop"></div>
+        <main class="content">
+            <div class="flex-container" style="vertical-align: middle; flex-direction: column;">
+                <div>
+                    <a href="timer.html?loadSaved=false"><pomo-button id="btn-create">Create New Timer</pomo-button></a>
+                    
+                </div>
+                <div id="leftover-tasks-wrapper">
+                    <div>
+                        <p>or</p>
+                    </div>
+                    <div>
+                        <a href="timer.html?loadSaved=true"><pomo-button id="btn-check-leftover" type="outline">Use leftover tasks from last time</pomo-button></a>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+    </body>
+</html>
+
