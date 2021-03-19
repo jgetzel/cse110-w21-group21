@@ -255,6 +255,9 @@ window.addEventListener("DOMContentLoaded", () => {
         element.setFinishTaskCallback(() => {
             removeCompletedTasks();
         });
+        element.setDeleteTaskCallback(() => {
+            deleteTaskById(task.id);
+        });
         element.task = task;
     }
 
@@ -316,11 +319,15 @@ window.addEventListener("DOMContentLoaded", () => {
         const currentTaskToBeAdded = `<pomo-task description="${nextTask.description}" pomosUsed="${nextTask.pomosUsed}" pomosRequired=${nextTask.pomosRequired}>${nextTask.title}</pomo-task>`;
         currentTaskHTML.insertAdjacentHTML("beforeend", currentTaskToBeAdded);
         taskListHTML.removeChild(taskListHTML.childNodes[0]);
-        currentTaskHTML.childNodes[currentTaskHTML.childNodes.length - 1].setFinishTaskCallback(() => {
+        let element = currentTaskHTML.childNodes[currentTaskHTML.childNodes.length - 1];
+        element.setFinishTaskCallback(() => {
             removeCompletedTasks();
             startNewTask();
         });
-        currentTaskHTML.childNodes[currentTaskHTML.childNodes.length - 1].task = nextTask;
+        element.setDeleteTaskCallback(() => {
+            deleteTaskById(nextTask.id);
+        });
+        element.task = nextTask;
 
     }
 
@@ -355,6 +362,39 @@ window.addEventListener("DOMContentLoaded", () => {
         });
         storePomoSession(currentPomoSession);
 
+    }
+
+    function deleteTaskById(id) {
+        // search current task list and task lists for this id and remove it from display and the pomo session
+        let currentTaskElementList = currentTaskHTML.childNodes;
+        if (currentTaskElementList.length) {
+            let task = currentTaskElementList[currentTaskElementList.length - 1].task;
+            if (task.id === id) {
+                if (confirm("Are you sure you want to delete this task?")) {
+                    currentPomoSession.deleteTask(task);
+                    currentTaskHTML.removeChild(currentTaskHTML.childNodes[currentTaskElementList.length - 1]);
+                    startNewTask();     
+                    storePomoSession(currentPomoSession);
+                    return;
+                }
+            }
+        }
+        if (taskListHTML.childNodes.length) {
+            let i = 0;
+            for (const node of taskListHTML.childNodes) {
+                let task = node.task;
+                if (task.id === id) {
+                    if (confirm("Are you sure you want to delete this task?")) {
+                        currentPomoSession.deleteTask(task);
+                        taskListHTML.removeChild(taskListHTML.childNodes[i]);
+                        storePomoSession(currentPomoSession);
+                        return;
+                    }
+                }
+                i++;
+            }
+        }
+        // 
     }
 
     /**
